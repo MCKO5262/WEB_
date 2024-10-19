@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Календарь & Захиалга</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #731DD8;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+.orders, .calendar {
+  background: #800080;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.orders h2 {
+  margin-top: 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.order-item input {
+  margin-right: 10px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day {
+  background-color: #9C27B0;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.day h4 {
+  margin: 0 0 10px 0;
+  background: #6a0dad;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.event {
+  background-color: #673AB7;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="orders">
+      <h2>Захиалга</h2>
+      <ul id="order-list">
+        <!-- Захиалгын мэдээллүүдийг JavaScript ашиглан энд нэмнэ -->
+      </ul>
+    </section>
+    
+    <section class="calendar">
+      <div class="calendar-header">
+        <button id="prev-week" aria-label="Өмнөх долоо хоног">&lt;</button>
+        <h3 id="current-week">10-14 - 10-20</h3>
+        <button id="next-week" aria-label="Дараагийн долоо хоног">&gt;</button>
+      </div>
+      <div class="weekdays">
+        <div class="day" id="monday"><h4>Даваа</h4></div>
+        <div class="day" id="tuesday"><h4>Мягмар</h4></div>
+        <div class="day" id="wednesday"><h4>Лхагва</h4></div>
+        <div class="day" id="thursday"><h4>Пүрэв</h4></div>
+        <div class="day" id="friday"><h4>Баасан</h4></div>
+        <div class="day" id="saturday"><h4>Бямба</h4></div>
+        <div class="day" id="sunday"><h4>Ням</h4></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const orders = [
+  { id: 1, date: '2024-10-14', time: '19:00-20:00', description: 'Хувийн тоглолт: Шинэ цомгийн дуунуудыг танилцуулах' },
+  { id: 2, date: '2024-10-15', time: '10:00-11:30', description: 'Хурлын есдүгээр танилцуулга' },
+  { id: 3, date: '2024-10-15', time: '12:30-14:00', description: 'Технологийн семинар' },
+  { id: 4, date: '2024-10-18', time: '20:00-22:00', description: 'Шөнийн клубын DJ тоглолт' }
+];
+
+function loadOrders() {
+  const orderList = document.getElementById('order-list');
+  orders.forEach(order => {
+    const listItem = document.createElement('li');
+    listItem.className = 'order-item';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `order-${order.id}`;
+    checkbox.addEventListener('change', () => toggleEvent(order));
+
+    const label = document.createElement('label');
+    label.htmlFor = checkbox.id;
+    label.textContent = `${order.date} ${order.time} - ${order.description}`;
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Цуцлах';
+    cancelBtn.className = 'cancel-btn';
+
+    listItem.appendChild(checkbox);
+    listItem.appendChild(label);
+    listItem.appendChild(cancelBtn);
+
+    orderList.appendChild(listItem);
+  });
+}
+
+function toggleEvent(order) {
+  const dayId = getDayId(order.date);
+  const dayElement = document.getElementById(dayId);
+  if (dayElement) {
+    const eventElement = document.querySelector(`#event-${order.id}`);
+    if (eventElement) {
+      eventElement.remove();
+    } else {
+      const newEvent = document.createElement('div');
+      newEvent.className = 'event';
+      newEvent.id = `event-${order.id}`;
+      newEvent.textContent = `${order.time} - ${order.description}`;
+      dayElement.appendChild(newEvent);
+    }
+  }
+}
+
+function getDayId(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDay(); // 0: Ням, 1: Даваа, ..., 6: Бямба
+  const dayIds = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  return dayIds[day];
+}
+
+document.addEventListener('DOMContentLoaded', loadOrders);
+
+  </script>
+
+</body>
+</html>
