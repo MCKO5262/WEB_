@@ -6,6 +6,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Solned</title>
   <link rel="stylesheet" href="global.css">
+  <style>
+    .search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+  background: #c674ff;
+  border-radius: 25px;
+  padding: 5px 15px;
+}
+    /* Main Content */
+main {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+aside {
+    background: var(--primary-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: 300px;
+}
+
+aside h2 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    color: var(--text-dark-color);
+}
+
+aside ul {
+    list-style: none;
+}
+
+aside ul li {
+    background: var(--secondary-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+aside ul li p {
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    color: var(--text-dark-color);
+}
+
+aside input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* Calendar */
+.calendar {
+    flex-grow: 1;
+    background: var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-header button {
+    background: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+}
+
+.weekdays .day {
+    background: var(--primary-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    color: var(--text-dark-color);
+    text-align: center;
+}
+  </style>
 </head>
 
 <body>
@@ -15,19 +107,18 @@
         <li class="logo"><a href="Nuur.html">
             <img src="picture/logo.PNG" alt="Company logo" />
           </a></li>
-        <li class="searchbar">
-          <search>
-            <form>
-              <input type="search" placeholder="Хайлт" name="search" />
-              <button type="submit">Search</button>
+          <li class="searchbar">
+            <form class="search-form">
+              <input type="search" placeholder="Хайлт хийх" name="search" />
+              <button type="button" class="close-btn">×</button>
             </form>
-          </search>
-        </li>
+          </li>          
         <li class="checkorder"><a href="ordercheck.html
-          ">Захиалга шалгах</a></li>
+          ">Хуваарь</a></li>
           <div class="user-profile">
             <span>Thunder</span>
             <img src="picture/thunder.jfif" alt="User Profile">
+            <button class="dropdown-btn">▼</button>
         </div>
       </ul>
     </nav>
@@ -104,6 +195,7 @@
     <p>Оффис, Чингэлтэй дүүрэг 6-хороо, 53 байр</p>
     
   </footer>
+  
 </body>
 
 </html>
