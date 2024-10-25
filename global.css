@@ -1,0 +1,144 @@
+/* Global Variables */
+:root {
+    --primary-color: #8A4DFF;
+    --secondary-color: #A057FF;
+    --background-color: #C277E9;
+    --text-color: #FFFFFF;
+    --text-dark-color: #333333;
+    --border-color: #D3B3FF;
+    --hover-bg-color: #7a3ff7;
+
+    --font-family: 'Roboto', sans-serif;
+    --base-font-size: 16px;
+    --heading-font-size: 1.5rem;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease-in-out;
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--base-font-size);
+    color: var(--text-color);
+    background: var(--background-color);
+    line-height: 1.6;
+    transition: var(--transition);
+}
+
+/* Header and Navigation */
+header {
+    box-shadow: var(--box-shadow);
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav .logo img {
+    height: 50px;
+}
+
+.searchbar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+    background: #c674ff; /* Хайлтын талбарын дэвсгэр өнгө */
+    border-radius: 25px;
+    padding: 5px 15px;
+    width: 100%;
+    max-width: 400px; /* Хайлтын талбарын өргөн */
+  }
+  
+  .search-form input[type="search"] {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .search-form .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-profile img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-color);
+    margin-top: 2rem;
+}
+
+footer a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0.5rem;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--hover-bg-color);
+}
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 1rem;
+}
+
+footer ul li img {
+    width: 30px;
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
