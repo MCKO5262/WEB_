@@ -8,108 +8,155 @@
   name="description"
   content="Solned is your go-to platform for discovering and booking talented musicians, bands, and performers for events.">
   <title>Document</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="/styles/Footer.css">
+  <link rel="stylesheet" href="/styles/sanalhuselt.css">
 </head>
-
 <body>
   <header>
     <nav>
       <ul>
-        <li class="logo"><a href="Nuur.html">
-            <img alt="Company logo" src="picture/logo.PNG">
-          </a></li>
-        <li class="searchbar">
-
-          <form>
-            <input type="search" placeholder="Хайлт" name="search" >
-            <button type="submit">Search</button>
-          </form>
-
+        <li class="logo">
+          <a href="Nuur.html">
+            <img alt="logo" src="picture/logo.png" />
+          </a>
         </li>
-        <li class="checkorder"><a href="ordercheck.html
-              ">Захиалга шалгах</a></li>
+        <li class="searchbar">
+          <form>
+            <input type="text" name="Хайлт" id="search" />
+          </form>
+        </li>
+        <li class="checkorder">
+          <a
+            href="ordercheck.html
+        "
+            >Захиалга шалгах</a
+          >
+        </li>
         <li class="login"><a href="login.html">Нэвтрэх</a></li>
       </ul>
     </nav>
-    </header>
+  </header>
     <main>
-      <section class="media-player">
-        <h2>Уран бүтээлчийн мэдээлэл</h2>
-        <video>
-          <source src="#" type="video/mp4">
-        </video>
-        <ul>
-          <li><button class="Video" type="button">Video</button></li>
-          <li><button class="image" type="button">images</button></li>
-          <li><button class="audio" type="button">Audio</button></li>
-        </ul>
-      </section>
-      <aside class="Profile-info">
-        <img src="#" alt="Profile Picture" width="150">
-        <h2>Thunder</h2>
-        <p>Улаанбаатар</p>
-        <p>1,500,000 ₮</p>
-        <a href="#">Захиалга өгөх</a>
-        <button class="fav" type="submit">Талагдсан</button>
-        <a href="#">Хуваарь харах</a>
-      </aside>
-      <article>
-        <h3>Товч агуулга</h3>
-        <p>i know he know knowledge is only weapon to destroy freedom we are are rock and roll include holly ring hha so
-          good order kind of kill like my fast guitar and singer</p>
-      </article>
-      <section>
-        <h3>Сэтгэгдэл</h3>
-        <article>
-          <h4>Ner</h4>
-          <div class="date">9-р Сарын 28 , 2024</div>
-          <p>i know he know knowledge is only weapon to destroy freedom we are are rock and roll include holly ring hha
-            so good order kind of kill like my fast guitar and singer</p>
-        </article>
-        <article>
-          <h4>Ner</h4>
-          <div class="date">9-р Сарын 28 , 2024</div>
-          <p>i know he know knowledge is only weapon to destroy freedom we are are rock and roll include holly ring hha
-            so good order kind of kill like my fast guitar and singer</p>
-        </article>
-        <article>
-          <h4>Ner</h4>
-          <div class="date">9-р Сарын 28 , 2024</div>
-          <p>i know he know knowledge is only weapon to destroy freedom we are are rock and roll include holly ring hha
-            so good order kind of kill like my fast guitar and singer</p>
+      <section id="container">
+        <article id="main-grid">
+          <!-- Main Content -->
+          <section>
+            <section id="media-player">
+              <h2>Уран бүтээлчийн мэдээлэл</h2>
+              <figure id="video-container">
+                <video controls>
+                  <source src="#" type="video/mp4">
+                </video>
+              </figure>
+              <section id="media-controls">
+                <button id="media-button-video" class="media-button active">Video</button>
+                <button id="media-button-images" class="media-button">Images</button>
+                <button id="media-button-audio" class="media-button">Audio</button>
+              </section>
+            </section>
+      
+            <section id="content-summary">
+              <h3>Товч агуулга</h3>
+              <p>i know he know knowledge is only weapon to destroy freedom we are rock and roll include holly ring hha so good order kind of kill like my fast guitar and singer</p>
+            </section>
+      
+            <section id="comments-section">
+              <h3>Сэтгэгдэл</h3>
+              <section id="comments">
+                <article id="comment-1" class="comment">
+                  <header id="comment-header-1">
+                    <strong id="comment-author-1">Ner</strong>
+                    <time id="comment-date-1">9-р Сарын 28 , 2024</time>
+                  </header>
+                  <p id="comment-content-1">i know he know knowledge is only weapon to destroy freedom we are rock and roll include holly ring hha so good order kind of kill like my fast guitar and singer</p>
+                </article>
+                <article id="comment-2" class="comment">
+                  <header id="comment-header-2">
+                    <strong id="comment-author-2">Ner</strong>
+                    <time id="comment-date-2">9-р Сарын 28 , 2024</time>
+                  </header>
+                  <p id="comment-content-2">i know he know knowledge is only weapon to destroy freedom we are rock and roll include holly ring hha so good order kind of kill like my fast guitar and singer</p>
+                </article>
+                <article id="comment-3" class="comment">
+                  <header id="comment-header-3">
+                    <strong id="comment-author-3">Ner</strong>
+                    <time id="comment-date-3">9-р Сарын 28 , 2024</time>
+                  </header>
+                  <p id="comment-content-3">i know he know knowledge is only weapon to destroy freedom we are rock and roll include holly ring hha so good order kind of kill like my fast guitar and singer</p>
+                </article>
+              </section>
+            </section>
+          </section>
+      
+          <!-- Profile Sidebar -->
+          <aside id="profile-sidebar">
+            <figure id="profile-image-container">
+              <img id="profile-image" src="/picture/davaidasha.png" alt="Profile">
+            </figure>
+            <h2 id="profile-name">Thunder</h2>
+            <p id="star-rating">★★★★★</p>
+            <address id="location">
+              Улаанбаатар
+            </address>
+            <p id="price">1,500,000 ₮</p>
+            <nav id="action-buttons">
+              <a href="#" id="order-button" class="btn btn-primary">Захиалга өгөх</a>
+              <a href="#" id="like-button" class="btn btn-secondary">Талагдсан</a>
+              <a href="#" id="schedule-button" class="btn btn-secondary">Хуваарь харах</a>
+            </nav>
+          </aside>
         </article>
       </section>
     </main>
-
-
     <footer>
-      <a href="Nuur.html">
-        <img src="picture/logo.PNG " width="30" alt="Company logo" >
-      </a>
-      <ul>
-        <li><a href="https://www.apple.com/app-store/">
-            <img src="#" alt="Apple Store">
-            Appstore-оос татаж авах
-          </a></li>
-        <li><a href="https://play.google.com/store">
-            <img src="#" alt="Google Play">
-            Playstore-оос татаж авах
-          </a></li>
-        <li><a href="facebook.com">
-            <img src="#" alt="facebook">
-          </a></li>
-        <li><a href="instagram.com">
-            <img src="#" alt="instagram">
-          </a></li>
-      </ul>
-      <p>SOLNED</p>
-      <a href="#">Бидний тухай</a>
-      <p></p>
-      <a href="#">Тусламж</a>
-      <p>ХОЛБОО БАРИХ</p>
-      <address>
-        <a href="gmail.com">Solned@gmail.com</a>
-        <p>Оффис, Чингэлтэй дүүрэг 6-хороо, 53 байр</p>
-      </address>
+      <section class="social-address">
+        <a href="Nuur.html">
+          <img src="picture/logo.PNG " width="30" alt="Company logo" />
+        </a>
+        <section>
+          <img src="picture/icons//facebook.png" alt="facebook" />
+          <img src="picture/icons/instagram.png" alt="facebook" />
+        </section>
+
+        <a href="https://www.apple.com/app-store/">
+          <button>
+            <img src="picture/icons//apple.png" alt="Apple Store" />
+            <p>Appstore-оос татаж авах</p>
+          </button>
+        </a>
+
+        <a href="https://play.google.com/store">
+          <button>
+            <img src="picture/icons//apple.png" alt="Apple Store" />
+            <p>Appstore-оос татаж авах</p>
+          </button>
+        </a>
+      </section>
+      <section class="about-us">
+        <ul>
+          <li>
+            <h2>SOLNED</h2>
+          </li>
+          <li>
+            <a href="#">Бидний тухай</a>
+          </li>
+          <li>
+            <a href="#">Тусламж</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <h2>ХОЛБОО БАРИХ</h2>
+          </li>
+          <li>
+            <a href="gmail.com">Solned@gmail.com</a>
+          </li>
+          <li>
+            <a>Оффис, Чингэлтэй</br/> дүүрэг 6-хороо, </br/>53 байр</a>
+          </li>
+        </ul>
+      </section>
     </footer>
 </body>
 

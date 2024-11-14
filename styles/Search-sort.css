@@ -1,0 +1,275 @@
+/* Container styles */
+.marketplace-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 0px;
+    margin-top: 2rem;
+  }
+  
+  /* Card styles */
+  .product-card {
+    position: relative;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    min-height: 380px;
+    overflow: hidden;
+  }
+  
+  /* Individual card background styles */
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(145deg, rgba(146, 84, 222, 0.8), rgba(122, 54, 207, 0.9));
+    border-radius: 12px;
+    z-index: -1;
+  }
+  
+  /* Card content wrapper to ensure content appears above gradient */
+  .card-content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  /* Image container */
+  .product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Product info */
+  .product-title {
+    color: white;
+    font-size: 1.6rem;
+    margin: 0px 0;
+    font-weight: 600;
+    align-self: center;
+  }
+  
+  .product-category {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    padding: 5px 0px;
+  }
+  
+  /* Star rating */
+  .rating {
+    color: #ffd700;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+  }
+  
+  /* Price */
+  .price {
+    color: white;
+    font-size: 1rem;
+    margin: 5px 0;
+    opacity: 0.9;
+  }
+  
+  /* Button styles */
+  .order-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 24px;
+    color: white;
+    font-family: var(--font-family);
+    font-size: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    align-self: center;
+    width: 14rem;
+    font-size: large;
+  }
+  
+  .order-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add subtle hover effect to entire card */
+  .product-card:hover {
+    transform: translateY(-3px);
+    transition: transform 0.3s ease;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .marketplace-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .marketplace-container {
+      grid-template-columns: 1fr;
+      padding: 10px;
+    }
+  }
+  /* Hide checkbox */
+.nav-toggle {
+  display: none;
+}
+
+/* Base navbar styles */
+.navbar {
+  overflow: hidden;
+  background-color: #9747FF; /* Darkest purple from palette */
+  font-family: var(font-family);
+  width: 100%;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Hamburger menu icon using CSS */
+.nav-label {
+  display: none;
+  padding: 14px 16px;
+  color: white;
+  float: right;
+  cursor: pointer;
+}
+
+.nav-label:before {
+  content: "☰";
+}
+
+/* Dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+/* Hover effects */
+.navbar a:hover, 
+.dropdown:hover .dropbtn {
+  background-color: #6237A0; /* Second purple from palette */
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #DEACF5; /* Lightest purple from palette */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.dropdown-content a {
+  float: none;
+  color: #28104E;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #9754CB; /* Third purple from palette */
+  color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 600px) {
+  .nav-label {
+    display: block;
+  }
+  
+  .navbar .nav-items {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+    overflow: hidden;
+  }
+  
+  .navbar a:not(:first-child), 
+  .dropdown .dropbtn {
+    display: none;
+  }
+  
+  /* Show menu when checkbox is checked */
+  .nav-toggle:checked ~ .nav-items {
+    max-height: 100vh;
+  }
+  
+  .nav-toggle:checked ~ .nav-items a,
+  .nav-toggle:checked ~ .nav-items .dropdown .dropbtn {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .nav-toggle:checked ~ .nav-items .dropdown {
+    float: none;
+  }
+  
+  .nav-toggle:checked ~ .nav-items .dropdown-content {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 25px;
+  }
+  
+  .nav-toggle:checked ~ .nav-items .dropdown .dropbtn {
+    width: 100%;
+    text-align: left;
+  }
+}

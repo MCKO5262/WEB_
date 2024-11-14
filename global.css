@@ -1,197 +1,160 @@
 :root {
-    --bc1: #C277E9;
-    --bc2: #AD49E1;
-    --primary-color: #6F00FF; /* Main color for headings */
-    --secondary-color: #7A1CAC; /* Text input and other content */
-    --third-color: #AD53DC; /* Navigation */
-    --fourth-color: #3B0F80; /* Small buttons */
-    --txtc: #ffffff; /* Text color */
-    --font-family: "Bahnschrift", sans-serif;
-    --base-font-size: 24px;
-    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --bc1: #c277e9;
+  --bc2: #ad49e1;
+  --primary-color: #6f00ff; /* Main color for headings */
+  --secondary-color: #7a1cac; /* Text input and other content */
+  --third-color: #ad53dc; /* Navigation */
+  --fourth-color: #3b0f80; /* Small buttons */
+  --txtc: #ffffff; /* Text color */
+  --font-family: "Bahnschrift", sans-serif;
+  --base-font-size: 24px;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bc1: #2f2f2f;
+    --bc2: #000000;
   }
-  
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bc1: #2F2F2F;
-      --bc2: #000000;
-    }
-  }
-  
-  * {
-    margin: 0;
-    box-sizing: border-box;
-    padding-left: 2%;
-    padding-right: 2%;
-  }
-  
-  body {
-    background: linear-gradient(180deg, var(--bc1) 69%, var(--bc2) 89.5%);
-    font-size: var(--base-font-size);
-    font-family: var(--font-family);
-    color: var(--txtc);
-  }
-  
-  /* Header styling */
-  nav{
-    padding: 0;
-    border-bottom: 2px solid var(--txtc);
-  }
-  nav ul{
-    display: flex;
-    align-items: center;
-    padding: 0;
-  
-  }
-  
-  .logo {
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo img {
-    padding-top: 8px;
-    width: 60px;
-    height: 60px;
-  }
-  
-  /* Search bar styling */
-  .searchbar {
-    flex: 1;
-    display: flex;
-    justify-content: start;
-    margin: 0 20px;
-  }
-  
-  .search-form {
-    display: flex;
-    align-items: center;
-    border: 2px solid var(--txtc);
-    border-radius: 25px;
-    padding: 5px 15px;
-    max-width: 400px;
-  }
-  
-  .search-form input[type="search"] {
-    flex: 1;
-    border: none;
-    background: transparent;
-    color: var(--txtc);
-    padding: 5px;
-    font-size: 16px;
-    outline: none;
-  }
-  
-  ::placeholder {
-    color: var(--txtc);
-  }
-  
-  .search-form .close-btn {
-    background: none;
-    border: none;
-    color: var(--txtc);
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-  
-  /* Order check and login section */
-  .checkorder_nevtreh {
-    display: flex;
-    align-items: center;
-  }
-  
-  .checkorder a {
-    color: var(--txtc);
-    text-decoration: none;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .checkorder i {
-    margin-right: 8px;
-  }
-  
-  .login {
-    font-size: 16px;
-    background-color: var(--fourth-color);
-    border-radius: 10px;
-    height: 40px;
-    width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .login a {
-    color: var(--txtc);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  }
-  
-  .login i {
-    margin-left: 10px;
-  }
-  
-  nav li:nth-last-child(1) {
-    background-color: var(--fourth-color); /* Style for 'Нэвтрэх' */
-    border-radius: 10px;
-    padding: 10px;
-  }
-  nav li:nth-last-child(2) {
-    list-style: none;
-    padding: 10px;
-  }
-  /* Footer хэсэг */
-  footer {
-    border-top: 2px solid var(--txtc);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 багана үүсгэнэ */
-    grid-template-rows: auto; /* Нэг эгнээтэй зохион байгуулалт */
-    padding: 30px;
-    color: white;
-    font-size: 12px; /* Хэмжээг бага зэрэг томруулсан */
-  }
-  footer h3{
-    padding-bottom: 10px;
-    font-weight: 1000;
-  }
-  
-  footer article, footer section, footer address {
-    padding: 10px;
-  }
-  
-  footer article {
-    grid-column: 1 / 2; /* Эхний баганад байрлуулсан */
-  }
-  
-  footer section {
-    grid-column: 3 / 4; /* 3-р баганад байрлуулсан */
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-  }
-  
-  footer address {
-    grid-column: 4 / 5; /* 4-р баганад байрлуулсан */
-    display: flex;
-    flex-direction: column;
-  }
-  footer a{
-    text-decoration: none;
-    color: inherit;}
-  
-  footer ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  footer a:hover {
-    text-decoration: underline;
-  }
-  footer article ul li .icons li{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* padding-left: 4%;
+  padding-right: 4%; */
+}
+
+body {
+  background: linear-gradient(180deg, var(--bc1) 69%, var(--bc2) 89.5%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  font-size: var(--base-font-size);
+  font-family: var(--font-family);
+  color: var(--txtc);
+  padding: 0 10% 0 10%;
+}
+
+/* Header styling */
+header nav {
+  padding: 0;
+  border-bottom: 2px solid var(--txtc);
+}
+header nav ul {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  gap: 24px;
+}
+
+.logo {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  padding-top: 8px;
+  width: auto;
+  height: 60px;
+}
+
+/* Search bar styling */
+.searchbar {
+  flex: 1;
+  display: flex;
+  justify-content: start;
+  margin: 0 20px;
+}
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--txtc);
+  border-radius: 25px;
+  padding: 5px 15px;
+  max-width: 400px;
+}
+
+.searchbar input {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.searchbar input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+.search-form .close-btn {
+  background: none;
+  border: none;
+  color: var(--txtc);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Order check and login section */
+.checkorder_nevtreh {
+  display: flex;
+  align-items: center;
+}
+
+.checkorder a {
+  color: var(--txtc);
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.checkorder i {
+  margin-right: 8px;
+}
+
+.login {
+  width: 180px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  background-color: var(--fourth-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.login a {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--txtc);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.login:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.login a:hover {
+  color: var(--hover-text-color);
+}
+
+.login i {
+  margin-left: 10px;
+}
+nav li:nth-last-child(2) {
+  list-style: none;
+  padding: 10px;
+}
