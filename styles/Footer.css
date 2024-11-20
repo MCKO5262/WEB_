@@ -1,6 +1,6 @@
 footer {
-  padding: 2rem 1rem;
   width: 100%;
+  padding: 0;
 }
 
 footer {
@@ -110,7 +110,6 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 3rem 2rem;
   }
 
   .social-address {
@@ -128,9 +127,7 @@ footer {
 
 /* Large Desktop Styles */
 @media (min-width: 1024px) {
-  footer {
-    padding: 4rem 3rem;
-  }
+
 
   .social-address {
     max-width: 350px;

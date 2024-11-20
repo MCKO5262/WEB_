@@ -1,70 +1,132 @@
 @import url(/global.css);
+:root {
+  --primary-color: #21016c;
+  --secondary-color: #6237a0;
+  --border-radius: 1rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+
+.logo-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  
+  
+}
+
+.logo-title {
+  font-size: 10rem;
+  font-weight: bold;
+  display: inline-block;
+  color: white;
+  justify-content: center;
+}
+
+.logo-highlight {
+  color: #c3ff1f; 
+}
+
+.logo-subtitle {
+  display: block;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: lighter;
+  color: white;
+}
+
 .event-section {
-  margin-top: 2rem;
+  margin-top: var(--spacing-lg);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 4rem 2rem 0 2rem;
-  background-color: #21016c;
-  border-radius: 2rem;
+  gap: var(--spacing-md);
+  padding: 4rem var(--spacing-lg) 0;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
 }
 
 .event-image {
-  padding: 0 1rem 0 1rem;
+  padding: 0 var(--spacing-md);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.event-image img {
+  width: 100%;
+  height: auto;
+  max-width: 1200px;
+  border-radius: var(--border-radius);
+}
+
 .event-details {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 1.2rem;
-  margin: 1rem 1rem 0 1rem;
+  align-items: center;
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-md);
 }
-.event-details > button {
-  background-color: #6237a0;
-  padding: 0.5rem 1rem;
+
+.event-details button {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: 0.7rem;
   color: white;
-  font-size: large;
+  font-size: 1.5rem;
   border: none;
   font-weight: bold;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
+.event-details button:hover {
+  opacity: 0.9;
+}
+
+/* Artist List */
 .artist-list {
-  margin-top: 1rem;
+  margin-top: var(--spacing-lg);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 4rem;
 }
 
 .artist-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-sm);
 }
 
-.artist-info > h2 {
-  font-size: 1.5rem;
+.artist-info h2 {
+  font-size: 2rem;
   font-weight: bold;
+  border-radius: 0.5rem;
 }
 
-.artist-info > button {
-  background-color: #6237a0;
-  padding: 0.5rem 1rem;
+.artist-info button {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: 0.7rem;
   color: white;
-  font-size: large;
+  font-size: 1.2rem;
   border: none;
   font-weight: bold;
   cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.artist-info button:hover {
+  opacity: 0.9;
 }
 
 .artist-card-container {
   width: 100%;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
   grid-template-columns: repeat(4, 1fr);
 }
 
@@ -72,59 +134,137 @@
   width: 100%;
   position: relative;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
-.artist-card > img {
-  border-radius: 1rem;
+
+.artist-card:hover {
+  transform: translateY(-5px);
+}
+
+.artist-card img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+  aspect-ratio: 1;
 }
 
 .artist-card-info {
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  bottom: 20px;
-  left: 10px;
+  gap: 0.3rem;
+  bottom: var(--spacing-md);
+  left: var(--spacing-md);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-/*-----------------artist type --------------------*/
+.artist-card h3 {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  padding: 0 0.5rem;
+  border-radius: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+
+
+/* Artist Type Section */
 #artist-type {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  margin-bottom: 2rem
 }
+
 #artist-type article {
-  background-color: var(--primary-color); /* Example background color */
-  border-radius: 1rem;
-  width: 25rem; /* Set a fixed width */
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  position: relative;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
   overflow: hidden;
-  transition: transform 0.3s;
+  position: relative;
+  transition: transform 0.3s ease;
 }
 
 #artist-type article:hover {
-  transform: scale(1.05); /* Slight zoom on hover */
+  transform: scale(1.03);
 }
 
 #artist-type img {
-  position: relative;
-  width: 100%; /* Make image take up full width of article */
+  width: 100%;
   height: auto;
-  border-radius: 10px; /* Rounded corners */
+  aspect-ratio: 16/9;
+  object-fit: cover;
 }
 
-
 #artist-type a {
-  position: relative;
-  bottom: 10px;
-  left: 10px;
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: var(--spacing-md);
   text-decoration: none;
   font-weight: bold;
   color: white;
-  cursor: pointer;
   background-color: var(--primary-color);
-  padding: 5px 10px;
-  border: 5px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .artist-card-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .artist-card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  #artist-type {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    --spacing-lg: 1.5rem;
+    --spacing-md: 0.75rem;
+  }
+
+  .event-section {
+    padding: 2rem var(--spacing-md) 0;
+  }
+
+  .artist-card-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .artist-info {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+
+  #artist-type {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .event-details button,
+  .artist-info button {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #2d0991;
+    --secondary-color: #7344b5;
+  }
 }

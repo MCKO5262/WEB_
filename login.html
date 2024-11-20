@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-section">
+            <div class="welcome-header">
+                <div class="welcome-text">Welcome to</div>
+                <div class="logo"><img src="/picture/logo.PNG" alt="Logo"></div>
+            </div>
+
+            <form>
+                <div class="input-group">
+                    <label class="input-label">Username *</label>
+                    <div class="input-wrapper">
+                        <input type="text" class="input-field" placeholder="Enter your username" required>
+                        <i class="input-icon fas fa-user"></i>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Password *</label>
+                    <div class="input-wrapper">
+                        <input type="password" class="input-field" placeholder="Enter your password" required>
+                        <i class="input-icon fas fa-eye"></i>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="login-button">Login</button>
+                <button type="button" class="register-button">Register New Account</button>
+
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-button">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button type="button" class="social-button">
+                        <i class="fab fa-apple"></i>
+                    </button>
+                    <button type="button" class="social-button">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="image-section">
+            <img src="/picture/musician.jpg" alt="Musician">
+            <div class="image-overlay"></div>
+        </div>
+    </div>
+</body>
+</html>

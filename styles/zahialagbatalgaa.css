@@ -1,0 +1,101 @@
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+}
+.main {
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.order-check {
+    background-color: rgba(147, 51, 234, 0.9);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.order-check__title {
+    color: white;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    background-color: rgba(147, 51, 234, 0.95);
+}
+
+.order-details {
+    padding: 1.5rem;
+    color: white;
+}
+
+.order-details__artist {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.order-details__image {
+    width: 100px;
+    height: 100px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+}
+
+.order-details__time {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 1rem 0;
+}
+
+.order-details__description {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+#cancelOrderBtn {
+    background-color: rgba(30, 27, 75, 0.8);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0 1.5rem 1.5rem;
+    transition: background-color 0.3s;
+}
+
+#cancelOrderBtn:hover {
+    background-color: rgba(30, 27, 75, 1);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .nav__list {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .nav__search {
+        order: 3;
+        width: 100%;
+    }
+
+    .order-check__title {
+        font-size: 1.25rem;
+    }
+
+    .order-details__artist {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main {
+        margin: 1rem auto;
+    }
+
+    .order-details {
+        padding: 1rem;
+    }
+
+    #cancelOrderBtn {
+        width: calc(100% - 2rem);
+        margin: 0 1rem 1rem;
+    }
+}

@@ -40,14 +40,14 @@ body {
 
 /* Header styling */
 header nav {
-  padding: 0;
+  padding: 1rem;
   border-bottom: 2px solid var(--txtc);
 }
 header nav ul {
   display: flex;
   align-items: center;
   padding: 0;
-  gap: 24px;
+  gap: 2rem;
 }
 
 .logo {
@@ -65,43 +65,45 @@ header nav ul {
 /* Search bar styling */
 .searchbar {
   flex: 1;
-  display: flex;
-  justify-content: start;
   margin: 0 20px;
+  list-style: none;
 }
 
-
-.search-form {
+/* Search form styles */
+.searchbar form {
   display: flex;
   align-items: center;
-  border: 2px solid var(--txtc);
+  border: 3px solid var(--txtc);
   border-radius: 25px;
   padding: 5px 15px;
   max-width: 400px;
+  transition: all 0.3s ease;
+  background-color: var(--third-color);
 }
 
+.searchbar form:focus-within {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Search input styles */
 .searchbar input {
   width: 100%;
-  padding: 10px 16px;
+  padding: 4px 8px;
   border-radius: 20px;
   border: none;
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
   color: white;
+  font-size: 16px;
 }
 
 .searchbar input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-
-.search-form .close-btn {
-  background: none;
-  border: none;
   color: var(--txtc);
-  font-size: 0.8rem;
-  cursor: pointer;
 }
 
+.searchbar input:focus {
+  outline: none;
+}
 /* Order check and login section */
 .checkorder_nevtreh {
   display: flex;
