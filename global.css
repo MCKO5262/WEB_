@@ -22,8 +22,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* padding-left: 4%;
-  padding-right: 4%; */
 }
 
 body {
@@ -78,7 +76,7 @@ header nav ul {
   padding: 5px 15px;
   max-width: 400px;
   transition: all 0.3s ease;
-  background-color: var(--third-color);
+  background-color: var(--bc1)
 }
 
 .searchbar form:focus-within {

@@ -34,21 +34,41 @@
           </ul>
         </nav>
       </header>
-
-    <main class="main">
-        <section class="order-check">
-            <h1 class="order-check__title">Захиалга шалгах</h1>
-            <article class="order-details">
-                <h2 class="order-details__artist">Thunder</h2>
-                <img class="order-details__image" src="/picture/thunder.jfif" alt="Thunder band profile" id="artistImage" />
-                <time class="order-details__time" datetime="2024-10-15T10:00">2024-10-15 10:00 - 11:30</time>
-                <p class="order-details__description">Хуримын ёслолд дуулах:</p>
-                <p class="order-details__description">Хосуудын хүссэн дууг амьд дуулахаар</p>
-            </article>
-            <button id="cancelOrderBtn" type="button">Цуцлах</button>
-        </section>
+      <main id="mainContent">
+        <article id="orderContainer">
+            <section id="orderCheck">
+                <header>
+                    <h1 id="orderTitle">Захиалга шалгах</h1>
+                </header>
+                <article id="orderContent">
+                    <figure id="artistSection">
+                        <img id="artistImage" 
+                             src="/picture/thunder.jfif" 
+                             alt="Thunder хамтлагийн зураг" 
+                             loading="lazy">
+                        <figcaption id="artistDetails">
+                            <h2 id="artistName">Thunder</h2>
+                            <time id="eventTime" datetime="2024-10-15T10:00">
+                                2024-10-15 10:00 - 11:30
+                            </time>
+                            <ul id="eventDescription">
+                                <li>Хуримын ёслолд дуулах:</li>
+                                <li>Хосуудын хүссэн дууг амьд дуулахаар</li>
+                            </ul>
+                        </figcaption>
+                    </figure>
+                    <footer>
+                        <button id="cancelOrderBtn" 
+                                type="button" 
+                                aria-label="Захиалга цуцлах">
+                            Цуцлах
+                        </button>
+                    </footer>
+                </article>
+            </section>
+        </article>
     </main>
-
+    <hr>
     <footer>
         <section class="social-address">
           <a href="Nuur.html">
