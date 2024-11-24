@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/styles/Nuur.css" />
     <link rel="stylesheet" href="./styles/Footer.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
+    <script type="module" src="./scripts/main.js"></script>
     <title>Solned</title>
   </head>
 
@@ -25,14 +25,19 @@
             </a>
           </li>
           <li class="searchbar">
-            <form>
-              <input type="text" name="Хайлт" id="search" />
+            <form action="/search" method="GET">
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Search for items..."
+                aria-label="Search"
+              />
             </form>
           </li>
           <li class="checkorder">
             <a
-              href="ordercheck.html
-          "
+              href="ZahialagShalgah.html"
               >Захиалга шалгах</a
             >
           </li>
@@ -43,9 +48,9 @@
     <main>
       <section class="event-section">
         <div class="logo-container">
-          <span class="logo-title">mongolian</span>
-          <span class="logo-title logo-highlight">event</span>
-          <span class="logo-subtitle">Event Entertainment & Service Company</span>
+          <p class="logo-title">mongolian</p>
+          <p  class="logo-title logo-highlight">event</p>
+          <p class="logo-subtitle">Event Entertainment & Service Company</p>
       </div>
         <section class="event-details">
           <button>Дэлгэрэнгүй</button>
@@ -60,32 +65,6 @@
         <div class="artist-card-container">
           <article class="artist-card">
             <img src="./picture//davaidasha.png" alt="Davai-Dasha" />
-            <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
-
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="113" />
-            <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
-
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="Honh" />
-            <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="Thunder" />
             <div class="artist-card-info">
               <p>1231</p>
               <p>133</p>
@@ -108,38 +87,12 @@
               <h3>Davai-Dasha</h3>
             </div>
           </article>
-
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="113" />
-            <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
-
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="Honh" />
-            <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="Thunder" />
-            <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
         </div>
       </section>
       <section id="artist-type">
         <article>
           <a href="#">Хамтлаг</a>
-          <img src="/picture/musician.jpg" alt="Musician playing guitar" />
+          <img src="/picture/band.jpg" alt="Musician playing guitar" />
         </article>
 
         <article>
@@ -149,7 +102,7 @@
 
         <article>
           <a href="#">Дуучин</a>
-          <img src="/picture/musician.jpg" alt="Host speaking on stage" />
+          <img src="/picture/singer.jpg" alt="Host speaking on stage" />
         </article>
       </section>
     </main>

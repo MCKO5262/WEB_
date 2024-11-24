@@ -22,8 +22,14 @@
           </a>
         </li>
         <li class="searchbar">
-          <form>
-            <input type="text" name="Хайлт" id="search" />
+          <form action="/search" method="GET">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search for items..."
+              aria-label="Search"
+            />
           </form>
         </li>
         <li class="checkorder">

@@ -91,7 +91,7 @@
   margin-top: var(--spacing-lg);
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: var(--spacing-lg);
 }
 
 .artist-info {

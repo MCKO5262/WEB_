@@ -1,0 +1,293 @@
+@import url(/global.css);
+
+*{
+    font-family: var(--font-family);
+}
+main {
+  display: flex;
+  padding: 1rem;
+  min-height: 60vh;
+  gap: 2rem;
+}
+
+aside {
+  width: 24rem;
+  flex-shrink: 0;
+}
+
+figure {
+  width: 20rem;
+  height: 20rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  margin: 0 0 1rem 0;
+  overflow: hidden;
+  justify-self: center;
+}
+
+figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  justify-self: center;
+}
+
+nav {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+nav button {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+nav button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+nav button.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#main-pro {
+  flex: 1;
+  min-width: 0; /* Prevent flex item overflow */
+}
+
+article {
+  background: rgba(147, 51, 234, 0.3);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: none;
+}
+
+article.active {
+  display: block;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+form {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+select {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(88, 28, 135, 0.5);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.2);
+  color: black;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.action-button {
+  float: right;
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+figure.media-item {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  margin: 0;
+}
+
+figure.video-item {
+  aspect-ratio: 16/9;
+  position: relative;
+}
+
+.play-button {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-circle {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+article#audio ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+article#audio li {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.audio-control {
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  aside {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  figure {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  section {
+    margin-left: 0;
+  }
+
+  article {
+    padding: 1rem;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .action-button {
+    float: none;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  main {
+    padding: 0.5rem;
+  }
+
+  article {
+    padding: 0.75rem;
+  }
+
+  figure {
+    width: 6rem;
+    height: 6rem;
+  }
+
+
+
+  .audio-control {
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+  }
+}
+
+.save-button {
+    background: linear-gradient(to right, rgba(147, 51, 234, 0.8), rgba(168, 85, 247, 0.8));
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+    box-shadow: 0 2px 10px rgba(147, 51, 234, 0.3);
+}
+
+.save-button:hover {
+    opacity: 0.9;
+}
+
+.save-button:active {
+    opacity: 0.8;
+    transform: translateY(1px);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .save-button {
+        width: 100%;
+        padding: 0.625rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+#info p {
+    padding-bottom: 1rem;
+}

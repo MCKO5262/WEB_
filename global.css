@@ -85,41 +85,48 @@ header nav ul {
 }
 
 /* Search input styles */
+.searchbar {
+  flex: 1;
+  list-style: none;
+}
+
+/* Search form styles */
+.searchbar form {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  border: 3px solid var(--txtc);
+  border-radius: 25px;
+  padding: 5px 15px;
+  max-width: 400px;
+  transition: all 0.3s ease;
+  background-color: var(--bc1, #2c2c2c); /* Dark input background */
+}
+
+.searchbar form:focus-within {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Search input styles */
 .searchbar input {
   width: 100%;
-  padding: 4px 8px;
+  padding: 8px 12px; /* Improved padding */
   border-radius: 20px;
   border: none;
   background: transparent;
-  color: white;
+  color: var(--txtc, #ffffff); /* Default text color */
   font-size: 16px;
+  caret-color: var(--txtc, #ffffff); /* Matches text color */
 }
 
 .searchbar input::placeholder {
-  color: var(--txtc);
+  color: rgba(255, 255, 255, 0.6); /* Lighter color for placeholders */
 }
 
 .searchbar input:focus {
   outline: none;
 }
-/* Order check and login section */
-.checkorder_nevtreh {
-  display: flex;
-  align-items: center;
-}
-
-.checkorder a {
-  color: var(--txtc);
-  text-decoration: none;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-}
-
-.checkorder i {
-  margin-right: 8px;
-}
-
 .login {
   width: 180px;
   height: 50px;
@@ -157,4 +164,24 @@ header nav ul {
 nav li:nth-last-child(2) {
   list-style: none;
   padding: 10px;
+}
+.checkorder a,
+.login a {
+  color: var(--txtc, #ffffff);
+  text-decoration: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  transition: color 0.3s ease;
+}
+
+.checkorder a:hover,
+.login a:hover {
+  color: rgba(255, 255, 255, 0.8); /* Slightly lighter color on hover */
+}
+
+.checkorder i,
+.login i {
+  font-size: 20px;
 }

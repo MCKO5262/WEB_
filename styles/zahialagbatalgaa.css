@@ -44,8 +44,8 @@
 }
 
 #artistImage {
-    width: 160px;
-    height: 160px;
+    width: 280px;
+    height: 280px;
     border-radius: 0.75rem;
     object-fit: cover;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
