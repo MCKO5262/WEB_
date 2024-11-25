@@ -276,3 +276,37 @@
 hr {
   margin-top: 2rem;
 }
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  padding-bottom: 0px;
+  min-height: 40px;
+
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: var(--secondary-color);
+}
+
+.remove-filter {
+  background: none;
+  border: none;
+  margin-left: 1px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 5px;
+}
+
+.remove-filter:hover {
+  color: var(--bc1);
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Davai-Dasha",
+    "image": "./picture/davaidasha.png",
+    "likes": 1231,
+    "bookings": 133,
+    "location": "Ховд",
+    "category": "singer",
+    "price": 1500007
+  },
+  {
+    "id": 2,
+    "name": "Honh Band",
+    "image": "./picture/davaidasha.png",
+    "likes": 1023,
+    "bookings": 110,
+    "location": "Улаан-Баатар",
+    "category": "band",
+    "price": 2000000
+  },
+  {
+    "id": 3,
+    "name": "Thunder",
+    "image": "/picture/thunder.jfif",
+    "likes": 1023,
+    "bookings": 110,
+    "category": "singer",
+    "location": "Дархан",
+    "price": 2000000
+  },
+  {
+    "id": 4,
+    "name": "Ankh-bayar",
+    "image": "/picture/musician.jpg",
+    "likes": 1023,
+    "bookings": 110,
+    "category": "band",
+    "location": "Ховд",
+    "price": 2000000
+  }
+]
