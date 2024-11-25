@@ -107,7 +107,7 @@
   border-radius: 0.5rem;
 }
 
-.artist-info button {
+.artist-info a {
   background-color: var(--secondary-color);
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: 0.7rem;
@@ -117,9 +117,10 @@
   font-weight: bold;
   cursor: pointer;
   transition: opacity 0.2s ease;
+  text-decoration: none;
 }
 
-.artist-info button:hover {
+.artist-info a:hover {
   opacity: 0.9;
 }
 
@@ -260,6 +261,7 @@
     padding: var(--spacing-sm) var(--spacing-md);
   }
 }
+
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
