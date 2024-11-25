@@ -1,41 +1,53 @@
-// ArtistManager класс үүсгэж байна
 class ArtistManager {
-  // Классын constructor - анхны утгуудыг зарлаж өгч байна
   constructor() {
-    // Тестийн өгөгдөл - дуучид, хамтлагуудын мэдээллийг агуулсан массив
-    this.mockData = [ /* дуучид, хамтлагуудын дата */ ];
+    // API URL
+    this.apiUrl = 'https://api.jsonbin.io/v3/qs/674450b2e41b4d34e45a351e';
     
-    // Уран бүтээлчдийн массив
-    this.artists = [];
-    
-    // Идэвхтэй шүүлтүүрүүдийг хадгалах Map
-    this.activeFilters = new Map();
-    
-    // Классыг эхлүүлэх
+    this.artists = []; // Уран бүтээлчдийн жагсаалт
+    this.activeFilters = new Map(); // Идэвхтэй шүүлтүүрүүд
     this.init();
   }
-
-  // Класс эхлүүлэх функц
   async init() {
-    // mockData-г artists массив руу хуулах
-    this.artists = this.mockData;
-    
-    // Шүүлтүүрийн tag-уудын контейнер үүсгэх
-    this.setupFilterTagsContainer();
-    
-    // Уран бүтээлчдийг дэлгэцэнд харуулах
-    this.renderArtists(this.artists);
-    
-    // Шүүлтүүрүүдийг тохируулах
-    this.setupFilters();
-    
-    // URL дээрх шүүлтүүрүүдийг хэрэгжүүлэх
-    this.applyURLFilters();
-  }
+    try {
+      // API-с өгөгдөл авах
+      const response = await fetch(this.apiUrl);
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      
+      const data = await response.json();
+      this.artists = data.record; // API-с ирсэн өгөгдлийг artists массивт оноох
+      
+      console.log('Initialized with artists:', this.artists);
 
-  // Шүүлтүүрийн tag-уудын контейнер үүсгэх
+      // Шүүлтүүрийн tag-уудын контейнер үүсгэх
+      this.setupFilterTagsContainer();
+      
+      // Уран бүтээлчдийг дэлгэцэнд харуулах
+      this.renderArtists(this.artists);
+      
+      // Шүүлтүүрүүдийг тохируулах
+      this.setupFilters();
+      
+      // URL дээрх шүүлтүүрүүдийг хэрэгжүүлэх 
+      this.applyURLFilters();
+
+    } catch (error) {
+      console.error('Error initializing ArtistManager:', error);
+      // Алдаа гарсан үед хэрэглэгчид мэдэгдэх
+      const container = document.querySelector('.marketplace-container');
+      if (container) {
+        container.innerHTML = `
+          <div class="error-message">
+            <p>Өгөгдөл ачаалахад алдаа гарлаа. Та хуудсаа refresh хийнэ үү.</p>
+          </div>
+        `;
+      }
+    }
+  
+  }
   setupFilterTagsContainer() {
-    // Хэрэв active-filters класстай элемент байхгүй бол шинээр үүсгэх
+    // Create container for filter tags if it doesn't exist
     if (!document.querySelector('.active-filters')) {
       const navbar = document.querySelector('.navbar');
       const container = document.createElement('div');
@@ -44,21 +56,17 @@ class ArtistManager {
     }
   }
 
-  // Шүүлтүүрүүдийг тохируулах
   setupFilters() {
-    // Dropdown цэсний элементүүд дээр дарах үед
     document.querySelectorAll('.dropdown-content a').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const filterType = e.target.closest('.dropdown').querySelector('.dropbtn').textContent;
         const value = e.target.textContent;
         
-        // Шүүлтүүрийг шинэчлэх
         this.updateFilters(filterType, value);
       });
     });
 
-    // Хайлтын input-д өөрчлөлт орох үед
     const searchInput = document.getElementById('search');
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
@@ -67,13 +75,10 @@ class ArtistManager {
     }
   }
 
-  // Шүүлтүүрүүдийг шинэчлэх
   updateFilters(filterType, value) {
-    // URL параметрүүдийг авах
     const params = new URLSearchParams(window.location.search);
     let paramKey = '';
     
-    // Шүүлтүүрийн төрлөөс хамааран URL параметр тохируулах
     switch(filterType) {
       case 'Төрлүүд':
         paramKey = 'category';
@@ -91,28 +96,22 @@ class ArtistManager {
         return;
     }
 
-    // Идэвхтэй шүүлтүүрт нэмэх
+    // Update active filters
     this.activeFilters.set(filterType, value);
-    
-    // Шүүлтүүрийн tag-уудыг шинэчлэх
     this.updateFilterTags();
 
-    // URL-г шинэчлэх
     window.history.pushState({}, '', `${window.location.pathname}?${params}`);
-    
-    // URL дээрх шүүлтүүрүүдийг хэрэгжүүлэх
     this.applyURLFilters();
   }
 
-  // Шүүлтүүрийн tag-уудыг шинэчлэх
   updateFilterTags() {
     const container = document.querySelector('.active-filters');
     if (!container) return;
 
-    // Одоо байгаа tag-уудыг цэвэрлэх
+    // Clear existing tags
     container.innerHTML = '';
 
-    // Идэвхтэй шүүлтүүр бүрт tag үүсгэх
+    // Create tag for each active filter
     this.activeFilters.forEach((value, type) => {
       const tag = document.createElement('span');
       tag.className = 'filter-tag';
@@ -122,22 +121,20 @@ class ArtistManager {
       `;
       container.appendChild(tag);
 
-      // Tag устгах товчлуур дээр дарах үед
+      // Add click handler for remove button
       tag.querySelector('.remove-filter').addEventListener('click', () => {
         this.removeFilter(type);
       });
     });
   }
 
-  // Шүүлтүүр устгах
   removeFilter(filterType) {
-    // URL параметрүүдийг авах
     const params = new URLSearchParams(window.location.search);
     
-    // Идэвхтэй шүүлтүүрээс устгах
+    // Remove from active filters
     this.activeFilters.delete(filterType);
     
-    // URL параметрээс устгах
+    // Remove from URL params
     switch(filterType) {
       case 'Төрлүүд':
         params.delete('category');
@@ -150,15 +147,13 @@ class ArtistManager {
         break;
     }
 
-    // URL болон tag-уудыг шинэчлэх
+    // Update URL and filter tags
     window.history.pushState({}, '', `${window.location.pathname}?${params}`);
     this.updateFilterTags();
     this.applyURLFilters();
   }
 
-  // URL дээрх шүүлтүүрүүдийг хэрэгжүүлэх
   applyURLFilters() {
-    // URL параметрүүдийг унших
     const params = new URLSearchParams(window.location.search);
     const filters = {
       category: params.get('category'),
@@ -167,20 +162,17 @@ class ArtistManager {
       search: params.get('search')
     };
 
-    // Шүүлтүүрүүдийг хэрэгжүүлэх
     this.filterArtists(filters);
   }
 
-  // Уран бүтээлчдийг шүүх
   filterArtists(filters = {}) {
+    console.log('Applying filters:', filters);
     let filtered = [...this.artists];
 
-    // Ангилалаар шүүх
     if (filters.category) {
       filtered = filtered.filter(artist => artist.category === filters.category);
     }
 
-    // Үнээр шүүх
     if (filters.price) {
       const priceRanges = {
         '0=100000': [0, 100000],
@@ -194,14 +186,12 @@ class ArtistManager {
       );
     }
 
-    // Байршлаар шүүх
     if (filters.location) {
       filtered = filtered.filter(artist => 
         artist.location === filters.location
       );
     }
 
-    // Хайлтаар шүүх
     if (filters.search) {
       const searchTerm = filters.search.toLowerCase();
       filtered = filtered.filter(artist =>
@@ -211,19 +201,19 @@ class ArtistManager {
       );
     }
 
-    // Шүүсэн үр дүнг харуулах
+    console.log('Filtered results:', filtered);
     this.renderArtists(filtered);
   }
 
-  // Уран бүтээлчдийг дэлгэцэнд харуулах
   renderArtists(artists) {
     const container = document.querySelector('.marketplace-container');
     if (!container) {
       console.error('Container element not found!');
       return;
     }
+
+    console.log('Rendering artists:', artists);
     
-    // HTML үүсгэх
     const artistsHTML = artists.map(artist => `
       <article class="product-card">
         <div class="product-image">
@@ -240,10 +230,8 @@ class ArtistManager {
       </article>
     `).join('');
 
-    // HTML-г контейнерт оруулах
     container.innerHTML = artistsHTML;
 
-    // Захиалгын товчлуурууд дээр click event listener нэмэх
     document.querySelectorAll('.order-button').forEach(button => {
       button.addEventListener('click', (e) => {
         const artistId = e.target.dataset.artistId;
@@ -252,7 +240,6 @@ class ArtistManager {
     });
   }
 
-  // Ангилалын нэрийг форматлах
   formatCategory(category) {
     const categories = {
       'singer': 'Дуучин',
@@ -261,21 +248,17 @@ class ArtistManager {
     return categories[category] || category;
   }
 
-  // Үнийг форматлах
   formatPrice(price) {
     return new Intl.NumberFormat('mn-MN').format(price);
   }
 
-  // Захиалга хийх
   handleBooking(artistId) {
     window.location.href = `ordercheck.html?artist=${artistId}`;
   }
 }
 
-// HTML ачаалагдсаны дараа ArtistManager классыг эхлүүлэх
 document.addEventListener('DOMContentLoaded', () => {
   new ArtistManager();
 });
 
-// Классыг export хийх
 export default ArtistManager;
