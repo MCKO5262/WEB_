@@ -96,7 +96,6 @@ class ArtistManager {
         return;
     }
 
-    // Update active filters
     this.activeFilters.set(filterType, value);
     this.updateFilterTags();
 
@@ -108,10 +107,8 @@ class ArtistManager {
     const container = document.querySelector('.active-filters');
     if (!container) return;
 
-    // Clear existing tags
     container.innerHTML = '';
 
-    // Create tag for each active filter
     this.activeFilters.forEach((value, type) => {
       const tag = document.createElement('span');
       tag.className = 'filter-tag';
@@ -131,10 +128,9 @@ class ArtistManager {
   removeFilter(filterType) {
     const params = new URLSearchParams(window.location.search);
     
-    // Remove from active filters
     this.activeFilters.delete(filterType);
     
-    // Remove from URL params
+    // url params ustgah
     switch(filterType) {
       case 'Төрлүүд':
         params.delete('category');
@@ -147,7 +143,6 @@ class ArtistManager {
         break;
     }
 
-    // Update URL and filter tags
     window.history.pushState({}, '', `${window.location.pathname}?${params}`);
     this.updateFilterTags();
     this.applyURLFilters();
