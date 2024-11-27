@@ -12,7 +12,7 @@
   {
     "id": 2,
     "name": "Honh Band",
-    "image": "./picture/davaidasha.png",
+    "image": "./picture/honh.png",
     "likes": 1023,
     "bookings": 110,
     "location": "Улаан-Баатар",
@@ -32,11 +32,71 @@
   {
     "id": 4,
     "name": "Ankh-bayar",
-    "image": "/picture/musician.jpg",
+    "image": "/picture/ankh-bayar.jpg",
     "likes": 1023,
     "bookings": 110,
     "category": "band",
     "location": "Ховд",
     "price": 2000000
+  },
+  {
+    "id": 5,
+    "name": "Sodkhuu",
+    "image": "./picture/sodkhuu.png",
+    "likes": 850,
+    "bookings": 90,
+    "location": "Эрдэнэт",
+    "category": "comedian",
+    "price": 1200000
+  },
+  {
+    "id": 6,
+    "name": "Zaya Dance",
+    "image": "./picture/zayadance.png",
+    "likes": 900,
+    "bookings": 95,
+    "location": "Чойбалсан",
+    "category": "dancer",
+    "price": 1100000
+  },
+  {
+    "id": 7,
+    "name": "Bilguun",
+    "image": "./picture/bilguun.png",
+    "likes": 720,
+    "bookings": 85,
+    "location": "Сүхбаатар",
+    "category": "musician",
+    "price": 1400000
+  },
+  {
+    "id": 8,
+    "name": "Uka",
+    "image": "./picture/ukaidol.png",
+    "likes": 1050,
+    "bookings": 120,
+    "location": "Улаан-Баатар",
+    "category": "singer",
+    "price": 1700000
+  },
+  {
+    "id": 9,
+    "name": "Otgonjargal",
+    "image": "./picture/otgonjargal.png",
+    "likes": 600,
+    "bookings": 50,
+    "location": "Өлгий",
+    "category": "host",
+    "price": 1000000
+  },
+  {
+    "id": 10,
+    "name": "Baatar Band",
+    "image": "./picture/baatarband.png",
+    "likes": 1500,
+    "bookings": 200,
+    "location": "Улаанбаатар",
+    "category": "band",
+    "price": 2500000
   }
 ]
