@@ -1,0 +1,174 @@
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.Neriin_huudas {
+    display: grid;
+    background-color: var(--color-purple-a);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 25rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "zrg ner"
+    "zrg unelgee"
+    "zrg huvaari";
+}
+
+.Neriin_huudas img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    grid-area: zrg;
+}
+
+.Neriin_huudas h2 {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    color: white;
+    grid-area: ner;
+    justify-self: center;
+}
+
+.stars {
+    color: gold;
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    grid-area: unelgee;
+    justify-self: center;
+    scale: 1.3;
+    text-shadow: 2px 2px 5px gold;
+}
+
+.Huvari_harah {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 0.7em 2em;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    grid-area: huvaari;
+    align-self: center;
+}
+
+.Huvari_harah:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--padding);
+    width: 100%;
+    max-width: 60rem;
+    padding: var(--padding);
+    border-radius: var(--border-radius2);
+}
+
+form h3 {
+    grid-column: 1 / -1;
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: var(--padding);
+    font-size: var(--font-size-large);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-size-medium);
+    gap: 0.5rem;
+    color: var(--color-text);
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+input[type="datetime-local"],
+textarea,
+select {
+    background-color: rgba(75, 0, 130, 0.5);
+    border: none;
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    color: var(--color-text);
+    font-size: var(--font-size-medium);
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+textarea {
+    resize: none;
+    height: 5rem;
+}
+
+.submit-btn {
+    grid-column: 1 / -1;
+    justify-self: center;
+    background-color: var(--color-purple-tod);
+    color: var(--color-text);
+    padding: 0.7em 2em;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size-medium);
+    transition: all 0.3s ease;
+    margin-top: var(--padding);
+}
+
+.submit-btn:hover {
+    background-color: var(--color-purple-budegees-tod);
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .Neriin_huudas {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "zrg"
+            "ner"
+            "unelgee"
+            "huvaari";
+        max-width: 90%;
+        padding: var(--padding);
+    }
+
+    .Neriin_huudas h2 {
+        font-size: calc(var(--font-size-large) - 0.5rem);
+    }
+
+    .stars {
+        font-size: calc(var(--font-size-medium) * 1.1);
+    }
+
+    form {
+        grid-template-columns: 1fr;
+        max-width: 90%;
+    }
+
+    .submit-btn {
+        grid-column: 1;
+        justify-self: center;
+        width: 100%;
+    }
+}
