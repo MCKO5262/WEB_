@@ -5,81 +5,200 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Solned</title>
+  <link rel="stylesheet" href="styles/gg.css">
+  <link rel="stylesheet" href="styles/Footer.css">
+  <link rel="stylesheet" href="styles/order.css">
   <link rel="stylesheet" href="global.css">
-  <link rel="stylesheet" href="/styles/Footer.css">
-  <script src="/js/main.js"></script>
 </head>
 
 <body>
   <header>
     <nav>
       <ul>
-        <li class="logo"><a href="Nuur.html">
-            <img src="picture/logo.PNG" alt="Company logo" />
-          </a></li>
-        <li class="searchbar">
-          <search>
-            <form>
-              <input type="search" placeholder="Хайлт" name="search" />
-              <button type="submit">Search</button>
-            </form>
-          </search>
+        <li class="logo">
+          <a href="Nuur.html">
+            <img alt="logo" src="picture/logo.png" />
+          </a>
         </li>
-        <li class="checkorder"><a href="ordercheck.html
-          ">Захиалга шалгах</a></li>
+        <li class="searchbar">
+          <form action="/search" method="GET">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Хайлт хийх..."
+              aria-label="Search"
+            />
+          </form>
+        </li>
+        <li class="checkorder">
+          <a
+            href="ZahialagShalgah.html"
+            >Захиалга шалгах</a
+          >
+        </li>
         <li class="login"><a href="login.html">Нэвтрэх</a></li>
       </ul>
     </nav>
   </header>
   <main>
-    <div class="Neriin_huudas">
-        <img src="thunder.png" alt="Thunder Image">
+    <section class="Neriin_huudas">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Q6WFJgTVCNOR0WpVQ5lcRZNJq2ve67oJsQ&s" alt="Thunder's Image">
         <h2>Thunder</h2>
-        <p id="stars">★★★★★</p>
-        <a id="Huvaari_harah" href="#">Хуваарь харах</a>
-        
-    </div>
-    <section>
-        <form action="get_order.html">
-            <label>
-                Захиалагчийн овог нэр
-                <input type="text" placeholder="Хариулт оруулах" required>
-            </label>
-            <label>
-                Утасны дугаар
-                <input type="number" placeholder="Хариулт оруулах" required>
-            </label>
-            <label>
-                Байршил
-                <input type="text" placeholder="Хариулт оруулах" required>
-            </label>
-            <label>
-                Он/Сар/Өдөр
-                <input type="date" placeholder="Хариулт оруулах" required>
-            </label>
-            <label>
-                Үзэгчдийн тоо
-                <input type="number" placeholder="Хариулт оруулах" required>
-            </label>
-            <label>
-                Тоглох хугацаа
-                <input type="text" placeholder="Хариулт оруулах" required>
-            </label>
-            <label>
-                Хэдэн минутын өмнө бэлэн байх
-                <input type="text" placeholder="Хариулт оруулах" required>
-            </label>
-            <label>
-                Ямар баяр
-                <input type="text" placeholder="Хариулт оруулах" required>
-            </label>
-            <form id="bookingForm"><button type="submit" class="submit-btn">Захиалга явуулах</button></form>
-            
-        </form>
-
-
+        <div class="stars">★★★★★</div>
+        <button class="Huvari_harah">Хуваарь харах</button>
     </section>
+
+    <form>
+      <!-- 1. Хэрэглэгчийн мэдээлэл -->
+      <h3>1. Хэрэглэгчийн мэдээлэл</h3>
+      <label>
+          Овог, нэр:
+          <input type="text" placeholder="Хариулт оруулах" required>
+      </label>
+      <label>
+          Холбогдох утасны дугаар:
+          <input type="tel" placeholder="Хариулт оруулах" required>
+      </label>
+      <label>
+          И-мэйл хаяг:
+          <input type="email" placeholder="Хариулт оруулах" required>
+      </label>
+      <label>
+          Байгууллагын нэр (хэрэв байгаа бол):
+          <input type="text" placeholder="Хариулт оруулах">
+      </label>
+      <label>
+          Байгууллагын төлөөлөгчийн нэр:
+          <input type="text" placeholder="Хариулт оруулах">
+      </label>
+      <label>
+          Төлбөрийн бичиг баримт авах хаяг:
+          <input type="email" placeholder="Хариулт оруулах">
+      </label>
+  
+      <!-- 2. Үйл ажиллагааны мэдээлэл -->
+      <h3>2. Үйл ажиллагааны мэдээлэл</h3>
+      <label>
+          Үйл ажиллагааны төрөл:
+          <select required>
+              <option value="" disabled selected>Сонгох</option>
+              <option value="concert">Тоглолт</option>
+              <option value="private">Хувийн арга хэмжээ</option>
+              <option value="corporate">Байгууллагын өдөрлөг</option>
+              <option value="festival">Баяр наадам</option>
+              <option value="other">Бусад</option>
+          </select>
+      </label>
+      <label>
+          Үйл ажиллагааны нэр ба онцлог:
+          <input type="text" placeholder="Хариулт оруулах">
+      </label>
+      <label>
+          Үйл ажиллагааны огноо:
+          <input type="datetime-local" required>
+      </label>
+      <label>
+          Үйл ажиллагааны байршил:
+          <input type="text" placeholder="Хот, дүүрэг, тодорхой хаяг" required>
+      </label>
+      <label>
+          Тоглолтын үргэлжлэх хугацаа (цаг/минут):
+          <input type="text" placeholder="Хариулт оруулах" required>
+      </label>
+      <label>
+          Уран бүтээлч бэлэн байх хугацаа (цаг/минут):
+          <input type="number" min="0" placeholder="Хариулт оруулах" required>
+      </label>
+  
+      <!-- 3. Үзэгчдийн мэдээлэл -->
+      <h3>3. Үзэгчдийн мэдээлэл</h3>
+      <label>
+          Үзэгчдийн тоо:
+          <select required>
+              <option value="" disabled selected>Сонгох</option>
+              <option value="10-50">10-50</option>
+              <option value="51-100">51-100</option>
+              <option value="101-200">101-200</option>
+              <option value="200plus">200+</option>
+          </select>
+      </label>
+      <label>
+          Үзэгчдийн насны дундаж:
+          <select required>
+              <option value="" disabled selected>Сонгох</option>
+              <option value="under18">-18</option>
+              <option value="19-25">19-25</option>
+              <option value="26-30">26-30</option>
+              <option value="31-40">31-40</option>
+              <option value="40plus">40+</option>
+          </select>
+      </label>
+      <label>
+          Үйл ажиллагааны хэв маяг:
+          <input type="text" placeholder="Жишээ: албан ёсны, энгийн">
+      </label>
+  
+      <!-- 4. Уран бүтээлчийн мэдээлэл -->
+      <h3>4. Уран бүтээлчийн мэдээлэл</h3>
+      <label>
+          Уран бүтээлчийн нэр:
+          <input type="text" placeholder="Хариулт оруулах" required>
+      </label>
+      <label>
+          Сонгосон уран бүтээлчтэй өмнө нь ажиллаж байсан уу?
+          <select required>
+              <option value="" disabled selected>Сонгох</option>
+              <option value="yes">Тийм</option>
+              <option value="no">Үгүй</option>
+          </select>
+      </label>
+      <label>
+          Хэрэв ажилласан бол товч мэдээлэл:
+          <textarea placeholder="Товч тайлбар бичнэ үү"></textarea>
+      </label>
+  
+      <!-- 5. Төлбөрийн мэдээлэл -->
+      <h3>5. Төлбөрийн мэдээлэл</h3>
+      <label>
+          Төлбөрийн нийт хэмжээ:
+          <input type="number" placeholder="Хариулт оруулах">
+      </label>
+      <label>
+          Төлбөрийн хэлбэр:
+          <select required>
+              <option value="" disabled selected>Сонгох</option>
+              <option value="cash">Бэлэн мөнгө</option>
+              <option value="bank">Банкны шилжүүлэг</option>
+              <option value="card">Картаар</option>
+          </select>
+      </label>
+      <label>
+          Төлбөр хийх хугацаа:
+          <input type="text" placeholder="Жишээ: захиалгын өдөр, тоглолтын дараа">
+      </label>
+  
+      <!-- 6. Тусгай шаардлага -->
+      <h3>6. Тусгай шаардлага</h3>
+      <label>
+          Тусгай хүсэлт байгаа эсэх:
+          <textarea placeholder="Жишээ: тайз, гэрэлтүүлэг"></textarea>
+      </label>
+      <label>
+          Уран бүтээлчийн техникийн хэрэгцээ:
+          <textarea placeholder="Жишээ: микрофон, тусгай дууны тохиргоо"></textarea>
+      </label>
+      <label>
+          Нэмэлт тайлбар эсвэл хүсэлт:
+          <textarea placeholder="Нэмэлт мэдээлэл"></textarea>
+      </label>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Захиалга илгээх</button>
+  </form>
+  
 </main>
+<hr>
 <footer>
   <section class="social-address">
     <a href="Nuur.html">
