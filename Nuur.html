@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="global.css" />
     <link rel="stylesheet" href="/styles/Nuur.css" />
     <link rel="stylesheet" href="./styles/Footer.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script type="module" src="/js/Nuur.js"></script>
     <title>Solned</title>
   </head>
 
@@ -45,49 +45,54 @@
       </nav>
     </header>
     <main>
-      <section class="event-section">
-        <div class="logo-container">
-          <p class="logo-title">mongolian</p>
-          <p  class="logo-title logo-highlight">event</p>
-          <p class="logo-subtitle">Event Entertainment & Service Company</p>
-      </div>
-        <section class="event-details">
-          <button>Дэлгэрэнгүй</button>
-          <div>1/2</div>
-        </section>
+      <section class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide active">
+            <section class="event-section">
+              <img src="/picture/event1.jpg" alt="Event image">
+              <div class="event-controls">
+                <a class="event-button">Дэлгэрэнгүй</a>
+                <div class="slide-counter">1/3</div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <button class="nav-button nav-prev">←</button>
+        <button class="nav-button nav-next">→</button>
       </section>
-      <section class="artist-list">
+      <section class="artist-section"> 
         <section class="artist-info">
-          <h2>Онцлох</h2>
+          <h2>Онцлох</h2> 
           <a href="Hailt-hiih.html">Бүгдийг харах</a>
         </section>
-        <div class="artist-card-container">
+        <div id="special-artists-container" class="artist-card-container">
           <article class="artist-card">
             <img src="./picture//davaidasha.png" alt="Davai-Dasha" />
             <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
+              <p class="comment">1231</p>
+              <p class="likes">133</p>
               <h3>Davai-Dasha</h3>
             </div>
           </article>
-        </div>
+          </div>
       </section>
-      <section class="artist-list">
+      <section> 
         <section class="artist-info">
-          <h2>Шинэ</h2>
+          <h2>Шинэ</h2> 
           <a href="Hailt-hiih.html">Бүгдийг харах</a>
         </section>
-        <div class="artist-card-container">
+        <div id="new-artists-container" class="artist-card-container">
           <article class="artist-card">
             <img src="./picture//davaidasha.png" alt="Davai-Dasha" />
             <div class="artist-card-info">
-              <p>1231</p>
-              <p>133</p>
+              <p class="comment">1231</p>
+              <p class="likes">133</p>
               <h3>Davai-Dasha</h3>
             </div>
           </article>
-        </div>
+          </div>
       </section>
+      
       <section id="artist-type">
         <article>
           <a href="#">Хамтлаг</a>

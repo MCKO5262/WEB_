@@ -98,5 +98,15 @@
     "location": "Улаанбаатар",
     "category": "band",
     "price": 2500000
+  },
+  {
+    "id": 11,
+    "name": "The Moon Band",
+    "image": "./picture/Moonband.jpg",
+    "likes": 2400,
+    "bookings": 230,
+    "location": "Улаанбаатар",
+    "category": "band",
+    "price": 2500000
   }
 ]

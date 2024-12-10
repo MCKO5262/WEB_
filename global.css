@@ -89,26 +89,6 @@ header nav ul {
   flex: 1;
   list-style: none;
 }
-
-/* Search form styles */
-.searchbar form {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  border: 3px solid var(--txtc);
-  border-radius: 25px;
-  padding: 5px 15px;
-  max-width: 400px;
-  transition: all 0.3s ease;
-  background-color: var(--bc1, #2c2c2c); /* Dark input background */
-}
-
-.searchbar form:focus-within {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-/* Search input styles */
 .searchbar input {
   width: 100%;
   padding: 8px 12px; /* Improved padding */
@@ -184,4 +164,153 @@ nav li:nth-last-child(2) {
 .checkorder i,
 .login i {
   font-size: 20px;
+}
+@media screen and (max-width: 1200px) {
+  :root {
+    --base-font-size: 20px;
+  }
+  
+  body {
+    padding: 0 3%;
+  }
+  
+  header nav ul {
+    gap: 1rem;
+  }
+  
+  .login {
+    width: 160px;
+    height: 45px;
+  }
+  
+  .searchbar {
+    margin: 0 15px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  header nav ul {
+    justify-content: center;
+  }
+  
+  .searchbar {
+    order: 3;
+    margin: 10px 0;
+    flex: 1 1 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --base-font-size: 18px;
+  }
+  
+  body {
+    padding: 0 2%;
+  }
+  
+  header {
+    position: relative;
+  }
+  
+  header nav {
+    padding: 0.8rem;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  
+  .login,
+  .checkorder {
+    flex: 0 1 auto;
+  }
+  
+  .login {
+    width: 140px;
+    height: 40px;
+  }
+  
+  .login a,
+  .checkorder a {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --base-font-size: 16px;
+  }
+  
+  body {
+    padding: 0 1%;
+  }
+  
+  header nav {
+    padding: 0.6rem;
+  }
+  
+  header nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  
+  .logo {
+    justify-content: center;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .searchbar form {
+    padding: 3px 12px;
+  }
+  
+  .searchbar input {
+    padding: 10px;
+  }
+  
+  .login {
+    width: 100%;
+    height: 45px;
+  }
+  
+  .checkorder {
+    width: 100%;
+  }
+  
+  .checkorder a {
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .login:hover {
+    transform: none;
+  }
+  
+  .checkorder a:hover {
+    background: none;
+    transform: none;
+  }
+  
+  .login:active,
+  .checkorder a:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

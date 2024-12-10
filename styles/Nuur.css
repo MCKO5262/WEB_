@@ -1,34 +1,56 @@
 @import url(/global.css);
+
 :root {
   --primary-color: #21016c;
   --secondary-color: #6237a0;
   --border-radius: 1rem;
-  --spacing-sm: 0.5rem;
+  --spacing-sm: 0.7rem;
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
+  --highlight-color: #c3ff1f;
 }
 
-.logo-container {
+/* Base Styles */
+.event-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  margin-bottom: 1rem;
+}
+
+
+.event-button:hover {
+  opacity: 0.9;
+}
+
+/* Logo & Event Title Styles */
+.logo-container,
+.swiper-container {
   text-align: center;
   font-family: Arial, sans-serif;
   color: white;
-  
-  
 }
 
 .logo-title {
   font-size: 10rem;
   font-weight: bold;
-  display: inline-block;
   color: white;
-  justify-content: center;
+  display: inline-block;
 }
 
-.logo-highlight {
-  color: #c3ff1f; 
+.logo-highlight
+{
+  color: var(--highlight-color);
 }
 
-.logo-subtitle {
+.logo-subtitle,
+.event-subtitle {
   display: block;
   font-size: 1rem;
   margin-top: 0.5rem;
@@ -38,55 +60,44 @@
   color: white;
 }
 
+/* Event Section */
 .event-section {
-  margin-top: var(--spacing-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-  padding: 4rem var(--spacing-lg) 0;
-  background-color: var(--primary-color);
-  border-radius: var(--border-radius);
-}
-
-.event-image {
-  padding: 0 var(--spacing-md);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.event-image img {
+  position: relative;
   width: 100%;
-  height: auto;
-  max-width: 1200px;
-  border-radius: var(--border-radius);
+}
+.event-section img {
+  width: 100%;
+  max-height: 40rem;
+  object-fit:unset;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+.slide-counter {
+  color: white;
+  font-size: 1rem;
 }
 
 .event-details {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
-  margin-top: var(--spacing-md);
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+}
+.event-controls {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.event-details button {
-  background-color: var(--secondary-color);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: 0.7rem;
-  color: white;
-  font-size: 1.5rem;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.event-details button:hover {
-  opacity: 0.9;
-}
-
-/* Artist List */
+/* Artist Styles */
 .artist-list {
   margin-top: var(--spacing-lg);
   display: flex;
@@ -95,6 +106,7 @@
 }
 
 .artist-info {
+  margin: 1.5rem 0rem 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,16 +125,9 @@
   border-radius: 0.7rem;
   color: white;
   font-size: 1.2rem;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
   text-decoration: none;
 }
 
-.artist-info a:hover {
-  opacity: 0.9;
-}
 
 .artist-card-container {
   width: 100%;
@@ -160,23 +165,41 @@
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
+
 .artist-card h3 {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   padding: 0 0.5rem;
   border-radius: 0.6rem;
   margin-bottom: 1rem;
 }
+.likes, .comment {
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
 
+.likes::before, .comment::before {
+  content: '❤️'; /* Heart icon for likes */
+  font-size: 1rem;
+}
 
+.comment::before {
+  content: '💬'; /* Comment icon */
+  font-size: 1rem;
+}
 
 /* Artist Type Section */
 #artist-type {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4rem;
-  margin-top: var(--spacing-lg);
+  margin: var(--spacing-lg) 0 2.5rem;
   padding: var(--spacing-md);
-  margin-bottom: 2rem
+  
 }
 
 #artist-type article {
@@ -211,6 +234,70 @@
   z-index: 1;
 }
 
+/* Swiper Navigation */
+.swiper-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.swiper-slide.active {
+  opacity: 1;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.nav-prev {
+  left: 1rem;
+  border-radius: 50% 15px 15px 50%;
+}
+
+.nav-next {
+  right: 1rem;
+  border-radius: 15px 50% 50% 15px;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #2d0991;
+    --secondary-color: #7344b5;
+  }
+}
+
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
   .artist-card-container {
@@ -226,6 +313,25 @@
   
   #artist-type {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .logo-title,
+  .event-title {
+    font-size: 5rem;
+  }
+  
+  .event-section {
+    padding: 2rem 1rem 1rem;
+  }
+  
+  .event-details button {
+    font-size: 1rem;
+  }
+  
+  .nav-button {
+    padding: 0.75rem 1rem;
   }
 }
 
@@ -254,19 +360,34 @@
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
-
-  .event-details button,
-  .artist-info button {
-    font-size: 0.9rem;
-    padding: var(--spacing-sm) var(--spacing-md);
+}
+@media screen and (max-width: 768px) {
+  .nav-button {
+    padding: 1rem 1.4rem;
+    font-size: 1.4rem;
+  }
+  
+  .nav-prev {
+    left: 1rem;
+  }
+  
+  .nav-next {
+    right: 1rem;
+  }
+  
+  .swiper-pagination {
+    bottom: 1.5rem;
   }
 }
 
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #2d0991;
-    --secondary-color: #7344b5;
+@media screen and (max-width: 480px) {
+  .nav-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.2rem;
+  }
+  
+  .swiper-pagination-bullet {
+    width: 0.6rem;
+    height: 0.6rem;
   }
 }

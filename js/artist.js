@@ -1,7 +1,7 @@
 class ArtistManager {
   constructor() {
     // API URL
-    this.apiUrl = 'https://api.jsonbin.io/v3/qs/6747f374e41b4d34e45c0cac';
+    this.apiUrl = 'https://api.jsonbin.io/v3/qs/67568e48acd3cb34a8b67ac2';
     
     this.artists = []; // Уран бүтээлчдийн жагсаалт
     this.activeFilters = new Map(); // Идэвхтэй шүүлтүүрүүд
@@ -66,7 +66,7 @@ class ArtistManager {
   }
 
   setupFilters() {
-    // Dropdown шүүлтүүрүүдийг тохируулах
+    // Dropdown filters setup
     document.querySelectorAll('.dropdown-content a').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -79,13 +79,68 @@ class ArtistManager {
       });
     });
 
-    // Хайлтын өгөгдөл оруулах талбар
+    // Search input handler - Fixed version
     const searchInput = document.getElementById('search');
     if (searchInput) {
+      // Prevent form submission
+      searchInput.closest('form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+      });
+
+      // Handle input changes
       searchInput.addEventListener('input', this.debounce((e) => {
-        this.filterArtists({ search: e.target.value });
+        const searchTerm = e.target.value;
+        const params = new URLSearchParams(window.location.search);
+        
+        if (searchTerm) {
+          params.set('search', searchTerm);
+        } else {
+          params.delete('search');
+        }
+        
+        window.history.pushState({}, '', `${window.location.pathname}?${params}`);
+        this.filterArtists({ search: searchTerm });
       }, 300));
     }
+  }
+
+  filterArtists(filters = {}) {
+    console.log('Applying filters:', filters);
+    let filtered = [...this.artists];
+  
+    // Refined search filter implementation
+    if (filters.search) {
+      const searchTerm = filters.search.toLowerCase().trim();
+      filtered = filtered.filter(artist => {
+        return (
+          artist.name?.toLowerCase().includes(searchTerm) ||
+          artist.category?.toLowerCase().includes(searchTerm) ||
+          artist.location?.toLowerCase().includes(searchTerm)
+        );
+      });
+    }
+  
+    // Apply other filters
+    if (filters.category) {
+      filtered = filtered.filter(artist => artist.category === filters.category);
+    }
+    
+    if (filters.price) {
+      const priceRanges = {
+        '0-100000': [0, 100000],
+        '100000-2000000': [100000, 2000000],
+        '2000000-': [2000000, Infinity]
+      };
+      const [min, max] = priceRanges[filters.price] || [0, Infinity];
+      filtered = filtered.filter(artist => artist.price >= min && artist.price <= max);
+    }
+    
+    if (filters.location) {
+      filtered = filtered.filter(artist => artist.location === filters.location);
+    }
+  
+    console.log('Filtered results:', filtered);
+    this.renderArtists(filtered);
   }
 
   // Хайлтын хугацаа хойшлуулах функц

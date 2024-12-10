@@ -6,7 +6,10 @@
   <link rel="stylesheet" href="global.css" />
   <link rel="stylesheet" href="/styles/profile.css"/>
   <link rel="stylesheet" href="./styles/Footer.css" />
+  <script type="module" src="component/App.js"></script>
+  <script type="module" src="component/button.js"></script>
 </head>
+
 <body>
     <header>
         <nav>
@@ -38,89 +41,7 @@
         </nav>
       </header>
   <main>
-    <aside>
-      <figure>
-        <img src="/picture/thunder.jfif" alt="Thunder Profile">
-      </figure>
-      <h1>Thunder</h1>
-      <nav>
-        <button class="active" data-tab="basic">Үндсэн</button>
-        <button data-tab="info">Еренхий Мэдээлэл</button>
-        <button data-tab="photos">Зураг</button>
-        <button data-tab="video">Видео</button>
-        <button data-tab="audio">Аудио</button>
-      </nav>
-    </aside>
-
-    <section id="main-pro">
-      <article id="basic" class="active">
-        <h2>Үндсэн</h2>
-        <form>
-          <label for="main-service">Үндсэн үйлчилгээ</label>
-          <select id="main-service">
-            <option>Дуучин</option>
-          </select>
-
-          <label for="extra-service">Нэмэлт үйлчилгээ</label>
-          <select id="extra-service">
-            <option>Байгууй</option>
-          </select>
-          <button class="save-button">Хадгалах</button>
-        </form>
-      </article>
-
-      <article id="info">
-        <h2>Бренхий уран бүтээлчийн талаар</h2>
-        <p>Танилцуулга</p>
-        <p>Дуучин хамтлаг болон наадан дээр очиж дуулдаг нэхэмжлэх өрчин увийн залруул дугаар алдартай</p>
-        <button class="save-button">өөрчлөх</button>
-      </article>
-
-      <article id="photos">
-        <h2>Таний зургууд</h2>
-        <section class="media-grid">
-          <figure class="media-item">
-            <img src="/picture/thunder.jfif" alt="Photo 1">
-          </figure>
-          <figure class="media-item">
-            <img src="/api/placeholder/400/400" alt="Photo 2">
-          </figure>
-        </section>
-        <button class="save-button">Зураг нэмэх</button>
-      </article>
-
-      <article id="video">
-        <h2>Видео</h2>
-        <section class="media-grid">
-          <figure class="video-item">
-            <div class="play-button">
-              <div class="play-circle">▶</div>
-            </div>
-          </figure>
-          <figure class="video-item">
-            <div class="play-button">
-              <div class="play-circle">▶</div>
-            </div>
-          </figure>
-        </section>
-        <button class="save-button">Видео нэмэх</button>
-      </article>
-
-      <article id="audio">
-        <h2>Аудио</h2>
-        <ul>
-          <li>
-            <button class="audio-control">▶</button>
-            <span>Sample Audio Track 1</span>
-          </li>
-          <li>
-            <button class="audio-control">▶</button>
-            <span>Sample Audio Track 2</span>
-          </li>
-        </ul>
-        <button class="save-button">Аудио нэмэх</button>
-      </article>
-    </section>
+    <profile-content></profile-content>
   </main>
   <hr>
   <footer>
