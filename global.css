@@ -11,12 +11,12 @@
   --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --bc1: #2f2f2f;
     --bc2: #000000;
   }
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -39,7 +39,6 @@ body {
 /* Header styling */
 header nav {
   padding: 1rem;
-  border-bottom: 2px solid var(--txtc);
 }
 header nav ul {
   display: flex;
