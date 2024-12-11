@@ -1,8 +1,8 @@
 class ArtistManager {
   constructor() {
     // API URL
-    this.apiUrl = 'https://api.jsonbin.io/v3/qs/67568e48acd3cb34a8b67ac2';
-    
+    this.apiUrl = 'https://api.jsonbin.io/v3/qs/6759b63fe41b4d34e463bae6';
+
     this.artists = []; // Уран бүтээлчдийн жагсаалт
     this.activeFilters = new Map(); // Идэвхтэй шүүлтүүрүүд
     this.init();
@@ -15,26 +15,26 @@ class ArtistManager {
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
-      
+
       const data = await response.json();
       // Зөв өгөгдлийн бүтэц болох талаар шалгах
       if (!Array.isArray(data.record)) {
         throw new Error('Invalid data structure');
       }
-      
+
       this.artists = data.record; // API-с ирсэн өгөгдлийг artists массивт оноох
-      
+
       console.log('Initialized with artists:', this.artists);
 
       // Шүүлтүүрийн tag-уудын контейнер үүсгэх
       this.setupFilterTagsContainer();
-      
+
       // Уран бүтээлчдийг дэлгэцэнд харуулах
       this.renderArtists(this.artists);
-      
+
       // Шүүлтүүрүүдийг тохируулах
       this.setupFilters();
-      
+
       // URL дээрх шүүлтүүрүүдийг хэрэгжүүлэх 
       this.applyURLFilters();
 
@@ -66,15 +66,12 @@ class ArtistManager {
   }
 
   setupFilters() {
-    // Dropdown filters setup
     document.querySelectorAll('.dropdown-content a').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const filterType = e.target.closest('.dropdown').querySelector('.dropbtn, .dropdown') 
-          ? e.target.closest('.dropdown').querySelector('.dropbtn, .dropdown').textContent 
-          : 'Unknown';
-        const value = e.target.textContent;
-        
+        const filterType = e.target.closest('.dropdown').querySelector('.dropbtn').textContent.trim();
+        const value = e.target.textContent.trim();
+
         this.updateFilters(filterType, value);
       });
     });
@@ -82,22 +79,16 @@ class ArtistManager {
     // Search input handler - Fixed version
     const searchInput = document.getElementById('search');
     if (searchInput) {
-      // Prevent form submission
-      searchInput.closest('form')?.addEventListener('submit', (e) => {
-        e.preventDefault();
-      });
-
-      // Handle input changes
       searchInput.addEventListener('input', this.debounce((e) => {
-        const searchTerm = e.target.value;
+        const searchTerm = e.target.value.trim();
         const params = new URLSearchParams(window.location.search);
-        
+
         if (searchTerm) {
           params.set('search', searchTerm);
         } else {
           params.delete('search');
         }
-        
+
         window.history.pushState({}, '', `${window.location.pathname}?${params}`);
         this.filterArtists({ search: searchTerm });
       }, 300));
@@ -107,7 +98,7 @@ class ArtistManager {
   filterArtists(filters = {}) {
     console.log('Applying filters:', filters);
     let filtered = [...this.artists];
-  
+
     // Refined search filter implementation
     if (filters.search) {
       const searchTerm = filters.search.toLowerCase().trim();
@@ -119,26 +110,32 @@ class ArtistManager {
         );
       });
     }
-  
+
     // Apply other filters
     if (filters.category) {
       filtered = filtered.filter(artist => artist.category === filters.category);
     }
-    
+
     if (filters.price) {
       const priceRanges = {
-        '0-100000': [0, 100000],
-        '100000-2000000': [100000, 2000000],
-        '2000000-': [2000000, Infinity]
+        '0-1,000,000': [0, 1000000],
+        '1,000,000-2,000,000': [1000000, 2000000],
+        '2,000,000-2,500,000': [2000000, 2500000],
+        '2,500,000-дээш': [2500000, Infinity],
       };
-      const [min, max] = priceRanges[filters.price] || [0, Infinity];
-      filtered = filtered.filter(artist => artist.price >= min && artist.price <= max);
+
+      if (filters.price) {
+        const [min, max] = priceRanges[filters.price] || [0, Infinity];
+        filtered = filtered.filter(artist => artist.price >= min && artist.price <= max);
+      }
+
+
     }
-    
+
     if (filters.location) {
       filtered = filtered.filter(artist => artist.location === filters.location);
     }
-  
+
     console.log('Filtered results:', filtered);
     this.renderArtists(filtered);
   }
@@ -146,7 +143,7 @@ class ArtistManager {
   // Хайлтын хугацаа хойшлуулах функц
   debounce(func, delay) {
     let timeoutId;
-    return function(...args) {
+    return function (...args) {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func.apply(this, args), delay);
     };
@@ -155,15 +152,18 @@ class ArtistManager {
   updateFilters(filterType, value) {
     const params = new URLSearchParams(window.location.search);
     let paramKey = '';
-    
-    switch(filterType) {
+
+    switch (filterType) {
       case 'Төрлүүд':
         paramKey = 'category';
         // Илүү уян хатан категорийн шилжүүлэг
         const categoryMap = {
-          'Дуучин': 'singer', 
+          'Дуучин': 'singer',
           'Хамтлаг': 'band',
-          'Хөгжимчин': 'musician'
+          'Хөгжимчин': 'musician',
+          'Хөтлөгч': 'host',
+          'Комедиан': 'comedian',
+          'Бүжигчин': 'dancer'
         };
         params.set(paramKey, categoryMap[value] || value);
         break;
@@ -212,11 +212,11 @@ class ArtistManager {
 
   removeFilter(filterType) {
     const params = new URLSearchParams(window.location.search);
-    
+
     this.activeFilters.delete(filterType);
-    
+
     // URL-с параметрыг хасах
-    switch(filterType) {
+    switch (filterType) {
       case 'Төрлүүд':
         params.delete('category');
         break;
@@ -248,54 +248,38 @@ class ArtistManager {
   filterArtists(filters = {}) {
     console.log('Applying filters:', filters);
     let filtered = [...this.artists];
-  
-    // Нэг бүрчлэн шүүлт хийх нарийвчилсан алгоритм
-    const applyFilter = (artists, filterKey, filterValue) => {
-      if (!filterValue) return artists;
-  
-      switch(filterKey) {
-        case 'category':
-          return artists.filter(artist => artist.category === filterValue);
-        
-        case 'price':
-          const priceRanges = {
-            '0=100000': [0, 100000],
-            '100000-2000000': [100000, 2000000],
-            '2000000-': [2000000, Infinity]
-          };
-          
-          const [min, max] = priceRanges[filterValue] || [0, Infinity];
-          return artists.filter(artist => 
-            artist.price >= min && artist.price <= max
-          );
-        
-        case 'location':
-          return artists.filter(artist => artist.location === filterValue);
-        
-        case 'search':
-          const searchTerm = filterValue.toLowerCase().trim();
-          return artists.filter(artist =>
-            artist.name.toLowerCase().includes(searchTerm) ||
-            artist.category.toLowerCase().includes(searchTerm) ||
-            artist.location.toLowerCase().includes(searchTerm)
-          );
-        
-        default:
-          return artists;
-      }
-    };
-  
-    // Бүх идэвхтэй шүүлтүүдийг дарааллаар нь хэрэгжүүлэх
-    const filterKeys = ['category', 'price', 'location', 'search'];
-    filterKeys.forEach(key => {
-      if (filters[key]) {
-        filtered = applyFilter(filtered, key, filters[key]);
-      }
-    });
-  
+
+    if (filters.search) {
+      const searchTerm = filters.search.toLowerCase().trim();
+      filtered = filtered.filter(artist =>
+        artist.name?.toLowerCase().includes(searchTerm) ||
+        artist.category?.toLowerCase().includes(searchTerm) ||
+        artist.location?.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    if (filters.category) {
+      filtered = filtered.filter(artist => artist.category === filters.category);
+    }
+
+    if (filters.price) {
+      const priceRanges = {
+        '0-1,000,000': [0, 1000000],
+        '1,000,000-2,000,000': [1000000, 2000000],
+        '2,000,000-2,500,000': [2000000, 2500000],
+        '2,500,000-дээш': [2500000, Infinity],
+      };
+
+      const [min, max] = priceRanges[filters.price] || [0, Infinity];
+      filtered = filtered.filter(artist => artist.price >= min && artist.price <= max);
+    }
+
+    if (filters.location) {
+      filtered = filtered.filter(artist => artist.location === filters.location);
+    }
+
     console.log('Filtered results:', filtered);
-  
-    // Хэрэв шүүлтийн дараа өгөгдөл олдохгүй бол анхны өгөгдлийг харуулах
+
     if (filtered.length === 0) {
       const container = document.querySelector('.marketplace-container');
       if (container) {
@@ -307,52 +291,50 @@ class ArtistManager {
       }
       return;
     }
-  
-    // Шүүгдсэн өгөгдлийг дэлгэцэнд харуулах
+
     this.renderArtists(filtered);
   }
+
   updateFilters(filterType, value) {
     const params = new URLSearchParams(window.location.search);
-    let paramKey = '';
-    
-    // Төрөл, үнэ, байршлын Map 
     const filterMappings = {
       'Төрлүүд': {
         paramKey: 'category',
         mapping: {
-          'Дуучин': 'singer', 
+          'Дуучин': 'singer',
           'Хамтлаг': 'band',
-          'Хөгжимчин': 'musician'
-        }
+          'Хөгжимчин': 'musician',
+          'Хөтлөгч': 'host',
+          'Комедиан': 'comedian',
+          'Бүжигчин': 'dancer',
+        },
       },
       'Үнэ': {
         paramKey: 'price',
-        mapping: null
+        mapping: null, // No additional mapping needed for price
       },
       'Байршил': {
         paramKey: 'location',
-        mapping: null
-      }
+        mapping: null,
+      },
     };
-  
+
     const filterConfig = filterMappings[filterType];
     if (!filterConfig) return;
-  
-    // Параметрийг шинэчлэх
-    const mappedValue = filterConfig.mapping 
-      ? (filterConfig.mapping[value] || value)
+
+    const mappedValue = filterConfig.mapping
+      ? filterConfig.mapping[value] || value
       : value;
-    
+
     params.set(filterConfig.paramKey, mappedValue);
-  
-    // Идэвхтэй шүүлтүүрийг шинэчлэх
+
     this.activeFilters.set(filterType, value);
     this.updateFilterTags();
-  
-    // URL-г шинэчлэх 
+
     window.history.pushState({}, '', `${window.location.pathname}?${params}`);
     this.applyURLFilters();
   }
+
 
   renderArtists(artists) {
     const container = document.querySelector('.marketplace-container');
@@ -410,7 +392,10 @@ class ArtistManager {
     const categories = {
       'singer': 'Дуучин',
       'band': 'Хамтлаг',
-      'musician': 'Хөгжимчин'
+      'musician': 'Хөгжимчин',
+      'host': 'Хөтлөгч',
+      'comedian': 'Комедиан',
+      'dancer': 'Бүжигчин'
     };
     return categories[category] || category;
   }
@@ -424,7 +409,7 @@ class ArtistManager {
   // Захиалга өгөх үйлдэл
   handleBooking(artistId) {
     // Захиалгын хуудас руу шилжих
-    window.location.href = `ordercheck.html?artist=${artistId}`;
+    window.location.href = `Sanalhuselt.html?artist=${artistId}`;
   }
 }
 
