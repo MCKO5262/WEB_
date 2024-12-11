@@ -7,7 +7,10 @@
     "bookings": 133,
     "location": "Ховд",
     "category": "singer",
-    "price": 1500007
+    "price": 1500007,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Davaidasha, whose real name is Ariunbold Ganbold, is a Mongolian pop singer and songwriter born on June 11, 2001, in Erdenet, Mongolia. Known for his blend of styles in bedroom pop and emo rap, he began releasing music independently around 2020. His stage name, derived from the Mongolian name Davaadash, reflects his unique artistic identity."
   },
   {
     "id": 2,
@@ -17,7 +20,10 @@
     "bookings": 110,
     "location": "Улаан-Баатар",
     "category": "band",
-    "price": 2000000
+    "price": 2000000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Honh Band, one of Mongolia’s classic rock bands, has been captivating audiences since the early 1990s with their powerful performances and meaningful lyrics."
   },
   {
     "id": 3,
@@ -25,9 +31,12 @@
     "image": "/picture/thunder.jfif",
     "likes": 1023,
     "bookings": 110,
-    "category": "singer",
     "location": "Дархан",
-    "price": 2000000
+    "category": "singer",
+    "price": 2000000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Thunder, a rising star from Darkhan, Mongolia, combines energetic beats with heartfelt lyrics, creating a unique and electrifying musical experience."
   },
   {
     "id": 4,
@@ -35,9 +44,12 @@
     "image": "/picture/ankh-bayar.jpg",
     "likes": 1023,
     "bookings": 110,
-    "category": "band",
     "location": "Ховд",
-    "price": 2000000
+    "category": "band",
+    "price": 2000000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Ankh-bayar is a folk band hailing from Khovd, Mongolia, known for preserving traditional melodies with a modern twist."
   },
   {
     "id": 5,
@@ -47,7 +59,10 @@
     "bookings": 90,
     "location": "Эрдэнэт",
     "category": "comedian",
-    "price": 1200000
+    "price": 1200000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Sodkhuu is a comedian celebrated for his relatable humor and ability to bring laughter to audiences of all ages across Mongolia."
   },
   {
     "id": 6,
@@ -57,7 +72,10 @@
     "bookings": 95,
     "location": "Чойбалсан",
     "category": "dancer",
-    "price": 1100000
+    "price": 1100000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Zaya Dance is a dynamic dancer from Choybalsan, Mongolia, known for blending contemporary and traditional moves in captivating performances."
   },
   {
     "id": 7,
@@ -67,7 +85,10 @@
     "bookings": 85,
     "location": "Сүхбаатар",
     "category": "musician",
-    "price": 1400000
+    "price": 1400000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Bilguun, a talented musician from Sukhbaatar, plays a variety of instruments and is recognized for his soulful melodies."
   },
   {
     "id": 8,
@@ -77,7 +98,10 @@
     "bookings": 120,
     "location": "Улаан-Баатар",
     "category": "singer",
-    "price": 1700000
+    "price": 1700000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Uka, a celebrated idol from Ulaanbaatar, has been a prominent figure in Mongolia’s pop music scene for over a decade."
   },
   {
     "id": 9,
@@ -87,7 +111,10 @@
     "bookings": 50,
     "location": "Өлгий",
     "category": "host",
-    "price": 1000000
+    "price": 1000000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Otgonjargal is a charismatic host from Olgii, known for engaging audiences with his warm personality and sharp wit."
   },
   {
     "id": 10,
@@ -97,7 +124,10 @@
     "bookings": 200,
     "location": "Улаанбаатар",
     "category": "band",
-    "price": 2500000
+    "price": 2500000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Baatar Band is a powerhouse of talent from Ulaanbaatar, delivering electrifying performances in both traditional and modern genres."
   },
   {
     "id": 11,
@@ -107,6 +137,74 @@
     "bookings": 230,
     "location": "Улаанбаатар",
     "category": "band",
-    "price": 2500000
+    "price": 2500000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "The Moon Band, hailing from Ulaanbaatar, is known for their enchanting melodies and strong connection with audiences worldwide."
+  },
+  {
+    "id": 12,
+    "name": "Bayarmaa Troupe",
+    "image": "./picture/bayarmaa.png",
+    "likes": 1300,
+    "bookings": 140,
+    "location": "Дархан",
+    "category": "dancer",
+    "price": 1800000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Bayarmaa Troupe is a renowned dance group from Darkhan, showcasing Mongolia's rich dance heritage with a contemporary flair."
+  },
+  {
+    "id": 13,
+    "name": "Erdene Ensemble",
+    "image": "./picture/erdeneensemble.png",
+    "likes": 950,
+    "bookings": 90,
+    "location": "Эрдэнэт",
+    "category": "band",
+    "price": 2000000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Erdene Ensemble performs an exquisite fusion of Mongolian traditional and classical music, captivating audiences everywhere."
+  },
+  {
+    "id": 14,
+    "name": "Amaraa",
+    "image": "./picture/amaraa.png",
+    "likes": 770,
+    "bookings": 75,
+    "location": "Ховд",
+    "category": "comedian",
+    "price": 1300000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Amaraa, a comedian from Khovd, brings laughter to the stage with his clever humor and energetic performances."
+  },
+  {
+    "id": 15,
+    "name": "Enkhee Host",
+    "image": "./picture/enkhee.png",
+    "likes": 850,
+    "bookings": 85,
+    "location": "Улаанбаатар",
+    "category": "host",
+    "price": 1200000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Enkhee Host is a professional from Ulaanbaatar, known for hosting events with elegance and charm."
+  },
+  {
+    "id": 16,
+    "name": "Golden Star Band",
+    "image": "./picture/goldenstar.png",
+    "likes": 2000,
+    "bookings": 220,
+    "location": "Сүхбаатар",
+    "category": "band",
+    "price": 2600000,
+    "video": "./video/#",
+    "audio": "./audio/#",
+    "description": "Golden Star Band is a highly acclaimed group from Sukhbaatar, blending intricate compositions with vibrant live performances."
   }
 ]
