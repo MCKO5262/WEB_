@@ -15,18 +15,28 @@
   <header>
     <nav>
       <ul>
-        <li class="logo"><a href="Nuur.html">
-            <img src="picture/logo.PNG" alt="Company logo" />
-          </a></li>
-        <li class="searchbar">
-          <search>
-            <form>
-              <input type="search" placeholder="Хайлт" name="search" />
-              <button type="submit">Search</button>
-            </form>
-          </search>
+        <li class="logo">
+          <a href="Nuur.html">
+            <img alt="logo" src="picture/logo.png" />
+          </a>
         </li>
-        <li class="checkorder"><a href="check-order.html">Захиалга шалгах</a></li>
+        <li class="searchbar">
+          <form action="/search" method="GET">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Хайлт хийх..."
+              aria-label="Search"
+            />
+          </form>
+        </li>
+        <li class="checkorder">
+          <a
+            href="ZahialagShalgah.html"
+            >Захиалга шалгах</a
+          >
+        </li>
         <li class="login"><a href="login.html">Нэвтрэх</a></li>
       </ul>
     </nav>
