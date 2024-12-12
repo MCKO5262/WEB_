@@ -1,5 +1,5 @@
 // API endpoint for fetching artists
-const API_URL = 'https://api.jsonbin.io/v3/qs/6759b63fe41b4d34e463bae6';
+const API_URL = 'https://api.jsonbin.io/v3/qs/675a54dde41b4d34e463fd7b';
 
 // Fetch artists from API
 async function fetchArtists() {

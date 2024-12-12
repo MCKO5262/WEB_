@@ -1,7 +1,7 @@
 class ArtistManager {
   constructor() {
     // API URL
-    this.apiUrl = 'https://api.jsonbin.io/v3/qs/6759b63fe41b4d34e463bae6';
+    this.apiUrl = 'https://api.jsonbin.io/v3/qs/675a54dde41b4d34e463fd7b';
 
     this.artists = []; // Уран бүтээлчдийн жагсаалт
     this.activeFilters = new Map(); // Идэвхтэй шүүлтүүрүүд

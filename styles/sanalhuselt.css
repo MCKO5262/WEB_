@@ -73,6 +73,12 @@
   gap: 12px;
 }
 
+#description {
+  display: flex;
+  flex-direction:row;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
 .btn {
   display: block;
   width: 100%;
@@ -179,20 +185,46 @@
   background-color: rgba(147, 51, 234, 0.1);
   border-radius: 12px;
   justify-self:normal;
+  margin-bottom: 2rem;
 
 }
 
-#content-summary h3 {
+h3 {
   background-color: blueviolet;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   width: fit-content;
   padding: 0.5rem 1rem;
   border-radius: 14px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+  
 }
 
 /* Individual Comment */
+.give-comment {
+  font-size: 1.4rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background-color: blueviolet;
+  color: white;
+  width: fit-content;
+  margin: 1rem;
+  border: none;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+.give-comment:hover {
+  background-color: rebeccapurple;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.give-comment:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
 .comment {
   padding: 16px;
   margin-bottom: 16px;
@@ -259,16 +291,6 @@
   .comment-header {
     gap: 8px;
   }
-}
-
-/* Section Title */
-#comments-section h3 {
-  display: block;
-  color: white;
-  padding: 12px;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-top: 2rem;
 }
 
 /* Animation */
