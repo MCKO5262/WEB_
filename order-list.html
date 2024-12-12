@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="mn">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Захиалга шалгах | Solned</title>
-    <meta name="description" content="Solned is your go-to platform for discovering and booking talented musicians, bands, and performers for events.">
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="/styles/Footer.css">
-    <link rel="stylesheet" href="/styles/zahialagbatalgaa.css">
-    <script type="module" src="/js/order-management.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Захиалга шалгах | Solned</title>
+  <meta name="description"
+    content="Solned is your go-to platform for discovering and booking talented musicians, bands, and performers for events.">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="/styles/Footer.css">
+  <link rel="stylesheet" href="/styles/zahialagbatalgaa.css">
+  <script type="module" src="/component/order-service.js"></script>
+  <script type="module" src="/component/app.js"></script>
+  <script type="module" src="/component/order-list.js"></script>
+  <script type="module" src="/component/order-card.js"></script>
+
+
 </head>
+
 <body>
   <header>
     <nav>
@@ -21,117 +29,71 @@
         </li>
         <li class="searchbar">
           <form action="/search" method="GET">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Хайлт хийх..."
-              aria-label="Search"
-            />
+            <input type="text" name="search" id="search" placeholder="Хайлт хийх..." aria-label="Search" />
           </form>
         </li>
         <li class="checkorder">
-          <a
-            href="ZahialagShalgah.html"
-            >Захиалга шалгах</a
-          >
+          <a href="ZahialagShalgah.html">Захиалга шалгах</a>
         </li>
         <li class="login"><a href="login.html">Нэвтрэх</a></li>
       </ul>
     </nav>
   </header>
-      <main id="mainContent">
-        <article id="orderContainer">
-            <section id="orderCheck">
-                <header>
-                    <h1 id="orderTitle">Захиалга шалгах</h1>
-                </header>
-                <article id="orderContent">
-                    <figure id="artistSection">
-                        <img id="artistImage" 
-                             src="/picture/thunder.jfif" 
-                             alt="Thunder хамтлагийн зураг" 
-                             loading="lazy">
-                        <figcaption id="artistDetails">
-                            <h2 id="artistName">Thunder</h2>
-                            <time id="eventTime" datetime="2024-10-15T10:00">
-                                2024-10-15 10:00 - 11:30
-                            </time>
-                            <ul id="eventDescription">
-                                <li>Хуримын ёслолд дуулах:</li>
-                                <li>Хосуудын хүссэн дууг амьд дуулахаар</li>
-                            </ul>
-                        </figcaption>
-                    </figure>
-                    <footer>
-                        <button id="cancelOrderBtn" 
-                                type="button" 
-                                aria-label="Захиалга цуцлах">
-                            Цуцлах
-                        </button>
-                    </footer>
-                </article>
-            </section>
-        </article>
-    </main>
-    <hr>
-    <footer>
-        <section class="social-address">
-          <a href="Nuur.html">
-            <img src="picture/logo.PNG " width="30" alt="Company logo" />
-          </a>
-          <section>
-            <img src="picture/icons//facebook.png" alt="facebook" />
-            <img src="picture/icons/instagram.png" alt="facebook" />
-          </section>
-  
-          <a href="https://www.apple.com/app-store/">
-            <button>
-              <img src="picture/icons//apple.png" alt="Apple Store" />
-              <p>Appstore-оос татаж авах</p>
-            </button>
-          </a>
-  
-          <a href="https://play.google.com/store">
-            <button>
-              <img src="picture/icons//apple.png" alt="Apple Store" />
-              <p>Appstore-оос татаж авах</p>
-            </button>
-          </a>
-        </section>
-        <section class="about-us">
-          <ul>
-            <li>
-              <h2>SOLNED</h2>
-            </li>
-            <li>
-              <a href="#">Бидний тухай</a>
-            </li>
-            <li>
-              <a href="#">Тусламж</a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <h2>ХОЛБОО БАРИХ</h2>
-            </li>
-            <li>
-              <a href="gmail.com">Solned@gmail.com</a>
-            </li>
-            <li>
-              <a>Оффис, Чингэлтэй</br/> дүүрэг 6-хороо, </br/>53 байр</a>
-            </li>
-          </ul>
-        </section>
-      </footer>
+  <main id="mainContent">
+    <app-root>
+      <order-list></order-list>
+    </app-root>
+  </main>
+  <hr>
+  <footer>
+    <section class="social-address">
+      <a href="Nuur.html">
+        <img src="picture/logo.PNG " width="30" alt="Company logo" />
+      </a>
+      <section>
+        <img src="picture/icons//facebook.png" alt="facebook" />
+        <img src="picture/icons/instagram.png" alt="facebook" />
+      </section>
 
-    <script>
-        document.getElementById('cancelOrderBtn').addEventListener('click', function() {
-            if (confirm('Та захиалгаа цуцлахдаа итгэлтэй байна уу?')) {
-                // Add cancellation logic here
-                alert('Захиалга амжилттай цуцлагдлаа');
-            }
-        });
-    </script>
+      <a href="https://www.apple.com/app-store/">
+        <button>
+          <img src="picture/icons//apple.png" alt="Apple Store" />
+          <p>Appstore-оос татаж авах</p>
+        </button>
+      </a>
+
+      <a href="https://play.google.com/store">
+        <button>
+          <img src="picture/icons//apple.png" alt="Apple Store" />
+          <p>Appstore-оос татаж авах</p>
+        </button>
+      </a>
+    </section>
+    <section class="about-us">
+      <ul>
+        <li>
+          <h2>SOLNED</h2>
+        </li>
+        <li>
+          <a href="#">Бидний тухай</a>
+        </li>
+        <li>
+          <a href="#">Тусламж</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <h2>ХОЛБОО БАРИХ</h2>
+        </li>
+        <li>
+          <a href="gmail.com">Solned@gmail.com</a>
+        </li>
+        <li>
+          <a>Оффис, Чингэлтэй</br /> дүүрэг 6-хороо, </br />53 байр</a>
+        </li>
+      </ul>
+    </section>
+  </footer>
 </body>
+
 </html>

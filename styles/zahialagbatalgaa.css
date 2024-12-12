@@ -1,7 +1,9 @@
 @import "/global.css";
+
 *{
     font-family: var(--font-family);
 }
+
 #mainContent {
     margin: 0 auto;
     padding: 1rem;

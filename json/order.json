@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "artistName": "Thunder",
+      "eventTime": "2024-10-15T10:00",
+      "description": ["Хуримын ёслолд дуулах", "Хосуудын хүссэн дууг амьд дуулахаар"],
+      "image": "/picture/thunder.jfif",
+      "likes": 5
+    },
+    {
+      "id": 2,
+      "artistName": "Melody Makers",
+      "eventTime": "2024-11-01T18:30",
+      "description": ["Гэр бүлийн үдэшлэгт тоглох", "Рок хөгжим ба бүжгийн хөтөлбөр"],
+      "image": "/picture/ankh-bayar.jpg",
+      "likes": 10
+    },
+    {
+      "id": 3,
+      "artistName": "DJ BeatMaster",
+      "eventTime": "2024-12-20T22:00",
+      "description": ["Диско үдэшлэгт DJ хийх", "Хөгжилтэй тоглолт"],
+      "image": "/picture/amaraa.jpg",
+      "likes": 15
+    }
+  ]
+  
