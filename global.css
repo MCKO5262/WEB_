@@ -35,16 +35,17 @@ body {
   color: var(--txtc);
   padding: 0 10% 0 10%;
 }
-
 /* Header styling */
 header nav {
   padding: 1rem;
+
 }
 header nav ul {
   display: flex;
   align-items: center;
   padding: 0;
   gap: 2rem;
+  border-bottom-color: #3b0f80;
 }
 
 .logo {

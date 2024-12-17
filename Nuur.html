@@ -56,7 +56,7 @@
                     </div>
                 </section>
             </div>
-            <!-- Other slides remain the same -->
+          </div>
         </div>
         <button class="nav-button nav-prev">←</button>
         <button class="nav-button nav-next">→</button>
@@ -161,101 +161,5 @@
         </ul>
       </section>
     </footer>
-    <script>
-      class Swiper {
-          constructor(container) {
-              this.container = container;
-              this.wrapper = container.querySelector('.swiper-wrapper');
-              this.slides = container.querySelectorAll('.swiper-slide');
-              this.prevButton = container.querySelector('.nav-prev');
-              this.nextButton = container.querySelector('.nav-next');
-              this.currentIndex = 0;
-              this.slidesCount = this.slides.length;
-              this.isAnimating = false;
-              
-              this.init();
-              this.startAutoplay();
-          }
-
-          init() {
-              this.prevButton.addEventListener('click', () => this.prevSlide());
-              this.nextButton.addEventListener('click', () => {
-                  this.stopAutoplay();
-                  this.nextSlide();
-              });
-              this.updateSlidePosition();
-              this.updateCounter();
-
-              // Add touch support
-              this.touchStartX = 0;
-              this.container.addEventListener('touchstart', (e) => {
-                  this.touchStartX = e.touches[0].clientX;
-              });
-              this.container.addEventListener('touchend', (e) => {
-                  const touchEndX = e.changedTouches[0].clientX;
-                  const diff = this.touchStartX - touchEndX;
-                  
-                  if (Math.abs(diff) > 50) { // Minimum swipe distance
-                      if (diff > 0) {
-                          this.nextSlide();
-                      } else {
-                          this.prevSlide();
-                      }
-                  }
-              });
-          }
-
-          updateSlidePosition() {
-              if (this.isAnimating) return;
-              this.isAnimating = true;
-              
-              const offset = -this.currentIndex * 100;
-              this.wrapper.style.transform = `translateX(${offset}%)`;
-              
-              setTimeout(() => {
-                  this.isAnimating = false;
-              }, 500); // Match transition duration
-          }
-
-          updateCounter() {
-              const counters = this.container.querySelectorAll('.slide-counter');
-              counters.forEach(counter => {
-                  counter.textContent = `${this.currentIndex + 1}/${this.slidesCount}`;
-              });
-          }
-
-          prevSlide() {
-              if (this.isAnimating) return;
-              this.currentIndex = (this.currentIndex - 1 + this.slidesCount) % this.slidesCount;
-              this.updateSlidePosition();
-              this.updateCounter();
-          }
-
-          nextSlide() {
-              if (this.isAnimating) return;
-              this.currentIndex = (this.currentIndex + 1) % this.slidesCount;
-              this.updateSlidePosition();
-              this.updateCounter();
-          }
-
-          startAutoplay() {
-              this.autoplayInterval = setInterval(() => {
-                  this.nextSlide();
-              }, 5000); // Change slide every 5 seconds
-          }
-
-          stopAutoplay() {
-              if (this.autoplayInterval) {
-                  clearInterval(this.autoplayInterval);
-              }
-          }
-      }
-
-      // Initialize the swiper
-      document.addEventListener('DOMContentLoaded', () => {
-          const swiperContainer = document.querySelector('.swiper-container');
-          new Swiper(swiperContainer);
-      });
-  </script>
   </body>
 </html>

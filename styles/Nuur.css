@@ -251,7 +251,6 @@
 .swiper-slide {
   flex: 0 0 100%;
   width: 100%;
-  opacity: 0;
   transition: opacity 0.5s ease;
 }
 .swiper-slide.active {
@@ -290,31 +289,6 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #2d0991;
-    --secondary-color: #7344b5;
-  }
-}
-
-/* Responsive Design */
-@media screen and (max-width: 1200px) {
-  .artist-card-container {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .artist-card-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  #artist-type {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
 @media screen and (max-width: 768px) {
   .logo-title,
@@ -335,32 +309,6 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-  :root {
-    --spacing-lg: 1.5rem;
-    --spacing-md: 0.75rem;
-  }
-
-  .event-section {
-    padding: 2rem var(--spacing-md) 0;
-  }
-
-  .artist-card-container {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .artist-info {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    text-align: center;
-  }
-
-  #artist-type {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
-  }
-}
 @media screen and (max-width: 768px) {
   .nav-button {
     padding: 1rem 1.4rem;
