@@ -1,4 +1,11 @@
+@import url(/global.css);
 /* Container styles */
+* {
+  transition: background-color var(--transition-speed) var(--transition-timing),
+              color var(--transition-speed) var(--transition-timing),
+              border-color var(--transition-speed) var(--transition-timing),
+              box-shadow var(--transition-speed) var(--transition-timing);
+}
 .marketplace-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -27,7 +34,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(145deg, rgba(146, 84, 222, 0.8), rgba(122, 54, 207, 0.9));
+    background: linear-gradient(120deg,  var(--artist-card-color),
+    var(--artist-card-color2));
     border-radius: 12px;
     z-index: -1;
   }
@@ -40,6 +48,7 @@
     flex-direction: column;
     align-items: center;
     z-index: 1;
+    box-shadow: var(--box-shadow);
   }
   
   /* Image container */
@@ -90,11 +99,11 @@
   
   /* Button styles */
   .order-button {
-    background: rgba(255, 255, 255, 0.2);
+    background: var( --secondary-color);
     border: none;
     border-radius: 10px;
     padding: 8px 24px;
-    color: white;
+    color: var(--txtc);
     font-family: var(--font-family);
     font-size: 100px;
     cursor: pointer;
@@ -108,9 +117,9 @@
   }
   
   .order-button:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--secondary-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
   }
   
   /* Add subtle hover effect to entire card */
@@ -140,7 +149,7 @@
 /* Base navbar styles */
 .navbar {
   overflow: hidden;
-  background-color: #9747FF; /* Darkest purple from palette */
+  background-color: var(--nav-color); /* Darkest purple from palette */
   font-family: var(font-family);
   width: 100%;
   margin-top: 2rem;
@@ -200,7 +209,7 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #DEACF5; /* Lightest purple from palette */
+  background-color: var(--bc2); /* Lightest purple from palette */
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -209,7 +218,7 @@
 
 .dropdown-content a {
   float: none;
-  color: #28104E;
+  color: var(--txtc);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -310,3 +319,4 @@ hr {
 .remove-filter:hover {
   color: var(--bc1);
 }
+

@@ -1,62 +1,65 @@
+@import url(/global.css);
+/*global.css нэртэй глобал CSS файлыг ачаалж, бүх хуудсанд ижил стиль хэрэглэх боломжтой болгодог.*/
 footer {
-  width: 100%;
-  padding-bottom: 2rem;
+  width: 100%; /* Footer хэсгийн нийт өргөнд тохиргоо хийж байна */
+  padding-bottom: 2rem; /* Доод зай нэмсэн */
 }
 
 footer {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-top: 2rem;
+  display: flex; /* Уян харимхай бүтэц үүсгэж байна */
+  flex-direction: column; /* Элементүүдийг босоо байрлалд оруулж байна */
+  gap: 2rem; /* Элементүүдийн хоорондын зай */
+  margin-top: 2rem; /* Дээд талын зай */
 }
 .social-address {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
+  display: flex; /* Уян харимхай бүтэц */
+  flex-direction: column; /* Элементүүдийг баганад оруулж байна */
+  gap: 1.5rem; /* Элементүүдийн хоорондын зай */
+  align-items: center; /* Элементүүдийг төвд байршуулсан */
 }
 
 .social-address > a {
-  text-decoration: none;
+  text-decoration: none; /* Холбоосын доогуур зураасыг арилгасан */
 }
 
 .social-address > a > img {
   width: 50px;
   height: 40px;
-  object-fit: contain;
+  object-fit: contain; /* Дүрсийг саванд багтааж байрлуулсан */
 }
 
 /* Social Icons */
 .social-address > section {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
+  display: flex; /* Уян харимхай бүтэц */
+  gap: 1rem; /* Дүрснүүдийн хоорондын зай */
+  justify-content: center; /* Дүрснүүдийг төвд байршуулсан */
 }
 
 .social-address > section img {
   width: 24px;
   height: 24px;
+  object-fit: contain;/* Дүрсийг пропорциональ хадгалан саванд байрлуулсан */
 }
 
 /* App Store Buttons */
 .social-address > a > button {
   background-color: white;
-  display: flex;
-  gap: 1rem;
+  display: flex;/* Уян бүтэц */
+  gap: 1rem;/* Дүрс ба текстийн хооронд зай нэмсэн */
   padding: 0.8rem 1.2rem;
-  text-decoration: none;
-  justify-content: center;
+  text-decoration: none; /* Доогуур зураасгүй */
+  justify-content: center; /* Элементүүдийг төвд байрлуулсан */
   font-family: var(--font-family);
   align-items: center;
   border-radius: 0.5rem;
   border: none;
   width: 100%;
   max-width: 220px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;/* Арын өнгийг шилжүүлэх анимац */
 }
 
 .social-address > a > button:hover {
-  background-color: #f3f4f6;
+  background-color: #f3f4f6;/* Хулгана дээр очих үед арын өнгийгөөрчилсөн */
 }
 
 .social-address > a > button img {
@@ -82,7 +85,7 @@ footer {
 .about-us > ul {
   list-style: none;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;/* Босоо байрлалд оруулсан */
   gap: 1rem;
   padding: 0;
   margin: 0;

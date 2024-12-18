@@ -8,7 +8,6 @@
   margin-bottom: 2rem;
 }
 
-/*  */
 #profile-sidebar {
   grid-row-end: 2;
   order: -1;
@@ -30,7 +29,6 @@
   }
 }
 
-/* Profile Sidebar Styles */
 #profile-image {
   width: 15rem;
   height: 15rem;
@@ -43,10 +41,11 @@
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 6px;
+  color: var(--txtc);
 }
 
 #star-rating {
-  color: #fbbf24;
+  color: var(--highlight-color);
   font-size: 1.5rem;
   margin-bottom: 8px;
 }
@@ -57,16 +56,16 @@
   justify-content: center;
   gap: 8px;
   margin-bottom: 8px;
-  color: #d1d5db;
+  color: var(--neutral-color);
 }
 
 #price {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 16px;
+  color: var(--txtc);
 }
 
-/* Action Buttons */
 #action-buttons {
   display: flex;
   flex-direction: column;
@@ -75,10 +74,11 @@
 
 #description {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   gap: 2rem;
   margin-bottom: 2rem;
 }
+
 .btn {
   display: block;
   width: 100%;
@@ -88,25 +88,26 @@
   cursor: pointer;
   font-weight: 500;
   text-decoration: none;
-  color: #fff;
+  color: var(--txtc);
   transition: background-color 0.3s ease;
 }
+
 .btn-primary {
-  background-color:rgb(68, 4, 94);
+  background-color: var(--fourth-color);
 }
 
 .btn-primary:hover {
-  background-color: #7e22ce;
+  background-color: var(--secondary-color);
 }
 
 .btn-secondary {
-  background-color:rgb(68, 4, 94)}
-
-.btn-secondary:hover {
-  background-color: #7e22ce;
+  background-color: var(--fourth-color);
 }
 
-/* Media Player Section */
+.btn-secondary:hover {
+  background-color: var(--secondary-color);
+}
+
 #media-player {
   grid-row: 1;
   background-color: var(--bc2);
@@ -116,22 +117,21 @@
   height: fit-content;
 }
 
-
 #media-player h2 {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 16px;
+  color: var(--txtc);
 }
 
 #video-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-  background-color: #000;
+  padding-bottom: 56.25%;
+  background-color: var(--primary-color);
   border-radius: 8px;
   margin-bottom: 16px;
 }
-
 #video-container video {
   position: absolute;
   top: 0;
@@ -140,8 +140,6 @@
   height: 100%;
   border-radius: 8px;
 }
-
-/* Media Controls */
 #media-controls {
   display: flex;
   gap: 16px;
@@ -160,54 +158,50 @@
 }
 
 .media-button.active {
-  background-color: #9333ea;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--txtc);
 }
 
 .media-button:not(.active) {
-  background-color: #374151;
-  color: #d1d5db;
+  background-color: var(--dark-neutral);
+  color: var(--neutral-color);
 }
 
 .media-button:hover:not(.active) {
-  background-color: #4b5563;
+  background-color: var(--hover-dark-neutral);
 }
 
-/* Content Sections */
 .content-section {
-  background-color: #1f2937;
+  background-color: var(--third-color);
   border-radius: 8px;
   margin-bottom: 24px;
   animation: fadeIn 0.3s ease-out;
 }
-/* Comments Section Container */
-#comments-section {
-  background-color: rgba(147, 51, 234, 0.1);
-  border-radius: 12px;
-  justify-self:normal;
-  margin-bottom: 2rem;
 
+#comments-section {
+  background-color: var(--fade-bg);
+  border-radius: 12px;
+  justify-self: normal;
+  margin-bottom: 2rem;
 }
 
 h3 {
-  background-color: blueviolet;
+  background-color: var(--primary-color);
   font-size: 1.5rem;
   font-weight: bold;
   width: fit-content;
   padding: 0.5rem 1rem;
   border-radius: 14px;
   margin-bottom: 1rem;
-  justify-content: center;
-  
+  color: var(--txtc);
 }
 
-/* Individual Comment */
 .give-comment {
   font-size: 1.4rem;
   padding: 1rem;
   border-radius: 14px;
-  background-color: blueviolet;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--txtc);
   width: fit-content;
   margin: 1rem;
   border: none;
@@ -215,59 +209,41 @@ h3 {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
+
 .give-comment:hover {
-  background-color: rebeccapurple;
+  background-color: var(--secondary-color);
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-.give-comment:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--box-shadow);
 }
 
 .comment {
   padding: 16px;
   margin-bottom: 16px;
-  background-color: rgba(147, 51, 234, 0.2);
+  background-color: var(--comment-bg);
   border-radius: 12px;
   border: none;
   transition: background-color 0.3s ease;
 }
 
 .comment:hover {
-  background-color: rgba(147, 51, 234, 0.3);
+  background-color: var(--fade-bg-hover);
 }
 
-/* Comment Author */
-#comment-author-1{
+#comment-author-1 {
   font-weight: 600;
-  color: #ffffff;
-  background-color: #9333ea;
+  color: var(--txtc);
+  background-color: var(--primary-color);
   padding: 0.3rem 4rem;
   border-radius: 999px;
   font-size: 1.5rem;
   width: fit-content;
 }
 
-/* Comment Date */
-#comment-date-1{
-  margin-left: 1rem;
-  padding: 0.5rem 0;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  width: fit-content;
-}
-#comment-header-1{
-  display: flex;
-  flex-direction: column;
-  padding-left: 0.5rem;
-}
-/* Comment Content */
-#comment-content-1{
-  color: rgba(255, 255, 255, 0.9);
+#comment-content-1 {
+  color: var(--txtc);
   line-height: 1.5;
   font-size: 1.5rem;
-  background-color: rgba(147, 51, 234, 0.15);
+  background-color: var(--comment-bg);
   padding: 12px;
   border-radius: 8px;
   margin: 0 4rem;

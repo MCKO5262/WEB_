@@ -1,8 +1,6 @@
 @import url(/global.css);
 
 :root {
-  --primary-color: #21016c;
-  --secondary-color: #6237a0;
   --border-radius: 1rem;
   --spacing-sm: 0.7rem;
   --spacing-md: 1rem;
@@ -12,7 +10,7 @@
 
 /* Base Styles */
 .event-button {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   color: white;
   border: none;
   padding: 0.8rem 2rem;
@@ -263,7 +261,7 @@
   transform: translateY(-50%);
   width: 3rem;
   height: 3rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--dark-neutral);
   backdrop-filter: blur(8px);
   border: none;
   color: white;

@@ -1,22 +1,55 @@
 :root {
-  --bc1: #c277e9;
-  --bc2: #ad49e1;
-  --primary-color: #6f00ff; /* Main color for headings */
-  --secondary-color: #7a1cac; /* Text input and other content */
-  --third-color: #ad53dc; /* Navigation */
-  --fourth-color: #3b0f80; /* Small buttons */
-  --txtc: #ffffff; /* Text color */
-  --font-family: "Bahnschrift", sans-serif;
-  --base-font-size: 24px;
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --bc1: #c277e9; /*Арын өнгө: Вэбсайтын үндсэн арын өнгө*/
+  --bc2: #ad49e1; /*Арын өнгө 2: Арын өнгөний 2 дахь хувилбар эсвэл градиентэд ашиглана*/
+  --primary-color: #6f00ff; /*Гарчигийн үндсэн өнгө: Томоохон текст, гарчиг зэрэгт*/
+  --secondary-color: #7a1cac; /*Туслах өнгө: Текст оруулах хэсэг болон бусад контентод*/
+  --third-color: #ad53dc; /*Навигацийн өнгө: Навигацийн хэсэг эсвэл холбогдох элементүүдэд*/
+  --fourth-color: #3b0f80; /*Жижиг товчны өнгө: Тусгай болон жижиг товчлууруудын өнгө*/
+  --txtc: #ffffff; /*Текстийн өнгө: Гол контентын текстийн өнгө (цагаан)*/
+  --highlight-color: #fbbf24; /*Онцлох өнгө: Одны үнэлгээ эсвэл анхаарал татах элементэд*/
+  --neutral-color: #d1d5db; /*Бүдэг өнгө: Гэрэлт текст эсвэл хоёрдогч мэдээлэлд*/
+  --dark-neutral: #374151; /*Товчны бараан дэвсгэр: Том товчлууруудын арын өнгө*/
+  --hover-dark-neutral: #4b5563; /*Hover үеийн дэвсгэр: Хулганаар товчин дээр очиход*/
+  --fade-bg: rgba(147, 51, 234, 0.1); /*Тайлбар хэсгийн арын бүдэг өнгө: Маш бүдэг ягаан дэвсгэр*/
+  --fade-bg-hover: rgba(147, 51, 234, 0.3); /*Hover үеийн бүдэг өнгө: Элементийн арын өнгө бага зэрэг тодорно*/
+  --comment-bg: rgba(147, 51, 234, 0.15); /*Тайлбар контентийн дэвсгэр: Тодорхой тайлбар бичих хэсэгт*/
+  --font-family: "Bahnschrift", sans-serif; /*Фонтын гэр бүл: Хэв маягт тохирсон загварлаг фонт*/
+  --base-font-size: 24px; /*Үндсэн фонтын хэмжээ: Ерөнхий текстийн хэмжээг тодорхойлно*/
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /*Сүүдрийн эффект: Элементийн доорх сүүдэрлэлт*/
+  --transition-speed: 0.3s; /*Шилжилтийн хурд: Элементүүдийн шилжилт явагдах хугацаа*/
+  --transition-timing: ease; /*Шилжилтийн цагийн функц: Зөөлөн шилжилт хийх*/
+  --nav-color: #9747FF; /*Навигацийн өнгө: Навигацийн арын дэвсгэр эсвэл фонтын өнгө*/
+  --artist-card-color: rgba(127, 72, 194, 0.8); /*Артист картны өнгө: Визуал элементэд зориулсан өнгө*/
+  --artist-card-color2: rgba(176, 14, 226, 0.9); /*Картны нэмэлт өнгө: Тодруулсан эсвэл ялгаатай өнгө*/
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --bc1: #2f2f2f;
-    --bc2: #000000;
-  }
-} */
+
+.darkmode {
+  /* Үндсэн дэвсгэр өнгөнүүд */
+  --bc1: #121212; /* Илүү гүн хар өнгө - нүдэнд илүү тав тухтай */
+  --bc2: #1e1e1e; /* Бага зэрэг илүү цайвар хар - ялгаатай түвшин үүсгэх */
+
+  --primary-color: #9d4edd; /* Илүү зөөлөн ягаан - тод байдлыг хадгалсан */
+  --secondary-color: #6911b6; /* Гүнзгий ягаан - текст оруулах хэсэгт */
+  --third-color: #5a189a; /* Навигацид зориулсан дунд зэргийн ягаан */
+  --fourth-color: #5e2296; /* Жижиг товчнуудад зориулсан гүн ягаан */
+  --txtc: #e2e2e2; /* Цагаанаас бага зэрэг бүдэг - нүдийг бага ядраана */
+  --highlight-color: #ffd60a; /* Одны үнэлгээнд зориулсан шар өнгө */
+  --neutral-color: #9ca3af; /* Бүдэг текстэд зориулсан саарал */
+  
+  --dark-neutral: #2d2d2d; /* Товчны дэвсгэр */
+  --hover-dark-neutral: #404040; /* Товч дээр очиход */
+  
+  --fade-bg: rgba(157, 78, 221, 0.05); /* Маш бүдэг ягаан дэвсгэр */
+  --fade-bg-hover: rgba(157, 78, 221, 0.1); /* Hover үед бага зэрэг тод */
+  --comment-bg: rgba(157, 78, 221, 0.08); /* Тайлбарын дэвсгэр */
+
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Илүү тод сүүдэр */
+  --nav-color: rgba(71, 13, 107, 0.788);
+  --artist-card-color: rgba(50, 30, 100, 0.8); /* A dark purple tone */
+--artist-card-color2: rgba(90, 10, 140, 0.9); /* A complementary dark purple shade */
+
+}
 
 * {
   box-sizing: border-box;
@@ -45,7 +78,7 @@ header nav ul {
   align-items: center;
   padding: 0;
   gap: 2rem;
-  border-bottom-color: #3b0f80;
+  border-bottom-color: var(--fourth-color);
 }
 
 .logo {
@@ -240,4 +273,54 @@ nav li:nth-last-child(2) {
   * {
     transition: none !important;
   }
+}
+
+#theme-switch {
+  height: 50px; 
+  width: 50px; 
+  padding: 0; 
+  border: none; 
+  border-radius: 50%; /* Товчийг дугуй хэлбэртэй болгох */
+  background-color: var(--third-color); 
+  color: var(--primary-color); 
+  display: flex; /* Flexbox-г ашиглан төвлөрүүлнэ */
+  justify-content: center; /* Төвд нь байршуулах */
+  align-items: center; /* Төвд нь байршуулах */
+  position: fixed; /* Товчийг тогтмол байрлуулна */
+  top: 20px; 
+  right: 20px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Зөөлөн шилжилтийн эффект */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+#theme-switch:hover {
+  background-color: var(--primary-color); /* Hover үед өнгө өөрчлөгдөх */
+  color: var(--third-color); /* Текстийн өнгө өөрчлөгдөх */
+  transform: scale(1.1); /* Томрох эффект */
+}
+
+#theme-switch:active {
+  transform: scale(0.95); /* Дарж байгаа үед жижигрэх эффект */
+}
+
+#theme-switch:focus {
+  outline: 2px solid var(--accent-color); /* Focus үед контур харагдах */
+  outline-offset: 4px; /* Контурын зайг тохируулах */
+}
+
+#theme-switch svg {
+  fill: var(--txtc); /* SVG-ийн өнгө */
+}
+
+#theme-switch svg:last-child {
+  display: none; /* Эцсийн SVG дүрсийг нуух */
+}
+
+.darkmode #theme-switch svg:first-child {
+  display: none; /* Dark mode-оор эхний SVG дүрсийг нуух */
+}
+
+.darkmode #theme-switch svg:last-child {
+  display: block; /* Dark mode-оор хоёр дахь SVG дүрсийг харуулах */
 }
