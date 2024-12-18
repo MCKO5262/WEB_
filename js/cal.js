@@ -22,7 +22,6 @@ const orders_more = [
         "eventStyle": "Албан ёсны"
       },
       "artistDetails": {
-        "artistName": "Тэмүүлэнгийн хамтлаг",
         "workedWithArtistBefore": "yes",
         "previousWorkInfo": "2022 онд хамтарсан тоглолт зохион байгуулсан"
       },
