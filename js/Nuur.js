@@ -66,11 +66,11 @@ function createArtistCard(artist) {
   return `
     <article class="artist-card">
       <img src="${artist.image}" alt="${artist.name}" loading="lazy" />
-      <div class="artist-card-info">
+      <a href="Sanalhuselt.html" class="artist-card-info">
         <p class="comment">Cэтгэгдэл: ${artist.comment}</p>
         <p class="likes">Таалагдсан: ${artist.likes}</p>
         <h3>${artist.name}</h3>
-      </div>
+      </a>
     </article>
   `;
 }

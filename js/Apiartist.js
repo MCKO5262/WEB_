@@ -1,6 +1,6 @@
 class ApiService {
     constructor() {
-      this.apiUrl = 'https://api.jsonbin.io/v3/qs/67611794e41b4d34e466b5a3'; // Unified API endpoint
+      this.apiUrl = 'https://api.jsonbin.io/v3/qs/6762af89e41b4d34e4677640'; // Unified API endpoint
     }
   
     async fetchArtists() {

@@ -16,13 +16,12 @@ class ArtistManager {
       this.renderArtists(this.artists);
       this.setupFilters();
       this.applyURLFilters();
-      this.setupOrderButtons(); // Add this new line
+      this.setupOrderButtons();
     } catch (error) {
       console.error('ArtistManager initialization error:', error);
     }
   }
 
-  // Add this new method
   setupOrderButtons() {
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('order-button')) {

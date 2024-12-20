@@ -15,7 +15,7 @@
 }
 
 #orderSection {
-    background-color: rgba(173, 73, 225, 1);
+    background-color: var(--third-color);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2rem;
@@ -25,7 +25,7 @@
 }
 
 #pageTitle {
-    color: #333333;
+    color: var(--txt);
     font-size: 2rem;
     margin-bottom: 2rem;
     text-align: center;
@@ -75,7 +75,7 @@
 }
 
 #submitButton {
-    background-color: #6b46c1;
+    background-color: var(--fourth-color);
     color: white;
     padding: 0.75rem 1.5rem;
     border: none;
