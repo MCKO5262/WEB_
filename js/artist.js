@@ -173,24 +173,28 @@ class ArtistManager {
     }
 
     container.innerHTML = artists
-      .map(
-        artist => `
-      <article class="product-card">
-        <div class="product-image">
+  .map(
+    artist => `
+    <article class="product-card">
+      <div class="product-image">
+        <a href="Sanalhuselt.html?id=${artist.id}">
           <img src="${artist.image || './picture/default.png'}" alt="${artist.name}" onerror="this.src='./picture/default.png'">
-        </div>
-        <h3 class="product-title">${artist.name}</h3>
-        <section class="product-info">
-          <p class="rating">${this.generateStarRating(artist.rating || 3)}</p>
-          <p class="product-location">${artist.location}</p>
-          <p class="product-category">${this.formatCategory(artist.category)}</p>
-          <p class="price">${this.formatPrice(artist.price)}₮</p>
-        </section>
-        <button class="order-button" data-artist-id="${artist.id}">Захиалга өгөх</button>
-      </article>
-    `
-      )
-      .join('');
+        </a>
+      </div>
+      <h3 class="product-title">
+        <a href="Sanalhuselt.html?id=${artist.id}">${artist.name}</a>
+      </h3>
+      <section class="product-info">
+        <p class="rating">${this.generateStarRating(artist.rating || 3)}</p>
+        <p class="product-location">${artist.location}</p>
+        <p class="product-category">${this.formatCategory(artist.category)}</p>
+        <p class="price">${this.formatPrice(artist.price)}₮</p>
+      </section>
+      <button class="order-button" data-artist-id="${artist.id}">Захиалга өгөх</button>
+    </article>
+  `
+  )
+  .join('');
   }
 
   formatPrice(price) {

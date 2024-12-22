@@ -3,14 +3,13 @@
   display: grid;
   gap: 24px;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr;
+  grid-template-rows: auto auto;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
 #profile-sidebar {
-  grid-row-end: 2;
-  order: -1;
+  grid-row: 1;
   background-color: var(--bc2);
   border-radius: 8px;
   padding: 20px;
@@ -19,15 +18,7 @@
 }
 
 /* Desktop Layout (768px and above) */
-@media (min-width: 768px) {
-  #main-grid {
-    grid-template-columns: 2fr 1fr;
-  }
-  
-  #profile-sidebar {
-    order: 2; /* Reset order for desktop view */
-  }
-}
+
 
 #profile-image {
   width: 15rem;
@@ -109,7 +100,7 @@
 }
 
 #media-player {
-  grid-row: 1;
+  grid-row: 2;
   background-color: var(--bc2);
   border-radius: 8px;
   padding: 20px;
@@ -285,5 +276,21 @@ h3 {
 @media (max-width: 640px) {
   #container {
     padding: 12px;
+  }
+}
+@media (min-width: 768px) {
+  #main-grid {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto;
+  }
+  
+  #profile-sidebar {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  #media-player {
+    grid-column: 1;
+    grid-row: 1;
   }
 }

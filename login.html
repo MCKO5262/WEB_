@@ -14,51 +14,11 @@
                 <div class="welcome-text">Welcome to</div>
                 <div class="logo"><img src="/picture/logo.PNG" alt="Logo"></div>
             </div>
-
-            <form>
-                <div class="input-group">
-                    <label class="input-label">Username *</label>
-                    <div class="input-wrapper">
-                        <input type="text" class="input-field" placeholder="Enter your username" required>
-                        <i class="input-icon fas fa-user"></i>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label class="input-label">Password *</label>
-                    <div class="input-wrapper">
-                        <input type="password" class="input-field" placeholder="Enter your password" required>
-                        <i class="input-icon fas fa-eye"></i>
-                    </div>
-                </div>
-
-                <div class="remember-forgot">
-                    <label class="remember-me">
-                        <input type="checkbox">
-                        Remember me
-                    </label>
-                    <a href="#" class="forgot-password">Forgot your password?</a>
-                </div>
-
-                <button type="submit" class="login-button">Login</button>
-                <button type="button" class="register-button">Register New Account</button>
-
-                <div class="divider">
-                    <span>or continue with</span>
-                </div>
-
-                <div class="social-login">
-                    <button type="button" class="social-button">
-                        <i class="fab fa-google"></i>
-                    </button>
-                    <button type="button" class="social-button">
-                        <i class="fab fa-apple"></i>
-                    </button>
-                    <button type="button" class="social-button">
-                        <i class="fab fa-facebook-f"></i>
-                    </button>
-                </div>
-            </form>
+            <form id="login-form">
+                <input type="text" id="username" name="username" placeholder="Artist ID" required />
+                <input type="password" id="password" name="password" placeholder="Password" required />
+                <button type="submit">Login</button>
+              </form>
         </div>
 
         <div class="image-section">
@@ -66,5 +26,32 @@
             <div class="image-overlay"></div>
         </div>
     </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+      
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+      
+          try {
+            const response = await fetch('/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password }),
+            });
+      
+            const result = await response.json();
+            if (result.success) {
+              alert('Login successful!');
+              window.location.href = '/dashboard'; // Redirect to dashboard
+            } else {
+              alert(result.message || 'Login failed');
+            }
+          } catch (error) {
+            console.error('Error during login:', error);
+            alert('An error occurred. Please try again.');
+          }
+        });
+      </script>
 </body>
 </html>
