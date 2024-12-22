@@ -65,11 +65,13 @@ function getNewArtists(processedArtists) {
 function createArtistCard(artist) {
   return `
     <article class="artist-card">
+    <a href="Sanalhuselt.html?id=${artist.id}">
       <img src="${artist.image}" alt="${artist.name}" loading="lazy" />
-      <a href="Sanalhuselt.html" class="artist-card-info">
+      <article class="artist-card-info">
         <p class="comment">Cэтгэгдэл: ${artist.comment}</p>
         <p class="likes">Таалагдсан: ${artist.likes}</p>
         <h3>${artist.name}</h3>
+      </article>
       </a>
     </article>
   `;

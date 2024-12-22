@@ -13,7 +13,11 @@
     padding: 0px;
     margin-top: 2rem;
   }
-  
+
+  a {
+    text-decoration: none;
+    color: var(--txtc);
+  }
   /* Card styles */
   .product-card {
     position: relative;

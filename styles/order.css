@@ -1,3 +1,7 @@
+@import url(/global.css);
+:root {
+    --font-size-large: 1.5rem;
+}
 main {
     min-height: 100vh;
     display: flex;
@@ -8,7 +12,7 @@ main {
 
 .Neriin_huudas {
     display: grid;
-    background-color: var(--color-purple-a);
+    background-color: var(--third-color);
     padding: 1.5rem;
     border-radius: 1rem;
     margin-bottom: 2rem;
@@ -69,10 +73,12 @@ form {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--padding);
-    width: 100%;
-    max-width: 60rem;
+    width: fit-content;
     padding: var(--padding);
-    border-radius: var(--border-radius2);
+    max-width: 100rem;
+    align-items: center;
+    border-radius: 16px;
+    background-color: var(--third-color);
 }
 
 form h3 {
@@ -87,9 +93,9 @@ form h3 {
 label {
     display: flex;
     flex-direction: column;
-    font-size: var(--font-size-medium);
+    font-size: large;
     gap: 0.5rem;
-    color: var(--color-text);
+    color: var(--txtc);
 }
 
 input[type="text"],
@@ -103,9 +109,9 @@ select {
     background-color: rgba(75, 0, 130, 0.5);
     border: none;
     padding: var(--padding);
-    border-radius: var(--border-radius);
-    color: var(--color-text);
-    font-size: var(--font-size-medium);
+    border-radius: 16px;
+    color: var(--txtc);
+    font-size: large;
     width: 100%;
     transition: background-color 0.3s ease;
 }
@@ -125,19 +131,19 @@ textarea {
 .submit-btn {
     grid-column: 1 / -1;
     justify-self: center;
-    background-color: var(--color-purple-tod);
-    color: var(--color-text);
+    background-color: var(--fourth-color);
+    color: var(--txtc);
     padding: 0.7em 2em;
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: 16px;
     cursor: pointer;
-    font-size: var(--font-size-medium);
+    font-size: 24px;
     transition: all 0.3s ease;
     margin-top: var(--padding);
 }
 
 .submit-btn:hover {
-    background-color: var(--color-purple-budegees-tod);
+    background-color: var(--secondary-color);
     transform: scale(1.05);
 }
 
