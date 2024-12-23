@@ -1,27 +1,41 @@
-import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
-import express from 'express';
-
-const app = express();
-const port = 3000;
+import swaggerJsdoc from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
 
 const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Artist Booking API',
+            title: 'Open API demo',
+            description: "API endpoints for DEMO",
+            contact: {
+                name: "admin",
+                email: "admin@my.com",
+                url: "my.com"
+            },
             version: '1.0.0',
-            description: 'API for managing users, artists, orders, and events',
         },
+        servers: [
+            {
+                url: "http://localhost:3000/",
+                description: "Local server"
+            },
+            {
+                url: "<your live url here>",
+                description: "Live server"
+            },
+        ]
     },
-    apis: ['./index.mjs'],  // Point to your API files
-};
-
-const swaggerSpec = swaggerJsdoc(options);
-
-// Set up Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-app.listen(port, () => {
-    console.log(`API documentation is available at http://localhost:${port}/api-docs`);
-});
+    // looks for configuration in specified directories
+    apis: ['./routes/*.mjs'],
+}
+const swaggerSpec = swaggerJsdoc(options)
+function swaggerDocs(app, port) {
+    // Swagger Page
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+    // Documentation in JSON format
+    app.get('/docs.json', (req, res) => {
+        res.setHeader('Content-Type', 'application/json')
+        res.send(swaggerSpec)
+    })
+}
+export default swaggerDocs
