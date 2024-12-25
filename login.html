@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Login Page</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/login.css">
+    <link rel="stylesheet" href="./styles/login.css">
 </head>
 <body>
     <div class="container">
         <div class="form-section">
             <div class="welcome-header">
                 <div class="welcome-text">Welcome to</div>
-                <div class="logo"><img src="/picture/logo.PNG" alt="Logo"></div>
+                <div class="logo"><img src="./picture/logo.PNG" alt="Logo"></div>
             </div>
             <form id="login-form">
                 <input type="text" id="username" name="username" placeholder="Artist ID" required />
@@ -22,7 +22,7 @@
         </div>
 
         <div class="image-section">
-            <img src="/picture/musician.jpg" alt="Musician">
+            <img src="./picture/musician.jpg" alt="Musician">
             <div class="image-overlay"></div>
         </div>
     </div>
@@ -34,23 +34,28 @@
           const password = document.getElementById('password').value;
       
           try {
-            const response = await fetch('/api/login', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ username, password }),
+            const response = await fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ u: "baterdene@example.com", p: "test" }), // Body with keys 'u' and 'p'
             });
-      
             const result = await response.json();
-            if (result.success) {
+            console.log(result)
+            // Directly call actions based on the `result.success` value
+            if(result.length >0){
+              
               alert('Login successful!');
-              window.location.href = '/dashboard'; // Redirect to dashboard
-            } else {
+                    window.location.href = './profile.html'; 
+            }else{
+
               alert(result.message || 'Login failed');
             }
-          } catch (error) {
-            console.error('Error during login:', error);
-            alert('An error occurred. Please try again.');
-          }
+            
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again.');
+            }
+
         });
       </script>
 </body>
