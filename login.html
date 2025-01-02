@@ -17,8 +17,9 @@
             <form id="login-form">
                 <input type="text" id="username" name="username" placeholder="Artist ID" required />
                 <input type="password" id="password" name="password" placeholder="Password" required />
-                <button type="submit">Login</button>
-              </form>
+                <button type="submit" id="login-button">Login</button>
+                <div id="error-message" style="color: red; margin-top: 10px;"></div>
+            </form>
         </div>
 
         <div class="image-section">
@@ -28,35 +29,47 @@
     </div>
     <script>
         document.getElementById('login-form').addEventListener('submit', async (e) => {
-          e.preventDefault();
-      
-          const username = document.getElementById('username').value;
-          const password = document.getElementById('password').value;
-      
-          try {
-            const response = await fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ u: "baterdene@example.com", p: "test" }), // Body with keys 'u' and 'p'
-            });
-            const result = await response.json();
-            console.log(result)
-            // Directly call actions based on the `result.success` value
-            if(result.length >0){
-              
-              alert('Login successful!');
-                    window.location.href = './profile.html'; 
-            }else{
-
-              alert(result.message || 'Login failed');
-            }
+            e.preventDefault();
             
+            // Get the actual values from the form
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Disable the button while logging in
+            const loginButton = document.getElementById('login-button');
+            const errorMessage = document.getElementById('error-message');
+            loginButton.disabled = true;
+            loginButton.textContent = 'Logging in...';
+            errorMessage.textContent = '';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        u: username, 
+                        p: password 
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data) {
+                    // Successful login
+                    window.location.href = './profile.html';
+                } else {
+                    // Failed login
+                    errorMessage.textContent = data.message || 'Login failed. Please check your credentials.';
+                }
             } catch (error) {
                 console.error('Error during login:', error);
-                alert('An error occurred. Please try again.');
+                errorMessage.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                // Re-enable the button
+                loginButton.disabled = false;
+                loginButton.textContent = 'Login';
             }
-
         });
-      </script>
+    </script>
 </body>
 </html>

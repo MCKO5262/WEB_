@@ -1,78 +1,153 @@
 // app.js
 export class OrderApp {
     constructor() {
-        this.setupComponents(); // Компонентуудыг инициалчлах
-        this.setupEventListeners(); // Үйл явдлын сонсогчдыг тохируулах
-        this.loadInitialTheme(); // Эхний загварыг ачаалах
+        // Wait for a moment to ensure custom elements are defined
+        setTimeout(() => this.initialize(), 0);
     }
 
-    setupComponents() {
-        this.form = document.querySelector('order-form'); // OrderForm компонентыг DOM-оос сонгоно
-        this.confirmation = document.querySelector('order-confirmation'); // OrderConfirmation компонентыг DOM-оос сонгоно
+    initialize() {
+        this.form = document.querySelector('order-form');
+        this.confirmation = document.querySelector('order-confirmation');
+        
+        if (!this.form || !this.confirmation) {
+            console.error('Required components not found:', {
+                form: !!this.form,
+                confirmation: !!this.confirmation
+            });
+            return;
+        }
+
+        this.setupEventListeners();
+        console.log('OrderApp initialized with components:', {
+            form: this.form,
+            confirmation: this.confirmation
+        });
     }
 
     setupEventListeners() {
-        document.addEventListener('order-submit', this.handleOrderSubmit.bind(this)); // Захиалга илгээх үйл явдалд хариу үйлдэл
-        document.addEventListener('form-input', this.handleFormInput.bind(this)); // Формын оролтын өөрчлөлт
-        document.addEventListener('confirmation-closed', this.handleConfirmationClosed.bind(this)); // Баталгаажуулах модал хаах
-
-        const themeSwitch = document.getElementById('theme-switch'); // Загвар солих товч
-        if (themeSwitch) {
-            themeSwitch.addEventListener('click', this.toggleTheme.bind(this)); // Загвар солих үйл явдлыг сонсох
-        }
-    }
-
-    loadInitialTheme() {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; // Dark mode тохиргоог шалгах
-        if (prefersDark) {
-            this.setTheme('dark'); // Хэрэв dark mode тохиргоотой бол dark theme тохируулах
-        }
-    }
-
-    setTheme(theme) {
-        document.body.classList.toggle('dark-mode', theme === 'dark'); // Body дээр dark mode class-ыг нэмэх/хасах
-        this.form?.setAttribute('theme', theme); // Form-д theme тохируулах
-
-        // Загварын өнгийг шинэчлэх
-        document.documentElement.style.setProperty('--background-color', theme === 'dark' ? '#333333' : '#ffffff');
-        document.documentElement.style.setProperty('--text-color', theme === 'dark' ? '#ffffff' : '#000000');
-    }
-
-    handleFormInput(event) {
-        console.log('Form input changed:', event.detail); // Формын оролтын өөрчлөлтийг бүртгэх
-    }
-
-    handleConfirmationClosed() {
-        this.form?.setAttribute('state', ''); // Формын төлвийг дахин анхдагч болгож тохируулах
+        this.form.addEventListener('order-submit', this.handleOrderSubmit.bind(this));
+        console.log('Event listeners set up');
     }
 
     async handleOrderSubmit(event) {
+        const formData = event.detail;
+        console.log('Handling order submit:', formData);
+        
+        if (!formData) {
+            console.error('No form data received');
+            return;
+        }
+
+        this.form?.setAttribute('state', 'submitting');
+        
         try {
-            const response = await this.submitOrder(event.detail); // Захиалгын өгөгдлийг серверт илгээх
-            this.confirmation?.show('confirmed', 'Захиалга амжилттай баталгаажлаа!', '123456'); // Амжилттай мессеж
+            // Create a more comprehensive order payload with all user fields
+            const orderPayload = {
+                // User Information
+                phone: formData.phone,
+                fullname: formData.fullName,
+                email: formData.email,
+                organization_name: formData.organization_name,
+                representative_name: formData.representative_name,
+                billing_address: formData.billing_address,
+
+                // Event Information
+                event_type: formData.eventType,
+                event_name_and_features: formData.specialRequests || formData.eventType,
+                event_date: formData.eventDate,
+                event_location: formData.location,
+                total_amount: parseFloat(formData.totalAmount) || 0,
+                artist_availability: formData.artistAvailability,
+
+                // Additional Information
+                special_requests: formData.specialRequests
+            };
+
+            console.log('Sending order payload:', orderPayload);
+
+            const response = await fetch('http://localhost:3000/api/events', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderPayload)
+            });
+
+            const result = await response.json();
+            console.log('Server response:', result);
+
+            if (!response.ok) {
+                throw new Error(result.details || 'Order submission failed');
+            }
+
+            // Show success confirmation with order code
+            console.log('Showing confirmation popup');
+            this.showConfirmation(
+                'confirmed', 
+                'Захиалга амжилттай баталгаажлаа!', 
+                result.data.order_code
+            );
+            
+            // Reset form after successful submission
+            if (this.form) {
+                const formElement = this.form.shadowRoot?.querySelector('form');
+                formElement?.reset();
+            }
+            
         } catch (error) {
-            this.confirmation?.show('rejected', 'Захиалга амжилтгүй боллоо. Дахин оролдоно уу.'); // Алдааны мессеж
+            console.error('Order submission error:', error);
+            this.showConfirmation(
+                'rejected', 
+                'Захиалга амжилтгүй боллоо. Дахин оролдоно уу.'
+            );
         } finally {
-            this.form?.setAttribute('state', ''); // Формыг дахин ашиглах боломжтой болгох
+            this.form?.setAttribute('state', '');
         }
     }
 
-    async submitOrder(orderData) {
-        const response = await fetch('/api/orders', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orderData) // JSON өгөгдөл илгээх
-        });
-
-        if (!response.ok) {
-            throw new Error('Order submission failed'); // Алдаа гарсан тохиолдолд алдаа үүсгэх
+    showConfirmation(status, message, orderCode = '') {
+        console.log('Showing confirmation:', { status, message, orderCode });
+        if (this.confirmation) {
+            this.confirmation.show(status, message, orderCode);
+        } else {
+            console.error('Confirmation component not found');
+            alert(message); // Fallback if component isn't available
         }
-
-        return response.json(); // Серверээс хариу өгөгдөл авах
     }
 
-    toggleTheme() {
-        const isDark = document.body.classList.toggle('dark-mode'); // Загвар солих (dark/light)
-        this.setTheme(isDark ? 'dark' : 'light'); // Theme тохируулах
+    // Helper method to validate form data
+    validateFormData(formData) {
+        const requiredFields = [
+            'phone',
+            'fullName',
+            'email',
+            'organization_name',
+            'representative_name',
+            'billing_address',
+            'eventType',
+            'eventDate',
+            'location'
+        ];
+
+        const missingFields = requiredFields.filter(field => !formData[field]);
+        
+        if (missingFields.length > 0) {
+            console.error('Missing required fields:', missingFields);
+            return false;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            console.error('Invalid email format');
+            return false;
+        }
+
+        // Validate phone number (assuming 8-digit format)
+        const phoneRegex = /^[0-9]{8}$/;
+        if (!phoneRegex.test(formData.phone)) {
+            console.error('Invalid phone number format');
+            return false;
+        }
+
+        return true;
     }
 }

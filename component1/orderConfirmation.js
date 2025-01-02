@@ -1,118 +1,174 @@
 export class OrderConfirmation extends HTMLElement {
-  static get properties() {
-      return {
-          status: { type: String, reflect: true }, // Захиалгын статус (confirmed/rejected/pending)
-          message: { type: String }, // Харуулах мессеж
-          orderNumber: { type: String } // Захиалгын дугаар
-      };
-  }
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this._state = { status: 'pending', message: '', orderNumber: '', isVisible: false };
+        console.log('OrderConfirmation component constructed');
+    }
 
-  constructor() {
-      super();
-      this.attachShadow({ mode: 'open' }); // Shadow DOM үүсгэх
-      this._state = {
-          status: 'pending',
-          message: '',
-          orderNumber: '',
-          isVisible: false // Мод харагдах төлөв
-      };
-  }
+    connectedCallback() {
+        console.log('OrderConfirmation connected to DOM');
+        this.render();
+        this.setupEventListeners();
+    }
 
-  get state() {
-      return this._state; // Тухайн үеийн төлөвийг авах
-  }
+    show(status, message, orderNumber = '') {
+        console.log('Show confirmation called:', { status, message, orderNumber });
+        this._state = { status, message, orderNumber, isVisible: true };
+        this.setAttribute('status', 'showing');
+        this.updateUI();
+    }
 
-  set state(newState) {
-      this._state = { ...this._state, ...newState }; // Төлөвийг шинэчлэх
-      this.updateUI(); // UI-г шинэчлэх
-  }
+    hide() {
+        console.log('Hiding confirmation');
+        this._state = { ...this._state, isVisible: false };
+        this.removeAttribute('status');
+        this.dispatchEvent(new CustomEvent('confirmation-closed'));
+    }
 
-  connectedCallback() {
-      this.render(); // Элемент холбогдоход DOM-д дүрслэх
-      this.setupEventListeners(); 
-  }
-
-  render() {
-      const template = document.createElement('template');
-      template.innerHTML = `
-      <style>
-        :host {
-          display: none; // Эхэндээ харагдахгүй
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 1000; // Бусад элементүүдийн дээр гаргах
+    updateUI() {
+        if (!this.shadowRoot) {
+            console.error('Shadow root not found');
+            return;
         }
 
-        :host([status="showing"]) {
-          display: flex; // Модал харагдах үед
-          align-items: center;
-          justify-content: center;
+        const messageEl = this.shadowRoot.getElementById('statusMessage');
+        const orderNumberEl = this.shadowRoot.getElementById('orderNumberDisplay');
+        const statusIcon = this.shadowRoot.querySelector('.status-icon');
+        const popup = this.shadowRoot.querySelector('.popup-container');
+
+        if (!messageEl || !orderNumberEl || !statusIcon || !popup) {
+            console.error('Required elements not found');
+            return;
         }
 
-        .overlay {
-          background: rgba(0, 0, 0, 0.5); // Арын бүдэг хэсэг
+        console.log('Updating UI with state:', this._state);
+
+        messageEl.textContent = this._state.message;
+        
+        if (this._state.status === 'confirmed' && this._state.orderNumber) {
+            orderNumberEl.textContent = `Захиалгын дугаар: ${this._state.orderNumber}`;
+            statusIcon.className = 'status-icon confirmed';
+        } else if (this._state.status === 'rejected') {
+            orderNumberEl.textContent = '';
+            statusIcon.className = 'status-icon rejected';
         }
 
-        .popup {
-          background: var(--background-color, #ffffff); // Модалын дотоод өнгө
-          color: var(--text-color, #000000); // Текстийн өнгө
-          padding: 2rem;
+        popup.style.display = this._state.isVisible ? 'flex' : 'none';
+    }
+
+    setupEventListeners() {
+        const closeBtn = this.shadowRoot.querySelector('#closeBtn');
+        const popupContainer = this.shadowRoot.querySelector('.popup-container');
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                console.log('Close button clicked');
+                this.hide();
+            });
         }
 
-        .status-icon {
-          font-size: 48px; // Статусын дүрсний хэмжээ
+        if (popupContainer) {
+            popupContainer.addEventListener('click', (e) => {
+                if (e.target === popupContainer) {
+                    console.log('Background clicked');
+                    this.hide();
+                }
+            });
         }
-      </style>
+    }
 
-      <div class="overlay"></div>
-      <div class="popup">
-        <div class="status-icon"></div>
-        <slot name="title"><h3>Захиалгын статус</h3></slot>
-        <slot name="message"><p id="statusMessage"></p></slot>
-        <div class="order-number">
-          <p>Таны захиалгын дугаар: <span id="orderNumberDisplay"></span></p>
-        </div>
-        <slot name="actions"><button id="closeBtn">Хаах</button></slot>
-      </div>
-    `;
+    render() {
+        const template = `
+            <style>
+                :host {
+                    --bg-overlay: rgba(0, 0, 0, 0.5);
+                    --popup-bg: #ffffff;
+                    --success-color: #4CAF50;
+                    --error-color: #f44336;
+                    --primary-color: #007bff;
+                }
 
-      this.shadowRoot.appendChild(template.content.cloneNode(true)); // DOM-д нэмэх
-  }
+                .popup-container {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: var(--bg-overlay);
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                }
 
-  setupEventListeners() {
-      this.shadowRoot.getElementById('closeBtn').addEventListener('click', () => {
-          this.hide(); // Хаах товч дарсан үед модалыг нуух
-          this.dispatchEvent(new CustomEvent('confirmation-closed', { bubbles: true, composed: true })); // Үйл явдал тараах
-      });
-  }
+                .popup {
+                    background: var(--popup-bg);
+                    padding: 2rem;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    max-width: 90%;
+                    width: 400px;
+                    text-align: center;
+                    position: relative;
+                }
 
-  show(status, message, orderNumber = '123456') {
-      this.state = {
-          status,
-          message,
-          orderNumber,
-          isVisible: true // Модал харагдах төлөвийг шинэчлэх
-      };
-      this.setAttribute('status', 'showing'); // Статус харуулах
-  }
+                .status-icon {
+                    font-size: 48px;
+                    margin-bottom: 1rem;
+                    line-height: 1;
+                }
 
-  hide() {
-      this.state = { isVisible: false }; // Модалыг нуух
-      this.setAttribute('status', 'pending'); // Статусыг анхдагч болгож тохируулах
-  }
+                .status-icon.confirmed::before {
+                    content: '✓';
+                    color: var(--success-color);
+                }
 
-  updateUI() {
-      const messageEl = this.shadowRoot.getElementById('statusMessage');
-      const orderNumberEl = this.shadowRoot.getElementById('orderNumberDisplay');
+                .status-icon.rejected::before {
+                    content: '×';
+                    color: var(--error-color);
+                }
 
-      if (this.state.isVisible) {
-          messageEl.textContent = this.state.message; // Мессеж шинэчлэх
-          orderNumberEl.textContent = this.state.status === 'confirmed' ? this.state.orderNumber : ''; // Захиалгын дугаар шинэчлэх
-      }
-  }
+                #statusMessage {
+                    font-size: 1.2rem;
+                    margin: 1rem 0;
+                }
+
+                #orderNumberDisplay {
+                    font-size: 1.1rem;
+                    color: #666;
+                    margin: 0.5rem 0;
+                }
+
+                #closeBtn {
+                    margin-top: 1.5rem;
+                    padding: 0.75rem 1.5rem;
+                    border: none;
+                    border-radius: 4px;
+                    background: var(--primary-color);
+                    color: white;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    transition: background-color 0.3s ease;
+                }
+
+                #closeBtn:hover {
+                    background: #0056b3;
+                }
+            </style>
+            <div class="popup-container">
+                <div class="popup">
+                    <div class="status-icon"></div>
+                    <div id="messageContainer">
+                        <p id="statusMessage"></p>
+                        <p id="orderNumberDisplay"></p>
+                    </div>
+                    <button id="closeBtn">Хаах</button>
+                </div>
+            </div>
+        `;
+
+        this.shadowRoot.innerHTML = template;
+        console.log('Confirmation component rendered');
+    }
 }
-
-customElements.define('order-confirmation', OrderConfirmation);
