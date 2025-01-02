@@ -291,52 +291,194 @@ a {
 }
 
 
-@media screen and (max-width: 768px) {
-  .logo-title,
-  .event-title {
-    font-size: 5rem;
+/* Tablet (1024x768) */
+@media screen and (max-width: 1024px) {
+  .artist-card-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
-  
-  .event-section {
-    padding: 2rem 1rem 1rem;
+
+  #artist-type {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
-  
-  .event-details button {
-    font-size: 1rem;
+
+  .logo-title {
+    font-size: 6rem;
   }
-  
-  .nav-button {
-    padding: 0.75rem 1rem;
+
+  .logo-subtitle,
+  .event-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .artist-info h2 {
+    font-size: 1.8rem;
+  }
+
+  .event-section img {
+    max-height: 35rem;
+  }
+
+  .artist-card-info {
+    bottom: 0.8rem;
+    left: 0.8rem;
+  }
+
+  .event-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1.3rem;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .nav-button {
-    padding: 1rem 1.4rem;
+/* Босоо утас (430x932) */
+@media screen and (max-width: 430px) and (orientation: portrait) {
+  .artist-card-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #artist-type {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .logo-title {
+    font-size: 3rem;
+  }
+
+  .logo-subtitle,
+  .event-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  .event-section {
+    padding: 0.5rem;
+  }
+
+  .event-section img {
+    max-height: 20rem;
+  }
+
+  .event-button {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+
+  .artist-info {
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .artist-info h2 {
     font-size: 1.4rem;
   }
-  
-  .nav-prev {
-    left: 1rem;
+
+  .artist-info a {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
   }
-  
-  .nav-next {
-    right: 1rem;
+
+  .nav-button {
+    width: 2.2rem;
+    height: 2.2rem;
   }
-  
-  .swiper-pagination {
-    bottom: 1.5rem;
+
+  .likes, 
+  .comment {
+    font-size: 1rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .event-controls {
+    bottom: 0.8rem;
+    left: 0.8rem;
+    right: 0.8rem;
   }
 }
 
-@media screen and (max-width: 480px) {
-  .nav-button {
-    padding: 0.8rem 1.2rem;
+/* Хэвтээ утас (932x430) */
+@media screen and (max-width: 932px) and (orientation: landscape) {
+  .logo-title {
+    font-size: 2.8rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .logo-subtitle,
+  .event-subtitle {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  .event-section {
+    padding: 0.5rem;
+  }
+
+  .event-section img {
+    max-height: 65vh;
+  }
+
+  .artist-card-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+  }
+
+  #artist-type {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin: 0.8rem 0;
+    padding: 0.5rem;
+  }
+
+  .artist-info {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem;
+    margin: 0.4rem 0;
+  }
+
+  .artist-info h2 {
     font-size: 1.2rem;
   }
-  
-  .swiper-pagination-bullet {
-    width: 0.6rem;
-    height: 0.6rem;
+
+  .artist-info a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .artist-card-info {
+    bottom: 0.4rem;
+    left: 0.4rem;
+  }
+
+  .nav-button {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .event-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    margin: 0.4rem 0;
+  }
+
+  .likes, 
+  .comment {
+    font-size: 0.9rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .artist-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 }

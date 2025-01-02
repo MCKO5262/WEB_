@@ -306,3 +306,172 @@ cursor: pointer;
 background-color: #553C9A;
 }
 
+
+
+
+
+
+/* Base styles */
+:root {
+  --mobile-padding: 0.5rem;
+  --tablet-padding: 0.75rem;
+  --desktop-padding: 1rem;
+}
+
+/* Mobile First Approach (up to 430px) */
+@media screen and (max-width: 430px) {
+  main {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem;
+    padding: var(--mobile-padding);
+  }
+
+  aside {
+    grid-column: 1 / -1 !important;
+    margin-bottom: 1rem;
+  }
+
+  .calendar {
+    grid-column: 1 / -1 !important;
+  }
+
+  .weekdays, .weekdays-ajil {
+    grid-template-columns: repeat(1, 1fr) !important;
+    gap: 0.25rem;
+  }
+
+  .day {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+  }
+
+  .day h4 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .ajil {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .event {
+    margin: 0.25rem 0;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  aside li {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "time"
+      "pa"
+      "check"
+      "button";
+    gap: 0.5rem;
+  }
+
+  aside button {
+    width: 100%;
+    justify-self: center;
+  }
+
+  .calendar-header {
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  #current-week {
+    font-size: 1rem;
+    margin: 0 0.5rem;
+  }
+
+  #prev-week, #next-week {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Landscape phone (932x430) */
+@media screen and (min-width: 431px) and (max-width: 932px) and (orientation: landscape) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: var(--mobile-padding);
+  }
+
+  aside {
+    grid-column: 1 / 2;
+  }
+
+  .calendar {
+    grid-column: 2 / -1;
+  }
+
+  .weekdays, .weekdays-ajil {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  main {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    padding: var(--tablet-padding);
+  }
+
+  aside {
+    grid-column: 1 / 4;
+  }
+
+  .calendar {
+    grid-column: 4 / -1;
+  }
+
+  .weekdays, .weekdays-ajil {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+  }
+
+  .day {
+    padding: 0.75rem;
+  }
+}
+
+/* Additional responsive adjustments */
+@media screen and (max-width: 1024px) {
+  aside ul {
+    max-height: 60vh;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 2.5% auto;
+  }
+
+  .details-container {
+    gap: 0.5rem;
+  }
+
+  .detail-item {
+    padding: 0.75rem;
+  }
+}
+
+/* Dark mode adjustments for mobile */
+@media (prefers-color-scheme: dark) and (max-width: 430px) {
+  .day {
+    background-color: var(--color-purple-budegees-tod);
+  }
+
+  .ajil {
+    background-color: var(--color-purple-todoos-budeg);
+  }
+}

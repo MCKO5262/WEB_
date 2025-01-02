@@ -219,20 +219,38 @@ nav li:nth-last-child(2) {
 }
 
 @media screen and (max-width: 1024px) {
-  :root {
-    --base-font-size: 20px;
+  body {
+    padding: 0 5%;
+    font-size: calc(var(--base-font-size) * 0.9);
   }
-  
+
   header nav ul {
-    flex-direction: column;
-    align-items: center;
     gap: 1rem;
   }
-  
-  .logo, .searchbar, .login, .checkorder {
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+
+  .logo img {
+    height: 50px;
+  }
+
+  .searchbar form {
+    max-width: 300px;
+  }
+
+  .login {
+    width: 150px;
+    height: 45px;
+  }
+
+  .login a,
+  .checkorder a {
+    font-size: 16px;
+  }
+
+  #theme-switch {
+    height: 45px;
+    width: 45px;
+    top: 15px;
+    right: 15px;
   }
 }
 
@@ -250,18 +268,70 @@ nav li:nth-last-child(2) {
   }
 }
 
-@media screen and (max-width: 480px) {
-  :root {
-    --base-font-size: 16px;
+@media screen and (max-width: 430px) and (orientation: portrait) {
+  body {
+    padding: 0 3%;
+    font-size: calc(var(--base-font-size) * 0.8);
   }
-  
-  .login, .checkorder {
-    width: 100%;
-    max-width: 250px;
+
+  header nav {
+    padding: 0.5rem;
   }
-  
+
+  header nav ul {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: stretch;
+  }
+
+  .logo {
+    justify-content: start;
+  }
+
   .logo img {
-    max-width: 100px;
+    height: 40px;
+  }
+
+  .searchbar {
+    margin: 0;
+    width: 100%;
+  }
+
+  .searchbar form {
+    max-width: 70%;
+    justify-content: center;
+  }
+
+  .searchbar input {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .login {
+    width: 100%;
+    height: 40px;
+  }
+
+  .login a,
+  .checkorder a {
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  .checkorder {
+    width: 100%;
+  }
+
+  .checkorder a {
+    justify-content: center;
+    padding: 8px 0;
+  }
+
+  #theme-switch {
+    height: 35px;
+    width: 35px;
+    top: 10px;
+    right: 10px;
   }
 }
 
