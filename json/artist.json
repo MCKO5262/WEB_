@@ -28,7 +28,7 @@
   {
     "id": 3,
     "name": "Thunder",
-    "image": "/picture/thunder.jfif",
+    "image": "./picture/thunder.jfif",
     "likes": 1023,
     "comment": 110,
     "location": "Дархан",
@@ -41,7 +41,7 @@
   {
     "id": 4,
     "name": "Ankh-bayar",
-    "image": "/picture/ankh-bayar.jpg",
+    "image": "./picture/ankh-bayar.jpg",
     "likes": 1023,
     "comment": 110,
     "location": "Ховд",

@@ -144,3 +144,43 @@
         padding: 0.5rem 1rem;
     }
 }
+.error-message {
+    color: #ff4444;
+    background-color: #ffebee;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  #checkOrderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  #orderNumber {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  #submitButton {
+    padding: 0.75rem;
+    background-color: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  #submitButton:hover {
+    background-color: #2d2a6b;
+  }

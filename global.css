@@ -57,6 +57,11 @@
   margin: 0;
   padding: 0;
 }
+html, body {
+  overflow-x: hidden; 
+  overflow-y: auto;
+}
+
 
 body {
   background: linear-gradient(180deg, var(--bc1) 69%, var(--bc2) 89.5%);
@@ -69,9 +74,11 @@ body {
   color: var(--txtc);
   padding: 0 10% 0 10%;
 }
+
 /* Header styling */
 header nav {
   padding: 1rem;
+;
 
 }
 header nav ul {
@@ -124,6 +131,7 @@ header nav ul {
   list-style: none;
 }
 .searchbar input {
+  background-color: none;
   width: 100%;
   padding: 8px 12px; /* Improved padding */
   border-radius: 20px;
