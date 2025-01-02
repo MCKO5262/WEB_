@@ -45,7 +45,7 @@ export class OrderConfirmation extends HTMLElement {
         console.log('Updating UI with state:', this._state);
 
         messageEl.textContent = this._state.message;
-        
+
         if (this._state.status === 'confirmed' && this._state.orderNumber) {
             orderNumberEl.textContent = `Захиалгын дугаар: ${this._state.orderNumber}`;
             statusIcon.className = 'status-icon confirmed';
@@ -81,80 +81,151 @@ export class OrderConfirmation extends HTMLElement {
     render() {
         const template = `
             <style>
-                :host {
-                    --bg-overlay: rgba(0, 0, 0, 0.5);
-                    --popup-bg: #ffffff;
-                    --success-color: #4CAF50;
-                    --error-color: #f44336;
-                    --primary-color: #007bff;
-                }
+            @import url(./global.css);
+            .popup-container {
+            display: none;
+            position: fixed;
+            inset: 0; /* Shorter than setting top, right, bottom, left */
+            background: rgba(0, 0, 0, 0.75); /* Darker overlay for better contrast */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px); /* Adds depth to the overlay */
+            transition: opacity var(--transition-speed) var(--transition-timing);
+            }
 
-                .popup-container {
-                    display: none;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: var(--bg-overlay);
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1000;
-                }
+            .popup {
+            background: var(--bc1);
+            color: var(--txtc);
+            padding: var(--padding);
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            max-width: min(90%, 400px); /* More responsive approach */
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: popup-enter 0.3s var(--transition-timing);
+            border: 1px solid var(--third-color);
+            }
 
-                .popup {
-                    background: var(--popup-bg);
-                    padding: 2rem;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                    max-width: 90%;
-                    width: 400px;
-                    text-align: center;
-                    position: relative;
-                }
+            .status-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+            }
 
-                .status-icon {
-                    font-size: 48px;
-                    margin-bottom: 1rem;
-                    line-height: 1;
-                }
+            .status-icon.confirmed::before {
+            content: '✔';
+            color: #4ade80;
+            animation: icon-enter 0.4s var(--transition-timing);
+            }
 
-                .status-icon.confirmed::before {
-                    content: '✓';
-                    color: var(--success-color);
-                }
+            .status-icon.rejected::before {
+            content: '×';
+            color: #f87171; /* Brighter red for dark mode compatibility */
+            animation: icon-enter 0.4s var(--transition-timing);
+            }
 
-                .status-icon.rejected::before {
-                    content: '×';
-                    color: var(--error-color);
-                }
+            #statusMessage {
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            color: var(--txtc);
+            font-family: var(--font-family);
+            }
 
-                #statusMessage {
-                    font-size: 1.2rem;
-                    margin: 1rem 0;
-                }
+            #orderNumberDisplay {
+            font-size: 1.8rem;
+            color: var(--neutral-color);
+            margin: 0.5rem 0;
+            font-family: var(--font-family);
+            }
 
-                #orderNumberDisplay {
-                    font-size: 1.1rem;
-                    color: #666;
-                    margin: 0.5rem 0;
-                }
+            #closeBtn {
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--fourth-color);
+            color: var(--txtc);
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            transition: all var(--transition-speed) var(--transition-timing);
+            box-shadow: var(--box-shadow);
+            }
 
-                #closeBtn {
-                    margin-top: 1.5rem;
-                    padding: 0.75rem 1.5rem;
-                    border: none;
-                    border-radius: 4px;
-                    background: var(--primary-color);
-                    color: white;
-                    cursor: pointer;
-                    font-size: 1rem;
-                    transition: background-color 0.3s ease;
-                }
+            #closeBtn:hover {
+            background: var(--hover-dark-neutral);
+            transform: translateY(-2px);
+            }
 
-                #closeBtn:hover {
-                    background: #0056b3;
-                }
+            #closeBtn:active {
+            transform: translateY(0);
+            }
+
+            /* Animations */
+            @keyframes popup-enter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            }
+
+            @keyframes icon-enter {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+            }
+
+            /* Media Queries */
+            @media screen and (max-width: 768px) {
+            .popup {
+                padding: calc(var(--padding) * 0.75);
+            }
+            
+            .status-icon {
+                font-size: 2.5rem;
+                height: 60px;
+            }
+            
+            #statusMessage {
+                font-size: 1.1rem;
+            }
+            
+            #orderNumberDisplay {
+                font-size: 1rem;
+            }
+            }
+
+            /* Accessibility */
+            @media (prefers-reduced-motion: reduce) {
+            .popup,
+            .status-icon.confirmed::before,
+            .status-icon.rejected::before,
+            #closeBtn {
+                animation: none;
+                transition: none;
+            }
+            }
+
+            /* Dark mode support */
+            .darkmode .popup {
+            background: var(--bc1);
+            border-color: var(--third-color);
+            }
             </style>
             <div class="popup-container">
                 <div class="popup">
