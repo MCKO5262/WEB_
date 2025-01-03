@@ -1,23 +1,4 @@
-:root {
-  --bc1: #c277e9;
-  --bc2: #ad49e1;
-  --primary-color: #6f00ff; /* Main color for headings */
-  --secondary-color: #7a1cac; /* Text input and other content */
-  --third-color: #ad53dc; /* Navigation */
-  --fourth-color: #3b0f80; /* Small buttons */
-  --txtc: #ffffff; /* Text color */
-  --font-family: "Bahnschrift", sans-serif;
-  --base-font-size: 24px;
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --bc1: #2f2f2f;
-    --bc2: #000000;
-  }
-} */
-
+@import url(../global.css);
 * {
   box-sizing: border-box;
   margin: 0;

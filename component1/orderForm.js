@@ -1,73 +1,78 @@
 export class OrderForm extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" }); // Shadow DOM үүсгэх
     this._state = {
-      isSubmitting: false,
-      formData: {},
+      isSubmitting: false, // Илгээж буй байдал
+      formData: {}, // Формын өгөгдөл
     };
   }
 
+
   static get observedAttributes() {
-    return ["theme", "state"];
+    return ["theme", "state"]; // "theme" болон "state" аттрибутыг хянах
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "theme") {
-      this.updateTheme(newValue);
+      this.updateTheme(newValue); // Theme шинэчлэгдсэн үед
     } else if (name === "state") {
-      this.updateState(newValue);
+      this.updateState(newValue); // state шинэчлэгдсэн үед
     }
   }
+
 
   updateTheme(theme) {
     if (this.shadowRoot) {
       const container = this.shadowRoot.querySelector(".form-container");
       if (container) {
-        container.setAttribute("data-theme", theme);
+        container.setAttribute("data-theme", theme); // theme утга асуултаар шинэчлэх
       }
     }
   }
 
+
   updateState(state) {
-    this._state.isSubmitting = state === "submitting";
-    this.updateUI();
+    this._state.isSubmitting = state === "submitting"; // Илгээж буй байдал шалгах
+    this.updateUI(); // UI-г шинэчлэх
   }
+
 
   updateUI() {
     if (!this.shadowRoot) return;
-
     const submitButton = this.shadowRoot.querySelector(".submit-button");
     if (submitButton) {
-      submitButton.disabled = this._state.isSubmitting;
+      submitButton.disabled = this._state.isSubmitting; // Илгээж буй үед товчийг хаах
       submitButton.textContent = this._state.isSubmitting
         ? "Илгээж байна..."
-        : "Захиалга илгээх";
+        : "Захиалга илгээх"; // Товчийн текстийг өөрчлөх
     }
   }
 
+
   connectedCallback() {
-    this.render();
-    this.setupEventListeners();
-    // Apply initial theme if set
+    this.render(); // Компонентыг render хийх
+    this.setupEventListeners(); // Үйлдлийн сонсогчийг тохируулах
     const theme = this.getAttribute("theme");
     if (theme) {
-      this.updateTheme(theme);
+      this.updateTheme(theme); // Эхний theme-г хэрэглэж байна
     }
   }
+
 
   setupEventListeners() {
     const form = this.shadowRoot.querySelector("#orderForm");
     if (form) {
       form.addEventListener("submit", this.handleSubmit.bind(this));
-      form.addEventListener("input", this.handleInput.bind(this));
+      form.addEventListener("input", this.handleInput.bind(this)); // Инпут өгөгдөл өөрчлөгдөх үед
     }
   }
 
+
   handleInput(event) {
     const { name, value } = event.target;
-    this._state.formData[name] = value;
-    this.validateField(event.target);
+    this._state.formData[name] = value; // Формаас өгөгдөл авах
+    this.validateField(event.target); // Өгөгдлийг шалгах
   }
 
   validateField(field) {
@@ -112,27 +117,33 @@ export class OrderForm extends HTMLElement {
   validatePhone(phone) {
     return /^[0-9]{8}$/.test(phone);
   }
-
+  //handleSubmit функц нь формын өгөгдлийг шалгаж, зөв бол илгээх үйлдлийг гүйцэтгэнэ. Хэрэв оруулсан өгөгдөл буруу байвал хэрэглэгчийн өгөгдөл баталгаажих хүртэл илгээхгүй.
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); /*preventDefault() нь формын энэ стандарт үйлдлийг зогсооно. Энэ нь браузерын автоматаар формаар өгөгдөл илгээх үйлдлийг хааж, 
+    өөрийн бичсэн логикыг гүйцэтгэх боломжийг олгодог. Жишээ нь, хэрэглэгчийн илгээсэн формын өгөгдлийг сервер рүү шууд явуулах биш, эхлээд шалгаж байгаа.*/
 
     const form = event.target;
     let isValid = true;
 
-    // Validate all fields
+    // Бүх талбаруудыг шалгах
     Array.from(form.elements).forEach((field) => {
       if (field.name) {
         isValid = this.validateField(field) && isValid;
       }
     });
+    /*Формын бүх элементийг дамжиж, validateField(field) функцэд тус бүрийн талбарыг шалгах зорилгоор дамжуулна.
+    form.elements нь бүх формын оролт (input, select гэх мэт) элементийн цуглуулга юм.
+    Array.from(form.elements) нь энэ цуглуулгыг бодит массив болгон хөрвүүлж, forEach функцээр бүрт нэг бүрчлэн шалгаж байна.
+    validateField(field) нь тухайн талбарын утга зөв эсэхийг шалгах функц юм. Шалгалт амжилтгүй бол isValid утга false болно.*/
 
-    if (!isValid) return;
+    if (!isValid) return; // Хэрэв баталгаажуулалт амжилтгүй бол илгээхгүй
 
-    // Get form data
+    // Өгөгдлийг авах
     const formData = new FormData(form);
+    //Object.fromEntries(formData) нь FormData-ийн өгөгдлийг стандарт JavaScript объект болгож хөрвүүлнэ.
     const data = Object.fromEntries(formData);
 
-    // Dispatch order-submit event
+    // dispatchEvent нь шинэ CustomEvent үүсгэж, илгээх үйлдлийг гүйцэтгэнэ.
     this.dispatchEvent(
       new CustomEvent("order-submit", {
         detail: data,
@@ -141,6 +152,7 @@ export class OrderForm extends HTMLElement {
       })
     );
   }
+
 
   render() {
     this.shadowRoot.innerHTML = `

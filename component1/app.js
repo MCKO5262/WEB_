@@ -1,120 +1,127 @@
 // app.js
 export class OrderApp {
     constructor() {
-        // Wait for a moment to ensure custom elements are defined
+        // Custom elements бүртгэгдсэн эсэхийг баталгаажуулахын тулд бага зэрэг хүлээнэ
         setTimeout(() => this.initialize(), 0);
     }
 
     initialize() {
+        // Захиалгын форм болон баталгаажуулалтын хэсгийг DOM-аас хайж олох
         this.form = document.querySelector('order-form');
         this.confirmation = document.querySelector('order-confirmation');
         
+        // Хэрэв шаардлагатай элементүүд олдоогүй бол алдаа харуулах
         if (!this.form || !this.confirmation) {
-            console.error('Required components not found:', {
+            console.error('Шаардлагатай компонентууд олдсонгүй:', {
                 form: !!this.form,
                 confirmation: !!this.confirmation
             });
             return;
         }
 
+        // Арга хэмжээний сонсогчдыг тохируулах
         this.setupEventListeners();
-        console.log('OrderApp initialized with components:', {
+        console.log('OrderApp хийгдлээ:', {
             form: this.form,
             confirmation: this.confirmation
         });
     }
 
     setupEventListeners() {
+        // Захиалга илгээх үйлдлийн сонсогчийг бүртгэх
         this.form.addEventListener('order-submit', this.handleOrderSubmit.bind(this));
-        console.log('Event listeners set up');
     }
 
     async handleOrderSubmit(event) {
+        // Захиалгын өгөгдлийг эвентийн `detail`-ээс хүлээн авах
         const formData = event.detail;
-        console.log('Handling order submit:', formData);
+        console.log('Захиалга илгээж байна:', formData);
         
         if (!formData) {
-            console.error('No form data received');
+            console.error('Формын өгөгдөл олдсонгүй');
             return;
         }
 
+        // Формын төлөвийг "илгээж байна" болгон өөрчлөх
         this.form?.setAttribute('state', 'submitting');
         
         try {
-            // Create a more comprehensive order payload with all user fields
+            // Захиалгын өгөгдлийг JSON форматаар бэлтгэх
             const orderPayload = {
-                // User Information
                 phone: formData.phone,
                 fullname: formData.fullName,
                 email: formData.email,
                 organization_name: formData.organization_name,
                 representative_name: formData.representative_name,
                 billing_address: formData.billing_address,
-
-                // Event Information
                 event_type: formData.eventType,
                 event_name_and_features: formData.specialRequests || formData.eventType,
                 event_date: formData.eventDate,
                 event_location: formData.location,
                 total_amount: parseFloat(formData.totalAmount) || 0,
                 artist_availability: formData.artistAvailability,
-
-                // Additional Information
                 special_requests: formData.specialRequests
             };
 
-            console.log('Sending order payload:', orderPayload);
-
+            // Сервер рүү HTTP POST хүсэлт илгээх
             const response = await fetch('http://localhost:3000/api/events', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderPayload)
+                body: JSON.stringify(orderPayload) // JSON форматтай өгөгдөл илгээх
             });
 
+            // Серверээс ирсэн хариуг унших
             const result = await response.json();
-            console.log('Server response:', result);
+            console.log('Серверийн хариу:', result);
 
             if (!response.ok) {
-                throw new Error(result.details || 'Order submission failed');
+                throw new Error(result.details || 'Захиалгыг илгээхэд алдаа гарлаа');
             }
 
-            // Show success confirmation with order code
-            console.log('Showing confirmation popup');
+            // Амжилттай бол баталгаажуулалтын попап харуулах
+            console.log('Баталгаажуулалтын попап харуулж байна');
             this.showConfirmation(
                 'confirmed', 
                 'Захиалга амжилттай баталгаажлаа!', 
                 result.data.order_code
             );
             
-            // Reset form after successful submission
+            // Формыг цэвэрлэх
             if (this.form) {
                 const formElement = this.form.shadowRoot?.querySelector('form');
                 formElement?.reset();
+                /*if (this.form):this.form (гадна талаас order-form элемент) байгаа эсэхийг шалгана. Хэрэв байхгүй бол доорх үйлдлийг гүйцэтгэхгүй.this.form.shadowRoot?.querySelector('form'):order-form гэдэг custom элемент нь Shadow DOM ашигладаг байж магадгүй.shadowRoot-ыг ашиглан тухайн элемент доторх агуулга руу хандана.querySelector('form')-ийг ашиглан Shadow DOM доторх <form> элементийг олно.
+                formElement?.reset():formElement элемент нь HTML формыг илэрхийлэх элемент байх бөгөөд энэ элементийн
+                reset() функц нь HTML формын бүх оруулга (input), сонголт (select), шалгуур (checkbox) гэх мэт талбаруудыг анхдагч утгаар нь буцаана.
+                Жишээ нь, хэрэв хэрэглэгч формыг бөглөөд "Илгээх" товч дарсан бол энэ функц нь формыг дахин цэвэрлэж, хоослох болно.*/
             }
             
         } catch (error) {
-            console.error('Order submission error:', error);
+            // Алдаа гарвал хэрэглэгчид мэдэгдэх
+            console.error('Захиалгыг илгээхэд алдаа гарлаа:', error);
             this.showConfirmation(
                 'rejected', 
                 'Захиалга амжилтгүй боллоо. Дахин оролдоно уу.'
             );
         } finally {
+            // Формын төлөвийг анхны байдалд оруулах
             this.form?.setAttribute('state', '');
         }
     }
 
     showConfirmation(status, message, orderCode = '') {
-        console.log('Showing confirmation:', { status, message, orderCode });
+        // Баталгаажуулалтын хэсгийг харуулах эсвэл алдааны мессеж гаргах
+        console.log('Баталгаажуулалтыг харуулж байна:', { status, message, orderCode });
         if (this.confirmation) {
             this.confirmation.show(status, message, orderCode);
         } else {
-            console.error('Confirmation component not found');
-            alert(message); // Fallback if component isn't available
+            console.error('Баталгаажуулалтын компонент олдсонгүй');
+            alert(message); // Компонент байхгүй үед fallback
         }
     }
 
-    // Helper method to validate form data
     validateFormData(formData) {
+        // Шаардлагатай талбаруудыг шалгах
         const requiredFields = [
             'phone',
             'fullName',
@@ -130,24 +137,25 @@ export class OrderApp {
         const missingFields = requiredFields.filter(field => !formData[field]);
         
         if (missingFields.length > 0) {
-            console.error('Missing required fields:', missingFields);
+            console.error('Дутуу талбарууд:', missingFields);
             return false;
         }
 
-        // Validate email format
+        // И-мэйл хаягийн форматыг шалгах
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
-            console.error('Invalid email format');
+            console.error('И-мэйл хаяг буруу байна');
             return false;
         }
 
-        // Validate phone number (assuming 8-digit format)
+        // Утасны дугаарын форматыг шалгах (8 оронтой байх шаардлагатай)
         const phoneRegex = /^[0-9]{8}$/;
         if (!phoneRegex.test(formData.phone)) {
-            console.error('Invalid phone number format');
+            console.error('Утасны дугаарын формат буруу байна');
             return false;
         }
 
         return true;
     }
 }
+
