@@ -46,11 +46,11 @@
       </nav>
     </header>
 
-    <main id="mainContent">
-      <div id="loadingIndicator" class="loading">Loading...</div>
-      <div id="errorContainer" class="error" style="display: none"></div>
-      <div id="orderContainer"></div>
-      <div id="cancelModal" class="modal" style="display: none">
+    <main id="Zahialaga">
+      <p id="loading" class="loading">Уншиж байна...</p>
+      <p id="Aldaa" class="error" style="display: none"></p>
+      <section id="Zmedeelel"></section>
+      <article id="cancelModal" class="modal" style="display: none">
         <div class="modal-content">
           <h2>Захиалга цуцлах</h2>
           <p>Та захиалгаа цуцлахдаа итгэлтэй байна уу?</p>
@@ -63,7 +63,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </article>
     </main>
 
     <footer>
@@ -134,7 +134,7 @@
           );
           const data = await response.json();
 
-          document.getElementById("loadingIndicator").style.display = "none";
+          document.getElementById("loading").style.display = "none";
 
           if (data.success && data.data) {
             displayOrderDetails(data.data);
@@ -147,14 +147,14 @@
       }
 
       function showError(message) {
-        const errorContainer = document.getElementById("errorContainer");
-        errorContainer.textContent = message;
-        errorContainer.style.display = "block";
+        const Aldaa = document.getElementById("Aldaa");
+        Aldaa.textContent = message;
+        Aldaa.style.display = "block";
       }
 
       function displayOrderDetails(order) {
         currentOrderId = order.id;
-        const container = document.getElementById("orderContainer");
+        const container = document.getElementById("Zmedeelel");
 
         const statusText = {
           pending: "Хүлээгдэж байна",

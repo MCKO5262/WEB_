@@ -1,4 +1,3 @@
-/* Order List Page Styles */
 .order-card {
     background: var(--bc2);
     border-radius: 1.5rem;
@@ -96,7 +95,6 @@
     transform: translateY(-2px);
 }
 
-/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -164,7 +162,6 @@
     background-color: #dc2626;
 }
 
-/* Loading and Error States */
 .loading {
     text-align: center;
     padding: 2rem;
@@ -185,7 +182,6 @@ artist-profile {
     justify-content: center;
     background: var(--bc2);
 }
-/* Responsive Design */
 @media (max-width: 768px) {
     .order-details {
         grid-template-columns: 1fr;
