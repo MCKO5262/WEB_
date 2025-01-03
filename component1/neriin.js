@@ -120,9 +120,24 @@ export class ArtistProfile extends HTMLElement {
             .Huvari_harah:hover {
                 background-color: rgba(0, 0, 0, 0.4);
             }
-
+            @media screen and (max-width: 430px) and (orientation: portrait) {
+                .Neriin_huudas img {
+                    width: 8rem; 
+                    height: 8rem;
+                    margin-bottom: 0.7rem;
+                }
+                .Neriin_huudas h2 {
+                    font-size: 1.5rem; 
+                }
+                .stars {
+                    font-size: 1rem;
+                }
+                .Huvari_harah {
+                    font-size: 0.9rem;
+                    padding: 0.6em 1.8em;
+                }
+            }
             </style>
-
             <section class="Neriin_huudas">
                 <img class="artist-image" 
                      src="${this._state.artistData.image || ''}" 

@@ -180,7 +180,11 @@
     margin-bottom: 1rem;
     text-align: center;
 }
-
+artist-profile {
+    display: flex;
+    justify-content: center;
+    background: var(--bc2);
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .order-details {
