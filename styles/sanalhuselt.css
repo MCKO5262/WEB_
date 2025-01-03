@@ -226,14 +226,14 @@ h3 {
   background-color: var(--primary-color);
   padding: 0.3rem 4rem;
   border-radius: 999px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   width: fit-content;
 }
 
 #comment-content-1 {
   color: var(--txtc);
   line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background-color: var(--comment-bg);
   padding: 12px;
   border-radius: 8px;
@@ -293,4 +293,19 @@ h3 {
     grid-column: 1;
     grid-row: 1;
   }
+}
+#comment-date-1 {
+  color: var(--neutral-color);
+  font-size: 1rem;
+  background-color: var(--comment-bg);
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  width: fit-content;
+  margin-left: 1rem;
+}
+#comment-header-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
