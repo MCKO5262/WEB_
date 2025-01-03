@@ -390,18 +390,18 @@ nav li:nth-last-child(2) {
   outline-offset: 4px; /* Контурын зайг тохируулах */
 }
 
-#theme-switch svg {
+#theme-switch img {
   fill: var(--txtc); /* SVG-ийн өнгө */
 }
 
-#theme-switch svg:last-child {
+#theme-switch img:last-child {
   display: none; /* Эцсийн SVG дүрсийг нуух */
 }
 
-.darkmode #theme-switch svg:first-child {
+.darkmode #theme-switch img:first-child {
   display: none; /* Dark mode-оор эхний SVG дүрсийг нуух */
 }
 
-.darkmode #theme-switch svg:last-child {
+.darkmode #theme-switch img:last-child {
   display: block; /* Dark mode-оор хоёр дахь SVG дүрсийг харуулах */
 }
