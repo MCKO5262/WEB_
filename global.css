@@ -51,7 +51,9 @@
 --artist-card-color2: rgba(90, 10, 140, 0.9); /* A complementary dark purple shade */
 
 }
-
+header {
+  border-bottom: 1px solid var(--txtc);
+}
 * {
   box-sizing: border-box;
   margin: 0;

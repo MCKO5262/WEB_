@@ -40,7 +40,7 @@
             </li>
             <li class="checkorder">
               <a
-                href="ZahialagShalgah.html"
+                href="check-order.html"
                 >Захиалга шалгах</a
               >
             </li>
@@ -49,13 +49,10 @@
         </nav>
       </header>
     <main>
-      <section class="Neriin_huudas">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Q6WFJgTVCNOR0WpVQ5lcRZNJq2ve67oJsQ&s"
-          alt="Thunder's Image">
-        <h2>Thunder</h2>
-        <div class="stars">★★★★★</div>
-        <button class="Huvari_harah">Хуваарь харах</button>
-      </section>
+      <artist-profile 
+    artist-name="Thunder" 
+    image="./picture/thunder.jfif">
+    </artist-profile>
     <order-form theme="light">
       <h2 slot="header">Захиалгын маягт</h2>
     </order-form>
@@ -115,6 +112,7 @@
       import { OrderApp } from "./component1/app.js";
       import { OrderForm } from "./component1/orderForm.js";
       import { OrderConfirmation } from "./component1/orderConfirmation.js";
+      import { ArtistProfile } from "./component1/neriin.js";
 
       // Wait for custom elements to be defined
       customElements.define("order-form", OrderForm);

@@ -17,30 +17,6 @@ body {
   padding: 0 10% 0 10%;
 }
 
-/* Header styling */
-header nav {
-  padding: 1rem;
-}
-header nav ul {
-  display: flex;
-  align-items: center;
-  padding: 0;
-  gap: 2rem;
-}
-
-.logo {
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  padding-top: 8px;
-  width: auto;
-  height: 60px;
-}
-
-/* Search bar styling */
 .searchbar {
   flex: 1;
   margin: 0 20px;
@@ -87,64 +63,7 @@ header nav ul {
 .searchbar input:focus {
   outline: none;
 }
-.login {
-  width: 180px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 25px;
-  background-color: var(--fourth-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
 
-.login a {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--txtc);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-}
-
-.login:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-}
-
-.login a:hover {
-  color: var(--hover-text-color);
-}
-
-.login i {
-  margin-left: 10px;
-}
-nav li:nth-last-child(2) {
-  list-style: none;
-  padding: 10px;
-}
-.checkorder a,
-.login a {
-  color: var(--txtc, #ffffff);
-  text-decoration: none;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px; /* Space between icon and text */
-  transition: color 0.3s ease;
-}
-
-.checkorder a:hover,
-.login a:hover {
-  color: rgba(255, 255, 255, 0.8); /* Slightly lighter color on hover */
-}
-
-.checkorder i,
-.login i {
-  font-size: 20px;
-}
 @media screen and (max-width: 1200px) {
   :root {
     --base-font-size: 20px;
@@ -218,73 +137,7 @@ nav li:nth-last-child(2) {
   }
 }
 
-@media screen and (max-width: 480px) {
-  :root {
-    --base-font-size: 16px;
-  }
-  
-  body {
-    padding: 0 1%;
-  }
-  
-  header nav {
-    padding: 0.6rem;
-  }
-  
-  header nav ul {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.8rem;
-  }
-  
-  .logo {
-    justify-content: center;
-  }
-  
-  .logo img {
-    height: 40px;
-  }
-  
-  .searchbar form {
-    padding: 3px 12px;
-  }
-  
-  .searchbar input {
-    padding: 10px;
-  }
-  
-  .login {
-    width: 100%;
-    height: 45px;
-  }
-  
-  .checkorder {
-    width: 100%;
-  }
-  
-  .checkorder a {
-    justify-content: center;
-    width: 100%;
-    padding: 12px;
-  }
-}
 
-/* Touch device optimizations */
-@media (hover: none) {
-  .login:hover {
-    transform: none;
-  }
-  
-  .checkorder a:hover {
-    background: none;
-    transform: none;
-  }
-  
-  .login:active,
-  .checkorder a:active {
-    background: rgba(255, 255, 255, 0.1);
-  }
-}
 
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
@@ -293,4 +146,100 @@ nav li:nth-last-child(2) {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+loged {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.loged img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Dropdown button styling */
+.loged button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dropdown arrow icon */
+.loged button::after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--txtc, white);
+  border-bottom: 2px solid var(--txtc, white);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when active */
+.loged.active button::after {
+  transform: rotate(-135deg);
+}
+
+/* Dropdown menu */
+.loged a {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #333;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Show dropdown when active */
+.loged.active a {
+  display: block;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Dropdown animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dropdown arrow pointer */
+.loged a::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover effect */
+.loged a:hover {
+  background-color: #f5f5f5;
 }

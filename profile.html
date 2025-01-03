@@ -38,10 +38,14 @@
         <li class="checkorder">
           <a
             href="calendar.html"
-            >Захиалга шалгах</a
+             >📅 Хуваарь</a
           >
         </li>
-        <li class="login"><a href="login.html">Нэвтрэх</a></li>
+        <li class="loged">
+          <img src="./picture/thunder.jfif" alt="Profile picture">
+          <button></button>
+          <a href="login.html">Гарах</a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -181,15 +185,19 @@
     </section>
   </footer>
   <script>
-    document.querySelectorAll('nav button').forEach(button => {
-      button.addEventListener('click', () => {
-        document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('article').forEach(content => content.classList.remove('active'));
-
-        button.classList.add('active');
-        document.getElementById(button.getAttribute('data-tab')).classList.add('active');
-      });
-    });
+      document.querySelector('.loged button').addEventListener('click', function(e) {
+      e.stopPropagation();
+      const logedEl = this.closest('.loged');
+      logedEl.classList.toggle('active');
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function closeDropdown(event) {
+        if (!event.target.closest('.loged')) {
+          logedEl.classList.remove('active');
+          document.removeEventListener('click', closeDropdown);
+        }
+  });
+});
   </script>
 </body>
 

@@ -255,7 +255,7 @@ textarea {
 .submit-button {
   grid-column: 1 / -1;
   justify-self: center;
-  background-color: var(--fourth-color);
+  background-color: var(--secondary-color);
   color: var(--txtc);
   padding: 1em 3em;
   border: none;
