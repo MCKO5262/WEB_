@@ -349,7 +349,6 @@ nav li:nth-last-child(2) {
   }
 }
 
-/* Accessibility and Performance Enhancements */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
