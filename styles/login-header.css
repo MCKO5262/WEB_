@@ -5,25 +5,12 @@
   padding: 0;
 }
 
-body {
-  background: linear-gradient(180deg, var(--bc1) 69%, var(--bc2) 89.5%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  width: 100vw;
-  height: 100vh;
-  font-size: var(--base-font-size);
-  font-family: var(--font-family);
-  color: var(--txtc);
-  padding: 0 10% 0 10%;
-}
-
 .searchbar {
   flex: 1;
   margin: 0 20px;
   list-style: none;
 }
 
-/* Search form styles */
 .searchbar form {
   display: flex;
   align-items: center;
