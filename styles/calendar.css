@@ -1,61 +1,4 @@
-:root {
-/* Light mode variables */
---color-bg1: #C277E9;
---color-bg2: #AD49E1;
---color-text: #fff;
---color-purple-a: #AD49E1;
---color-purple-budeg: #9747FF;
---color-purple-budegees-tod: #6F00FF;
---color-purple-todoos-budeg: #7A1CAC;
---color-purple-tod: #3B0F80;
-
-/* Modal colors - light mode */
---modal-bg: #fff;
---modal-text: #000;
---modal-border: #ddd;
---modal-item-bg: #f8f8f8;
---modal-close-color: #666;
---modal-close-hover: #333;
---modal-overlay: rgba(0, 0, 0, 0.5);
---modal-button-bg: #6B46C1;
---modal-button-hover: #553C9A;
---modal-label-color: #333;
-
---font-family: "Bahnschrift", sans-serif;
---border-radius: 0.5rem;
---border-radius2: 1rem;
---padding: 1rem;
---font-size-large: 1.5rem;
---font-size-medium: 1rem;
---font-size-small: 0.875rem;
-}
-
-@media (prefers-color-scheme: dark) {
-:root {
-  /* Dark mode colors */
-  --color-bg1: #4A148C;
-  --color-bg2: #311B92;
-  --color-text: #fff;
-  --color-purple-a: #4A148C;
-  --color-purple-budeg: #311B92;
-  --color-purple-budegees-tod: #512DA8;
-  --color-purple-todoos-budeg: #673AB7;
-  --color-purple-tod: #7E57C2;
-  
-  /* Modal colors - dark mode */
-  --modal-bg: #1a1a1a;
-  --modal-text: #fff;
-  --modal-border: #333;
-  --modal-item-bg: #2d2d2d;
-  --modal-close-color: #888;
-  --modal-close-hover: #fff;
-  --modal-overlay: rgba(0, 0, 0, 0.7);
-  --modal-button-bg: #512DA8;
-  --modal-button-hover: #673AB7;
-  --modal-label-color: #ccc;
-}
-}
-
+@import url(./global.css);
 main {
 display: grid;
 grid-template-columns: repeat(16, 1fr);
@@ -69,7 +12,7 @@ grid-column: 1 / 5;
 background-color: var(--color-purple-a);
 border-radius: var(--border-radius);
 padding: var(--padding);
-color: var(--text-color);
+color: var(--txtc);
 width: 100%;
 max-width: 600px;
 margin: 0 auto;
@@ -81,6 +24,7 @@ font-size: var(--font-size-large);
 margin-bottom: 1rem;
 background-color: var(--color-purple-budegees-tod);
 border-radius: var(--border-radius);
+text-align: center;
 }
 
 aside ul {
@@ -306,12 +250,6 @@ cursor: pointer;
 background-color: #553C9A;
 }
 
-
-
-
-
-
-/* Base styles */
 :root {
   --mobile-padding: 0.5rem;
   --tablet-padding: 0.75rem;

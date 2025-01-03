@@ -1,170 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Solned is your go-to platform for discovering and booking talented musicians, bands, and performers for events."
-    />
-    <link rel="stylesheet" href="global.css" />
-    <link rel="stylesheet" href="./styles/Nuur.css" />
-    <link rel="stylesheet" href="./styles/Footer.css" />
-    <script type="module" src="./js/Nuur.js"></script>
-    <script type="text/javascript" src="./js/darkmode.js" defer></script>
-    <title>Solned</title>
-  </head>
 
-  <body>
-    <header>
-      <button id="theme-switch">
-        <p>🌑</p>
-        <p>☀️</p>
-      </button>
-      <nav>
-        <ul>
-          <li class="logo">
-            <a href="Nuur.html">
-              <img alt="logo" src="./picture/logo.png " />
-            </a>
-          </li>
-          <li class="searchbar">
-            <form action="/search" method="GET">
-              <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Хайлт хийх..."
-                aria-label="Search"
-              />
-            </form>
-          </li>
-          <li class="checkorder">
-            <a
-              href="./check-order.html"
-              >Захиалга шалгах</a
-            >
-          </li>
-          <li class="login"><a href="login.html">Нэвтрэх</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <section class="event-section">
-                    <img src="./picture/event1.jpg" alt="Event 1">
-                    <div class="event-controls">
-                        <a class="event-button">Дэлгэрэнгүй</a>
-                        <div class="slide-counter">1/3</div>
-                    </div>
-                </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Solned ххк  албан ёсны уран бүтээлчийн танилцуулга,захиалга, ажилах бүс, мэдээ мэдээлэл бүхий веб сайт.">
+  <meta name="author" content="Pizza hut Содбаяр, Мөнхсайхан, Тэлмэн">
+  <link rel="icon" type="image/png" href="./picture/icons/Лого.png">
+  <link rel="icon" type="image/png" href="./picture/icons/Лого.png">
+  <link rel="stylesheet" href="./styles/global.css" />
+  <link rel="stylesheet" href="./styles/Nuur.css" />
+  <link rel="stylesheet" href="./styles/Footer.css" />
+  <script type="module" src="./js/Nuur.js"></script>
+  <script type="text/javascript" src="./js/darkmode.js" defer></script>
+  <title>Solned</title>
+</head>
+<body>
+  <header>
+    <button id="theme-switch">
+      <p>🌑</p>
+      <p>☀️</p>
+    </button>
+    <nav>
+      <ul>
+        <li class="logo">
+          <a href="Nuur.html">
+            <img alt="logo" src="./picture/logo.png " />
+          </a>
+        </li>
+        <li class="searchbar">
+          <form action="/search" method="GET">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Хайлт хийх..."
+              aria-label="Search"
+            />
+            <button type="submit" class="search-btn">
+              🔍
+            </button>
+          </form>
+        </li>        
+        <li class="checkorder">
+          <a href="./check-order.html">🧾Захиалга шалгах</a>
+        </li>
+        <li class="login"><a href="login.html">Нэвтрэх</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide active">
+          <section class="Delgerengue-heseg">
+            <img src="./picture/event1.jpg" alt="Event 1">
+            <div class="event-controls">
+              <a href="#" class="Delgerengue">Дэлгэрэнгүй</a>
+              <div class="slide-counter">1/3</div>
             </div>
-          </div>
+          </section>
         </div>
-        <button class="nav-button nav-prev">←</button>
-        <button class="nav-button nav-next">→</button>
+        <div class="swiper-slide">
+          <section class="Delgerengue-heseg">
+            <img src="./picture/event2.jpg" alt="Event 2">
+            <div class="event-controls">
+              <a href="#" class="Delgerengue">Дэлгэрэнгүй</a>
+              <div class="slide-counter">2/3</div>
+            </div>
+          </section>
+        </div>
+        <div class="swiper-slide">
+          <section class="Delgerengue-heseg">
+            <img src="./picture/event.png" alt="Event 3">
+            <div class="event-controls">
+              <a href="#" class="Delgerengue">Дэлгэрэнгүй</a>
+              <div class="slide-counter">3/3</div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <button class="nav-button nav-prev">←</button>
+      <button class="nav-button nav-next">→</button>
     </section>
-      <section class="artist-section"> 
-        <section class="artist-info">
-          <h2>Онцлох</h2> 
-          <a href="Hailt-hiih.html">Бүгдийг харах</a>
-        </section>
-        <div id="special-artists-container" class="artist-card-container">
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="Davai-Dasha" />
-            <div class="artist-card-info">
-              <p class="comment">1231</p>
-              <p class="likes">133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
+    <section class="artist-section">
+      <section class="artist-info">
+        <h2>Онцлох</h2>
+        <a href="Hailt-hiih.html">Бүгдийг харах</a>
+      </section>
+      <div id="special-artists-container" class="artist-card-container">
+        <article class="artist-card">
+          <img src="./picture//davaidasha.png" alt="Davai-Dasha" />
+          <div class="artist-card-info">
+            <p class="comment">1231</p>
+            <p class="likes">133</p>
+            <h3>Davai-Dasha</h3>
           </div>
+        </article>
+      </div>
+    </section>
+    <section>
+      <section class="artist-info">
+        <h2>Шинэ</h2>
+        <a href="Hailt-hiih.html">Бүгдийг харах</a>
       </section>
-      <section> 
-        <section class="artist-info">
-          <h2>Шинэ</h2> 
-          <a href="Hailt-hiih.html">Бүгдийг харах</a>
-        </section>
-        <div id="new-artists-container" class="artist-card-container">
-          <article class="artist-card">
-            <img src="./picture//davaidasha.png" alt="Davai-Dasha" />
-            <div class="artist-card-info">
-              <p class="comment">1231</p>
-              <p class="likes">133</p>
-              <h3>Davai-Dasha</h3>
-            </div>
-          </article>
+      <div id="new-artists-container" class="artist-card-container">
+        <article class="artist-card">
+          <img src="./picture//davaidasha.png" alt="Davai-Dasha" />
+          <div class="artist-card-info">
+            <p class="comment">1231</p>
+            <p class="likes">133</p>
+            <h3>Davai-Dasha</h3>
           </div>
-      </section>
-      
-      <section id="artist-type">
-        <article>
-          <a href="http://127.0.0.1:5500/Hailt-hiih.html?category=band">Хамтлаг</a>
-          <img src="./picture/band.jpg" alt="Musician playing guitar" />
         </article>
+      </div>
+    </section>
 
-        <article>
-          <a href="http://127.0.0.1:5500/Hailt-hiih.html?category=musician">Хөгжимчин</a>
-          <img src="./picture/musician.jpg" alt="Musician playing guitar" />
-        </article>
+    <section id="artist-turul">
+      <article>
+        <a href="http://127.0.0.1:5500/Hailt-hiih.html?category=band">Хамтлаг</a>
+        <img src="./picture/band.jpg" alt="Musician playing guitar" />
+      </article>
 
-        <article>
-          <a href="http://127.0.0.1:5500/Hailt-hiih.html?category=singer">Дуучин</a>
-          <img src="./picture/singer.jpg" alt="Host speaking on stage" />
-        </article>
+      <article>
+        <a href="http://127.0.0.1:5500/Hailt-hiih.html?category=musician">Хөгжимчин</a>
+        <img src="./picture/musician.jpg" alt="Musician playing guitar" />
+      </article>
+
+      <article>
+        <a href="http://127.0.0.1:5500/Hailt-hiih.html?category=singer">Дуучин</a>
+        <img src="./picture/singer.jpg" alt="Host speaking on stage" />
+      </article>
+    </section>
+  </main>
+  <hr>
+  <footer>
+    <section class="social-address">
+      <a href="Nuur.html">
+        <img src="./picture/logo.png " width="30" alt="Company logo" />
+      </a>
+      <section>
+        <img src="picture/icons//facebook.png" alt="facebook" />
+        <img src="picture/icons/instagram.png" alt="facebook" />
       </section>
-    </main>
-    <hr>
-    <footer>
-      <section class="social-address">
-        <a href="Nuur.html">
-          <img src="./picture/logo.png " width="30" alt="Company logo" />
-        </a>
-        <section>
-          <img src="picture/icons//facebook.png" alt="facebook" />
-          <img src="picture/icons/instagram.png" alt="facebook" />
-        </section>
 
-        <a href="https://www.apple.com/app-store/">
-          <button>
-            <img src="picture/icons//apple.png" alt="Apple Store" />
-            <p>Appstore-оос татаж авах</p>
-          </button>
-        </a>
+      <a href="https://www.apple.com/app-store/">
+        <button>
+          <img src="picture/icons/play.png" alt="Apple Store" />
+          <p>Playstore-оос татаж авах</p>
+        </button>
+      </a>
 
-        <a href="https://play.google.com/store">
-          <button>
-            <img src="picture/icons//apple.png" alt="Apple Store" />
-            <p>Appstore-оос татаж авах</p>
-          </button>
-        </a>
-      </section>
-      <section class="about-us">
-        <ul>
-          <li>
-            <h2>SOLNED</h2>
-          </li>
-          <li>
-            <a href="#">Бидний тухай</a>
-          </li>
-          <li>
-            <a href="#">Тусламж</a>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <h2>ХОЛБОО БАРИХ</h2>
-          </li>
-          <li>
-            <a href="gmail.com">Solned@gmail.com</a>
-          </li>
-          <li>
-            <a>Оффис, Чингэлтэй</br/> дүүрэг 6-хороо, </br/>53 байр</a>
-          </li>
-        </ul>
-      </section>
-    </footer>
-  </body>
+      <a href="https://play.google.com/store">
+        <button>
+          <img src="picture/icons//apple.png" alt="Apple Store" />
+          <p>Appstore-оос татаж авах</p>
+        </button>
+      </a>
+    </section>
+    <section class="about-us">
+      <ul>
+        <li>
+          <h2>SOLNED</h2>
+        </li>
+        <li>
+          <a href="#">Бидний тухай</a>
+        </li>
+        <li>
+          <a href="#">Тусламж</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <h2>ХОЛБОО БАРИХ</h2>
+        </li>
+        <li>
+          <a href="gmail.com">Solned@gmail.com</a>
+        </li>
+        <li>
+          <a>Оффис, Чингэлтэй</br /> дүүрэг 6-хороо, </br />53 байр</a>
+        </li>
+      </ul>
+    </section>
+  </footer>
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM (веб хуудасны бүтэц) бүрэн ачаалагдсан үед кодыг ажиллуулна.
+    
+    const slides = document.querySelectorAll('.swiper-slide'); // Бүх слайдыг сонгоно
+    const prevButton = document.querySelector('.nav-prev');   // Өмнөх слайд руу шилжих товчийг сонгоно
+    const nextButton = document.querySelector('.nav-next');   // Дараагийн слайд руу шилжих товчийг сонгоно
+    const wrapper = document.querySelector('.swiper-wrapper'); // Слайдуудыг багтаасан wrapper элементийг сонгоно
+    let current = 0;// Одоогийн слайдын индекс
+    let auto= null;
+    let t = false;
+
+    // Тухайн индексийн слайдыг үзүүлэх функц
+    function showSlide(index) {
+        if (t) return;
+        t = true;
+        // Бүх слайдаас 'active' устгана
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        }); 
+        slides[index].classList.add('active');
+
+        slides.forEach(slide => {
+            const counter = slide.querySelector('.slide-counter'); 
+            counter.textContent = `${index + 1}/${slides.length}`; 
+        });
+        t = false;                           
+    }
+    // Дараагийн слайдыг үзүүлэх функц
+    function nextSlide() {
+        current = (current + 1) % slides.length;  
+        showSlide(current);
+    }
+    function prevSlide() {
+        current = (current - 1 + slides.length) % slides.length; 
+        showSlide(current);
+    }
+    // Автоматаар слайд солигдохыг эхлүүлэх функц
+    function startAutoplay() {
+        auto = setInterval(nextSlide, 5000);// 5 секунд тутамд дараагийн слайдыг үзүүлнэ
+    }
+    // Өмнөх слайд руу шилжих товчлуурын үйлдэл
+    prevButton.addEventListener('click', () => {
+        prevSlide(); // Өмнөх слайдыг үзүүлнэ
+        startAutoplay();  // Дахин автоматаар солигдолтыг эхлүүлнэ
+    });
+    // Дараагийн слайд руу шилжих товчлуурын үйлдэл
+    nextButton.addEventListener('click', () => {
+        nextSlide();// Дараагийн слайдыг үзүүлнэ
+        startAutoplay();// Дахин автоматаар солигдолтыг эхлүүлнэ
+    });
+
+    showSlide(current);
+    startAutoplay();
+});
+
+</script>
+
 </html>

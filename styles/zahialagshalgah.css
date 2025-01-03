@@ -1,14 +1,5 @@
-@import url('/global.css');
+@import url('global.css');
 
-:root {
-    --input-border: #e2e8f0;
-    --input-focus: #6b46c1;
-    --button-hover: #553c9a;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --focus-shadow: rgba(107, 70, 193, 0.2);
-    --error-bg: #ffebee;
-    --error-text: #ff4444;
-  }
 * {
     font-family: var(--font-family);
     margin: 0;
@@ -36,7 +27,6 @@ main {
 #orderSection {
     background-color: var(--third-color);
     border-radius: 12px;
-    box-shadow: 0 4px 12px var(--shadow-color);
     padding: clamp(1.5rem, 4vw, 2.5rem);
     margin: 2rem auto;
     width: 100%;
@@ -86,7 +76,7 @@ main {
   #orderNumber {
     width: 100%;
     padding: 0.875rem 1rem;
-    border: 2px solid var(--input-border);
+    border: 2px solid var(--txtc);
     border-radius: 8px;
     font-size: 1.125rem;
     transition: all 0.2s ease-in-out;

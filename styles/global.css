@@ -22,6 +22,13 @@
   --artist-card-color: rgba(127, 72, 194, 0.8); /*Артист картны өнгө: Визуал элементэд зориулсан өнгө*/
   --artist-card-color2: rgba(176, 14, 226, 0.9); /*Картны нэмэлт өнгө: Тодруулсан эсвэл ялгаатай өнгө*/
   --padding: 1rem;
+  --border-radius: 1rem;
+  --spacing-sm: 0.7rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --highlight-color: #c3ff1f;
+  --error-bg: #ffebee;
+  --error-text: #ff4444;
 }
 
 
@@ -50,6 +57,8 @@
   --artist-card-color: rgba(50, 30, 100, 0.8); /* A dark purple tone */
 --artist-card-color2: rgba(90, 10, 140, 0.9); /* A complementary dark purple shade */
 
+
+
 }
 header {
   border-bottom: 1px solid var(--txtc);
@@ -77,7 +86,7 @@ body {
   padding: 0 10% 0 10%;
 }
 
-/* Header styling */
+/* <------------------page-ийн толгой хэсэг------------> */
 header nav {
   padding: 1rem;
 ;
@@ -103,14 +112,13 @@ header nav ul {
   height: 60px;
 }
 
-/* Search bar styling */
+/* Хайлт хийх талбар */
 .searchbar {
   flex: 1;
   margin: 0 20px;
   list-style: none;
 }
-
-/* Search form styles */
+/*<!-- Хайлт хийх талбар -->*/
 .searchbar form {
   display: flex;
   align-items: center;
@@ -119,35 +127,39 @@ header nav ul {
   padding: 5px 15px;
   max-width: 400px;
   transition: all 0.3s ease;
-  background-color: var(--bc1)
+  background-color: var(--bc1);
 }
 
 .searchbar form:focus-within {
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
-
-/* Search input styles */
-.searchbar {
-  flex: 1;
-  list-style: none;
-}
 .searchbar input {
   background-color: none;
   width: 100%;
-  padding: 8px 12px; /* Improved padding */
+  padding: 8px 12px; 
   border-radius: 20px;
   border: none;
   background: transparent;
-  color: var(--txtc, #ffffff); /* Default text color */
+  color: var(--txtc, #ffffff); 
   font-size: 16px;
-  caret-color: var(--txtc, #ffffff); /* Matches text color */
+  caret-color: var(--txtc, #ffffff); 
 }
-
+.searchbar input:focus {
+  outline: none;
+}
+.search-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--txtc);
+  transition: transform 0.2s ease;
+}
 .searchbar input::placeholder {
-  color: rgba(255, 255, 255, 0.6); /* Lighter color for placeholders */
+  color: rgba(255, 255, 255, 0.6);
 }
-
+/* search focus хийх үед хүрээлэх border  арилгана*/
 .searchbar input:focus {
   outline: none;
 }
@@ -159,23 +171,20 @@ header nav ul {
   align-items: center;
   border-radius: 25px;
   background-color: var(--fourth-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--box-shadow);
   transition: all 0.3s ease;
 }
 
 .login a {
-  font-size: 16px;
-  font-weight: 500;
   color: var(--txtc);
-  text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
 }
 
 .login:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px var(--box-shadow);
 }
 
 .login a:hover {
@@ -185,47 +194,49 @@ header nav ul {
 .login i {
   margin-left: 10px;
 }
-nav li:nth-last-child(2) {
+.checkorder {
+  width: 220px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  background-color: var(--fourth-color);
+  box-shadow: 0 4px 6px var(--box-shadow);
   list-style: none;
+  transition: all 0.3s ease;
   padding: 10px;
 }
+.checkorder:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px var(--box-shadow);
+}
+
 .checkorder a,
 .login a {
   color: var(--txtc, #ffffff);
   text-decoration: none;
   font-size: 20px;
-  display: flex;
   align-items: center;
-  gap: 8px; /* Space between icon and text */
+  gap: 8px;
   transition: color 0.3s ease;
 }
 
 .checkorder a:hover,
 .login a:hover {
-  color: rgba(255, 255, 255, 0.8); /* Slightly lighter color on hover */
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .checkorder i,
 .login i {
   font-size: 20px;
 }
-/* Breakpoint adjustments */
-@media screen and (max-width: 1280px) {
-  body {
-    padding: 0 5%;
-  }
-  
-  .searchbar {
-    margin: 0 10px;
-  }
-}
-
+/* Tablet (1024x768) */
 @media screen and (max-width: 1024px) {
   body {
     padding: 0 5%;
     font-size: calc(var(--base-font-size) * 0.9);
   }
-
   header nav ul {
     gap: 1rem;
   }
@@ -235,7 +246,12 @@ nav li:nth-last-child(2) {
   }
 
   .searchbar form {
-    max-width: 300px;
+    max-width: 100%;
+    padding: 5px 10px;
+  }
+
+  .search-btn {
+    font-size: 24px;
   }
 
   .login {
@@ -260,26 +276,30 @@ nav li:nth-last-child(2) {
   :root {
     --base-font-size: 18px;
   }
-  
   body {
     padding: 0 3%;
   }
-  
+  .checkorder::after {
+    content: 📰;
+  }
   .searchbar form {
     max-width: 100%;
+    padding: 5px 10px;
+  }
+
+  .search-btn {
+    font-size: 24px;
   }
 }
-
+/* Босоо утас (430x932) */
 @media screen and (max-width: 430px) and (orientation: portrait) {
   body {
     padding: 0 3%;
     font-size: calc(var(--base-font-size) * 0.8);
   }
-
   header nav {
     padding: 0.5rem;
   }
-
   header nav ul {
     flex-direction: column;
     gap: 0.8rem;
@@ -337,7 +357,6 @@ nav li:nth-last-child(2) {
   }
 }
 
-/* Touch device optimizations */
 @media (hover: none) {
   .login, .checkorder a {
     transition: transform 0.2s ease;
@@ -349,11 +368,6 @@ nav li:nth-last-child(2) {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-  }
-}
 
 #theme-switch {
   height: 50px; 
@@ -390,17 +404,17 @@ nav li:nth-last-child(2) {
 }
 
 #theme-switch p {
-  fill: var(--txtc); /* SVG-ийн өнгө */
+  fill: var(--txtc); 
 }
 
 #theme-switch p:last-child {
-  display: none; /* Эцсийн SVG дүрсийг нуух */
+  display: none; 
 }
 
 .darkmode #theme-switch p:first-child {
-  display: none; /* Dark mode-оор эхний SVG дүрсийг нуух */
+  display: none; 
 }
 
 .darkmode #theme-switch p:last-child {
-  display: block; /* Dark mode-оор хоёр дахь SVG дүрсийг харуулах */
+  display: block; 
 }
