@@ -34,7 +34,7 @@
     "location": "Дархан",
     "category": "singer",
     "price": 2000000,
-    "video": "/video/ThunderZ - Tsumuuhei (Animated Video).mp4",
+    "video": "./video/thunder.mp4",
     "audio": "/audio/videoplayback.weba",
     "description": "Thunder, a rising star from Darkhan, Mongolia, combines energetic beats with heartfelt lyrics, creating a unique and electrifying musical experience."
   },
