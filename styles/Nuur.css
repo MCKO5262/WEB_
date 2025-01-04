@@ -73,6 +73,7 @@ a {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 3rem;
 }
 
 .artist-card {
@@ -136,8 +137,9 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4rem;
-  margin: var(--spacing-lg) 0 2.5rem;
+  margin-top: none;
   padding: var(--spacing-md);
+  
 }
 
 #artist-turul article {
