@@ -5,10 +5,10 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  background-color: var(--fourth-color);
   padding: 10px;
   border-radius: 22px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: fit-content;
 }
 
 .dropdown img {
