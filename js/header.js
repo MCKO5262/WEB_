@@ -18,7 +18,7 @@ function initializeHeader() {
                 <li class="dropdown">
                     <div class="dropdown-toggle">
                         <img src="${userData.profileImage}" alt="user">
-                        <span class="username">${userData.username}</span>
+                        <span class="username"></span>
                         <p>🔽</p>
                     </div>
                     <div class="dropdown-content">
