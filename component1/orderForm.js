@@ -316,9 +316,17 @@ textarea {
   .form-section {
     margin-bottom: 2rem;
   }
+}* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  overflow-x: hidden; 
+  overflow-y: auto;
 }
       </style>
-
+      <main>
       <div class="form-container">
       <div class="header-slot">
         <slot name="header"></slot>
@@ -409,6 +417,7 @@ textarea {
         <button type="submit" class="submit-button">Захиалга илгээх</button>
       </form>
     </div>
+      </main>
     `;
   }
 }

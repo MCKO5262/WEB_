@@ -62,6 +62,15 @@ export class ArtistProfile extends HTMLElement {
     render() {
         this.shadowRoot.innerHTML = `
             <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                }
+                html, body {
+                overflow-x: hidden; 
+                overflow-y: auto;
+                }
                 .Neriin_huudas {
                 display: grid;
                 background-color: var(--third-color);

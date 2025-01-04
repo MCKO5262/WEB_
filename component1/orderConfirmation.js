@@ -144,7 +144,7 @@ export class OrderConfirmation extends HTMLElement {
 
             .status-icon.rejected::before {
             content: '×';
-            color: #f87171; /* Brighter red for dark mode compatibility */
+            color: #f87171;
             animation: icon-enter 0.4s var(--transition-timing);
             }
 
@@ -227,8 +227,6 @@ export class OrderConfirmation extends HTMLElement {
                 font-size: 1rem;
             }
             }
-
-            /* Accessibility */
             @media (prefers-reduced-motion: reduce) {
             .popup,
             .status-icon.confirmed::before,
@@ -238,8 +236,6 @@ export class OrderConfirmation extends HTMLElement {
                 transition: none;
             }
             }
-
-            /* Dark mode support */
             .darkmode .popup {
             background: var(--bc1);
             border-color: var(--third-color);
@@ -252,11 +248,10 @@ export class OrderConfirmation extends HTMLElement {
                         <p id="statusMessage"></p>
                         <p id="orderNumberDisplay"></p>
                     </div>
-                    <button id="closeBtn">Хаах</button>
+                    <button id="closeBtn"><a href="get-order.html">Хаах</a></button>
                 </div>
             </div>
         `;
-
         this.shadowRoot.innerHTML = template;
         console.log('Confirmation component rendered');
     }
