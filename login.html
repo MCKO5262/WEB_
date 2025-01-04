@@ -17,7 +17,7 @@
             <form id="login-form">
                 <input type="text" id="username" name="username" placeholder="Artist ID" required />
                 <input type="password" id="password" name="password" placeholder="Password" required />
-                <button type="submit" id="login-button">Login</button>
+                <button type="submit" id="login-button">Нэвтрэх</button>
                 <div id="error-message" style="color: red; margin-top: 10px;"></div>
             </form>
         </div>
@@ -30,16 +30,13 @@
     <script>
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Get the actual values from the form
-            const username = document.getElementById('username').value;
+             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Disable the button while logging in
             const loginButton = document.getElementById('login-button');
             const errorMessage = document.getElementById('error-message');
-            loginButton.disabled = true;
-            loginButton.textContent = 'Logging in...';
+            loginButton.disabled = true; //Логин товчийг идэвхгүй болгоно.,Хэрэглэгч нэвтрэлтийн хүсэлт илгээж байх үед олон дахин дарахаас сэргийлэх.
+            loginButton.textContent = 'Уншиж байна...';
             errorMessage.textContent = '';
 
             try {
@@ -52,22 +49,20 @@
                     })
                 });
                 
-                const data = await response.json();
+                const data = await response.json(); //Серверээс ирсэн JSON хариуг JavaScript объект болгон хөрвүүлнэ.
                 
-                if (response.ok && data) {
-                    // Successful login
+                if (response.ok && data) { //Амжилттай нэвтрэх Серверээс ирсэн хариу амжилттай эсэхийг шалгана (response.ok нь HTTP статус код 200-299 бол үнэн болно).
                     window.location.href = './profile.html';
                 } else {
-                    // Failed login
-                    errorMessage.textContent = data.message || 'Login failed. Please check your credentials.';
+                    errorMessage.textContent = data.message || 'Дахиад шалгаад хүсэлт явуулна уу.';
                 }
             } catch (error) {
-                console.error('Error during login:', error);
-                errorMessage.textContent = 'Network error. Please check your connection and try again.';
+                console.error('нэвтрэх үед:', error);
+                errorMessage.textContent = 'Сүлжээний алдаа';
             } finally {
-                // Re-enable the button
+                //  үсэлт дууссаны дараа товчийг дахин идэвхжүүлнэ
                 loginButton.disabled = false;
-                loginButton.textContent = 'Login';
+                loginButton.textContent = 'Нэвтрэх';
             }
         });
     </script>
