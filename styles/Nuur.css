@@ -31,8 +31,9 @@ a {
 
 .Delgerengue-heseg img {
   width: 100%;
+  min-height: 20rem;
   max-height: 50rem;
-  object-fit: fill;
+  object-fit: cover;
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 1rem;
@@ -224,7 +225,20 @@ a {
   align-items: center;
   z-index: 2;
 }
+.Bugd {
+  color: var(--txtc);
+  transition: all 0.3s ease;
+}
 
+.Bugd:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px var(--box-shadow);
+}
+
+.Bugd:hover {
+  background-color: var(--nav-color);
+  color: var(--hover-text-color);
+}
 /*Slide-ийн 2 тийшээ хөдөлгөх button*/
 .nav-button {
   position: absolute;
