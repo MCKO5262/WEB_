@@ -17,9 +17,6 @@
   height: fit-content;
 }
 
-/* Desktop Layout (768px and above) */
-
-
 #profile-image {
   width: 15rem;
   height: 15rem;
@@ -240,7 +237,7 @@ h3 {
   margin: 0 4rem;
 }
 
-/* Mobile Optimization */
+
 @media (max-width: 640px) {
   #comments-section {
     padding: 16px;
@@ -260,7 +257,6 @@ h3 {
   }
 }
 
-/* Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -272,7 +268,7 @@ h3 {
   }
 }
 
-/* Container Padding */
+
 @media (max-width: 640px) {
   #container {
     padding: 12px;
