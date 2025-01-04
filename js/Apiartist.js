@@ -1,6 +1,6 @@
 class ApiService {
     constructor() {
-      this.apiUrl = 'https://api.jsonbin.io/v3/qs/6778b668ad19ca34f8e559ac'; // Unified API endpoint
+      this.apiUrl = 'https://api.jsonbin.io/v3/qs/6778b668ad19ca34f8e559ac';
     }
   
     async fetchArtists() {
@@ -10,7 +10,7 @@ class ApiService {
           headers: {
             'Content-Type': 'application/json',
           },
-          signal: AbortSignal.timeout(10000), // 10 seconds timeout
+          signal: AbortSignal.timeout(10000),
         });
   
         if (!response.ok) {
