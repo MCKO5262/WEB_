@@ -37,12 +37,12 @@ h1 {
   justify-self: center;
 }
 
-nav {
+.optionuud {
   border-radius: 0.5rem;
   overflow: hidden;
 }
 
-nav button {
+.optionuud button {
   width: 100%;
   text-align: left;
   padding: 0.75rem 1rem;
@@ -53,11 +53,11 @@ nav button {
   transition: background-color 0.2s;
 }
 
-nav button:hover {
+.optionuud button:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-nav button.active {
+.optionuud button.active {
   background: rgba(255, 255, 255, 0.2);
 }
 

@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Solned  албан ёсны уран бүтээлчийн танилцуулга,захиалга, ажилах бүс, мэдээ мэдээлэл бүхий веб сайт.">
   <meta name="author" content="Solned Содбаяр, Мөнхсайхан, Тэлмэн">
+  <title>Profile</title>
   <link rel="icon" type="image/png" href="./picture/icons/Лого.png">
   <link rel="stylesheet" href="./styles/global.css" />
   <link rel="stylesheet" href="./styles/profile.css" />
   <link rel="stylesheet" href="./styles/Footer.css" />
+  <link rel="stylesheet" href="./styles/login-header.css" />
   <script type="text/javascript" src="./js/darkmode.js" defer></script>
-
 </head>
-
 <body>
   <header>
     <button id="theme-switch">
@@ -44,11 +44,17 @@
              >📅 Хуваарь</a
           >
         </li>
-        <li class="loged">
-          <img src="./picture/thunder.jfif" alt="Profile picture">
-          <button></button>
-          <a href="login.html">Гарах</a>
-        </li>
+        <li class="dropdown">
+          <div class="dropdown-toggle">
+            <img src="./picture/thunder.jfif" alt="user">
+            <span class="username">Thunder</span>
+            <p>🔽</p>
+          </div>
+          <div class="dropdown-content">
+            <a href="login.html">Гарах</a>
+            <a href="profile.html">Тохиргоо</a>
+          </div>
+        </li>      
       </ul>
     </nav>
   </header>
@@ -58,7 +64,7 @@
         <img src="./picture/thunder.jfif" alt="Thunder Profile">
       </figure>
       <h1>Thunder</h1>
-      <nav>
+      <nav class = "optionuud">
         <button class="active" data-tab="basic">Үндсэн</button>
         <button data-tab="info">Еренхий Мэдээлэл</button>
         <button data-tab="photos">Зураг</button>
@@ -95,10 +101,10 @@
         <h2>Таний зургууд</h2>
         <section class="media-grid">
           <figure class="media-item">
-            <img src="/picture/thunder.jfif" alt="Photo 1">
+            <img src="./picture/thunder1..jpg" alt="Photo 1">
           </figure>
           <figure class="media-item">
-            <img src="/api/placeholder/400/400" alt="Photo 2">
+            <img src="./picture/thunder2.jpg" alt="Photo 2">
           </figure>
         </section>
         <button class="save-button">Зураг нэмэх</button>
@@ -187,5 +193,20 @@
       </ul>
     </section>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.optionuud button');
+    const articles = document.querySelectorAll('#main-pro article');
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        buttons.forEach(b => b.classList.remove('active'));
+        articles.forEach(a => a.classList.remove('active'));
+        const tab = button.getAttribute('data-tab');
+        button.classList.add('active');
+        document.getElementById(tab).classList.add('active');
+      });
+    });
+  });
+  </script>
 </body>
 </html>

@@ -12,9 +12,10 @@
   <link rel="stylesheet" href="./styles/gg.css">
   <link rel="stylesheet" href="./styles/Footer.css">
   <link rel="stylesheet" href="./global.css">
-  <link rel="stylesheet" href="./styles/modal.css">
+  <link rel="stylesheet" href="./styles/login-header.css">
   <link rel="stylesheet" href="./styles/global.css">
   <script type="module" src="./js/darkmode.js"></script>
+  
 </head>
 <body>
   <header>
@@ -45,10 +46,15 @@
                >📅 Хуваарь</a
             >
           </li>
-          <li class="loged">
-            <img src="./picture/thunder.jfif" alt="Profile picture">
-            <button></button>
-            <a href="login.html">Гарах</a>
+          <li class="dropdown">
+            <div class="dropdown-toggle">
+              <img src="./picture/thunder.jfif" alt="user">
+              <span class="username">Thunder</span>
+              <p>🔽</p>
+            </div>
+            <div class="dropdown-content">
+              <a href="#logout">Гарах</a>
+            </div>
           </li>
       </ul>
     </nav>
