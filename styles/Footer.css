@@ -108,47 +108,86 @@ footer {
   opacity: 0.8;
 }
 
-/* Tablet and Desktop Styles */
+@media (min-width: 1024px) {
+  .social-address {
+    max-width: 350px;
+    gap: var(--spacing-lg);
+  }
+
+  .about-us {
+    gap: calc(var(--spacing-lg) * 2);
+  }
+}
+/* Tablet*/
 @media (min-width: 768px) {
   footer {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    padding: var(--padding);
+    gap: var(--spacing-lg);
   }
 
   .social-address {
     align-items: flex-start;
     max-width: 300px;
+    gap: var(--spacing-md);
   }
 
   .about-us {
     flex-direction: row;
     align-items: flex-start;
     text-align: left;
-    gap: 4rem;
+    gap: var(--spacing-lg);
+  }
+}
+/* Хэвтээ утас*/
+@media screen and (max-width: 932px) and (orientation: landscape) {
+  footer {
+    flex-direction: row;
+    gap: var(--spacing-md);
+    padding: var(--padding);
+  }
+
+  footer .social-address {
+    gap: var(--spacing-sm);
+  }
+
+  footer .about-us {
+    gap: var(--spacing-lg);
   }
 }
 
-/* Large Desktop Styles */
-@media (min-width: 1024px) {
-
-
-  .social-address {
-    max-width: 350px;
+@media screen and (max-width: 430px) and (orientation: portrait) {
+  footer {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
   }
 
-  .about-us {
-    gap: 6rem;
-  }
-}
+  footer .social-address {
+    align-items: center;
+    gap: var(--spacing-sm);
 
-/* Small Screen Adjustments */
-@media (max-width: 320px) {
-  .social-address > a > button {
-    padding: 0.6rem;
   }
 
-  .social-address > a > button p {
-    font-size: 0.8rem;
+  footer .social-address > section img {
+    width: 20px;
+    height: 20px;
+  }
+
+  footer .about-us {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-align: center;
+  }
+
+  footer .about-us > ul > li > h2 {
+    font-size: 1rem;
+  }
+
+  footer .about-us > ul > li > a {
+    font-size: 0.9rem;
   }
 }

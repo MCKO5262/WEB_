@@ -29,6 +29,8 @@
   --highlight-color: #c3ff1f;
   --error-bg: #ffebee;
   --error-text: #ff4444;
+  --calendar-back:#673AB7;
+  --har:black;
 }
 
 
@@ -55,8 +57,8 @@
   --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Илүү тод сүүдэр */
   --nav-color: rgba(71, 13, 107, 0.788);
   --artist-card-color: rgba(50, 30, 100, 0.8); /* A dark purple tone */
---artist-card-color2: rgba(90, 10, 140, 0.9); /* A complementary dark purple shade */
-
+  --artist-card-color2: rgba(90, 10, 140, 0.9); /* A complementary dark purple shade */
+  --calendar-back: rgba(56, 29, 124, 0.8);
 
 
 }

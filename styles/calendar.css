@@ -1,4 +1,11 @@
 @import url(./global.css);
+:root {
+  --calendar-grid-cols-desktop: repeat(16, 1fr);
+  --calendar-grid-cols-tablet: repeat(12, 1fr);
+  --calendar-grid-cols-mobile: 1fr;
+  --calendar-event-font-size: 14px;
+  --calendar-event-font-size-mobile: 0.875rem;
+}
 main {
 display: grid;
 grid-template-columns: repeat(16, 1fr);
@@ -155,7 +162,7 @@ padding: 0.5rem;
 }
 
 .event {
-background-color: #673AB7;
+background-color: var(--calendar-back);
 padding: 5px;
 margin-bottom: 5px;
 border-radius: 4px;
@@ -171,11 +178,11 @@ left: 0;
 top: 0;
 width: 100%;
 height: 100%;
-background-color: rgba(0, 0, 0, 0.5);
+background-color: var(--har);
 }
 
 .modal-content {
-background-color: #fff;
+background-color: var(--txtc);
 margin: 5% auto;
 padding: 20px;
 border-radius: 8px;
@@ -190,7 +197,7 @@ overflow-y: auto;
 display: flex;
 justify-content: space-between;
 align-items: center;
-border-bottom: 1px solid #ddd;
+border-bottom: 1px solid var(--txtc);
 padding-bottom: 10px;
 margin-bottom: 20px;
 }
@@ -218,7 +225,7 @@ gap: 12px;
 
 .detail-item {
 padding: 10px;
-background-color: #f8f8f8;
+background-color: var(--txtc);
 border-radius: 4px;
 }
 
@@ -257,7 +264,7 @@ background-color: #553C9A;
   --desktop-padding: 1rem;
 }
 
-/* Mobile First Approach (up to 430px) */
+/* Mobile*/
 @media screen and (max-width: 430px) {
   main {
     grid-template-columns: 1fr !important;
@@ -340,8 +347,8 @@ background-color: #553C9A;
 @media screen and (min-width: 431px) and (max-width: 932px) and (orientation: landscape) {
   main {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-    padding: var(--mobile-padding);
+    gap: var(--spacing-md);
+    padding: var(--padding);
   }
 
   aside {
@@ -354,7 +361,7 @@ background-color: #553C9A;
 
   .weekdays, .weekdays-ajil {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
   }
 }
 
@@ -362,7 +369,7 @@ background-color: #553C9A;
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   main {
     grid-template-columns: repeat(12, 1fr);
-    gap: 1rem;
+    gap: var(--spacing-md);
     padding: var(--tablet-padding);
   }
 
@@ -376,41 +383,10 @@ background-color: #553C9A;
 
   .weekdays, .weekdays-ajil {
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
   }
 
   .day {
-    padding: 0.75rem;
-  }
-}
-
-/* Additional responsive adjustments */
-@media screen and (max-width: 1024px) {
-  aside ul {
-    max-height: 60vh;
-  }
-
-  .modal-content {
-    width: 95%;
-    margin: 2.5% auto;
-  }
-
-  .details-container {
-    gap: 0.5rem;
-  }
-
-  .detail-item {
-    padding: 0.75rem;
-  }
-}
-
-/* Dark mode adjustments for mobile */
-@media (prefers-color-scheme: dark) and (max-width: 430px) {
-  .day {
-    background-color: var(--color-purple-budegees-tod);
-  }
-
-  .ajil {
-    background-color: var(--color-purple-todoos-budeg);
+    padding: var(--padding);
   }
 }
