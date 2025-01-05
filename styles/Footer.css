@@ -28,7 +28,6 @@ footer {
   object-fit: contain; /* Дүрсийг саванд багтааж байрлуулсан */
 }
 
-/* Social Icons */
 .social-address > section {
   display: flex; /* Уян харимхай бүтэц */
   gap: 1rem; /* Дүрснүүдийн хоорондын зай */

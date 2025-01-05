@@ -281,8 +281,8 @@ background-color: #553C9A;
     grid-column: 1 / -1 !important;
   }
 
-  .weekdays, .weekdays-ajil {
-    grid-template-columns: repeat(1, 1fr) !important;
+  .weekdays {
+    grid-template-columns: 1fr !important;
     gap: 0.25rem;
   }
 
@@ -359,9 +359,9 @@ background-color: #553C9A;
     grid-column: 2 / -1;
   }
 
-  .weekdays, .weekdays-ajil {
+  .weekdays {
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-sm);
+    gap: 0.5rem;
   }
 }
 
@@ -384,6 +384,10 @@ background-color: #553C9A;
   .weekdays, .weekdays-ajil {
     grid-template-columns: repeat(7, 1fr);
     gap: var(--spacing-sm);
+  }
+  .weekdays {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
   }
 
   .day {

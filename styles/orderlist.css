@@ -182,6 +182,7 @@ artist-profile {
     justify-content: center;
     background: var(--bc2);
 }
+
 @media (max-width: 768px) {
     .order-details {
         grid-template-columns: 1fr;
