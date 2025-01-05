@@ -8,8 +8,8 @@
   <meta name="author" content="Solned Содбаяр, Мөнхсайхан, Тэлмэн">
   <title>Profile</title>
   <link rel="icon" type="image/png" href="./picture/icons/Лого.png">
-  <link rel="stylesheet" href="./styles/header.css">
   <link rel="stylesheet" href="./styles/global.css" />
+  <link rel="stylesheet" href="./styles/header.css"/>
   <link rel="stylesheet" href="./styles/profile.css" />
   <link rel="stylesheet" href="./styles/Footer.css" />
   <link rel="stylesheet" href="./styles/login-header.css" />
@@ -27,7 +27,7 @@
       <ul>
         <li class="logo">
           <a href="Nuur.html">
-            <img alt="logo" src="./picture/logo.png ">
+            <img alt="logo" src="./picture/logo.png " />
           </a>
         </li>
         <li class="searchbar">
@@ -39,31 +39,15 @@
               placeholder="Хайлт хийх..."
               aria-label="Search"
             />
+            <p type="submit" class="search-btn">
+              🔍
+            </p>
           </form>
-        </li>
+        </li>        
         <li class="checkorder">
-          <a
-            href="calendar.html"
-             >📅 Хуваарь</a
-          >
+          <a href="./check-order.html">🧾Захиалга шалгах</a>
         </li>
-        <li class="dropdown">
-          <div class="dropdown-toggle">
-            <img src="./picture/thunder.jfif" alt="user">
-            <span class="username">Thunder</span>
-            <svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <!-- дөрвөлжин -->
-              <rect x="10" y="10" width="80" height="80" rx="15" ry="15" fill="#e6e6e6"/>
-              <!-- Доошоо сум -->
-              <path d="M30 40 L50 60 L70 40" stroke="#000" stroke-width="8" fill="none" stroke-linecap="round" />
-            </svg>
-          
-          </div>
-          <div class="dropdown-content">
-            <a href="login.html">Гарах</a>
-            <a href="profile.html">Тохиргоо</a>
-          </div>
-        </li>      
+        <li class="login"><a href="login.html">Нэвтрэх</a></li>
       </ul>
     </nav>
   </header>

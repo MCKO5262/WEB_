@@ -13,13 +13,13 @@ function initializeHeader() {
         }
         
         // Add user dropdown if it doesn't exist
-        if (!headerNav.querySelector('.dropdown')) {
+        if (!headerNav.querySelector('.loged')) {
             const userSection = `
-                <li class="dropdown">
-                    <div class="dropdown-toggle">
+                <li class="loged">
+                    <div class="tovch">
                         <img src="${userData.profileImage}" alt="user">
-                        <span class="username"></span>
-                        <span class="username">Thunder</span>
+                        <span class="ner"></span>
+                        <span class="ner">Thunder</span>
                         <svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                         <!-- дөрвөлжин -->
                         <rect x="10" y="10" width="80" height="80" rx="15" ry="15" fill="#e6e6e6"/>
@@ -27,7 +27,7 @@ function initializeHeader() {
                         <path d="M30 40 L50 60 L70 40" stroke="#000" stroke-width="8" fill="none" stroke-linecap="round" />
                         </svg>
                     </div>
-                    <div class="dropdown-content">
+                    <div class="songolt">
                         <a href="#" onclick="logout(); return false;">Гарах</a>
                         <a href="profile.html">Тохиргоо</a>
                     </div>
@@ -36,7 +36,7 @@ function initializeHeader() {
         }
     } else {
         // Remove dropdown if it exists
-        const dropdown = headerNav.querySelector('.dropdown');
+        const dropdown = headerNav.querySelector('.loged');
         if (dropdown) {
             dropdown.remove();
         }

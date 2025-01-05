@@ -2,7 +2,7 @@
  
 /*Гарах button */
 
-.dropdown {
+.loged {
   position: relative;
   display: inline-block;
   padding: 10px;
@@ -11,13 +11,13 @@
   height: fit-content;
 }
 
-.dropdown img {
+.loged img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
 
-.dropdown-content {
+.songolt {
   display: none;
   position: absolute;
   top: 60px;
@@ -28,19 +28,19 @@
   z-index: 1;
 }
 
-.dropdown-content a {
+.songolt a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {
+.songolt a:hover {
   background-color: #f0f0f0;
   border-radius: 8px;
 }
 
-.dropdown:hover .dropdown-content {
+.loged:hover .songolt {
   display: block;
 }
 
@@ -49,19 +49,19 @@
   align-items: center;
 }
 
-.username {
+.ner {
   margin: 0 10px;
   font-weight: bold;
   color: #ffffff;
 }
 
-.dropdown-toggle {
+.tovch {
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-.dropdown-toggle svg {
+.tovch svg {
   width: 30px;
   height: 30px;
   margin-left: 10px;
