@@ -182,7 +182,7 @@ artist-profile {
     justify-content: center;
     background: var(--bc2);
 }
-
+/*Tablet*/
 @media (max-width: 768px) {
     .order-details {
         grid-template-columns: 1fr;
@@ -203,8 +203,8 @@ artist-profile {
         padding: 1.5rem;
     }
 }
-
-@media (max-width: 480px) {
+  /* Босоо утас (430x932) */
+  @media screen and (max-width: 430px) and (orientation: portrait)  {
     .order-card {
         padding: 1rem;
     }

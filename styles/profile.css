@@ -185,7 +185,7 @@ article#audio li {
   padding: 0;
 }
 
-/* Mobile Responsive Styles */
+
 @media (max-width: 768px) {
   main {
     flex-direction: column;
@@ -229,10 +229,18 @@ article#audio li {
   .action-button {
     float: none;
   }
+  .save-button {
+    width: 100%;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.95rem;
+  }
+    #info p {
+    padding-bottom: 1rem;
+}
 }
 
-/* Small mobile devices */
-@media (max-width: 480px) {
+
+@media screen and (max-width: 430px) and (orientation: portrait)  {
   body {
     font-size: 14px;
   }
@@ -280,14 +288,7 @@ article#audio li {
     transform: translateY(1px);
 }
 
-/* Mobile responsiveness */
+/**/
 @media (max-width: 768px) {
-    .save-button {
-        width: 100%;
-        padding: 0.625rem 1.5rem;
-        font-size: 0.95rem;
-    }
-}
-#info p {
-    padding-bottom: 1rem;
+
 }
