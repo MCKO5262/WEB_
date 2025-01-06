@@ -1,6 +1,4 @@
-// auth.js
 function checkAuthState() {
-    // Check if user is logged in by looking for auth token
     const isLoggedIn = localStorage.getItem('authToken') !== null;
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
     return { isLoggedIn, userData };
@@ -11,8 +9,6 @@ function logout() {
     localStorage.removeItem('userData');
     window.location.href = './login.html';
 }
-
-// Only initialize login form if we're on the login page
 function initializeLoginForm() {
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
@@ -57,6 +53,4 @@ function initializeLoginForm() {
         });
     }
 }
-
-// Initialize form when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeLoginForm);
