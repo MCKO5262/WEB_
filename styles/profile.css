@@ -31,7 +31,7 @@ figure img {
   object-fit: cover;
 }
 
-h1 {
+#artist_id {
   font-size: 2rem;
   margin-bottom: 1rem;
   justify-self: center;
@@ -61,7 +61,7 @@ h1 {
   background: rgba(255, 255, 255, 0.2);
 }
 
-#main-pro {
+#Medeelel {
   flex: 1;
   min-width: 0; /* Prevent flex item overflow */
 }

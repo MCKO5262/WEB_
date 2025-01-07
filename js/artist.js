@@ -6,6 +6,7 @@ class ArtistManager {
     this.activeFilters = new Map();
     this.init();
   }
+  
 
   async init() {
     try {
@@ -24,10 +25,12 @@ class ArtistManager {
 
   setupOrderButtons() {
     document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('order-button')) {
-        e.preventDefault();
-        const artistId = e.target.dataset.artistId;
-        window.location.href = 'get-order.html';
+      const orderButton = e.target.closest('.order-button');
+      if (orderButton) {
+        const artistId = orderButton.closest('.product-card').querySelector('.product-title a').getAttribute('href').split('=')[1];
+        if (artistId) {
+          window.location.href = `get-order.html?id=${artistId}`;
+        }
       }
     });
   }
@@ -185,12 +188,12 @@ class ArtistManager {
         <a href="Sanalhuselt.html?id=${artist.id}">${artist.name}</a>
       </h3>
       <section class="product-info">
-        <p class="rating">${this.generateStarRating(artist.rating || 3)}</p>
+        <p class="rating">💖${artist.likes}</p>
         <p class="product-location">${artist.location}</p>
         <p class="product-category">${this.formatCategory(artist.category)}</p>
         <p class="price">${this.formatPrice(artist.price)}₮</p>
       </section>
-      <button class="order-button" data-artist-id="${artist.id}">Захиалга өгөх</button>
+      <button class="order-button"">Захиалга өгөх</button>
     </article>
   `
   )
@@ -206,9 +209,6 @@ class ArtistManager {
     return categories[category] || category;
   }
 
-  generateStarRating(rating = 5) {
-    return '⭐'.repeat(Math.min(Math.max(rating, 0), 5));
-  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

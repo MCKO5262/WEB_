@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./styles/Footer.css" />
   <link rel="stylesheet" href="./styles/login-header.css" />
   <script type="text/javascript" src="./js/darkmode.js" defer></script>
+  <script type="module" src="./js/profile.js"></script>
   <script src="./js/auth.js"></script>
   <script src="./js/header.js"></script>
 </head>
@@ -45,7 +46,7 @@
           </form>
         </li>        
         <li class="checkorder">
-          <a href="./check-order.html">🧾Захиалга шалгах</a>
+          <a href="./calendar.html">📅 Хуваарь</a>
         </li>
         <li class="login"><a href="login.html">Нэвтрэх</a></li>
       </ul>
@@ -54,9 +55,9 @@
   <main>
     <aside>
       <figure>
-        <img src="./picture/thunder.jfif" alt="Thunder Profile">
+        <img id="artist_images" src="./picture/thunder.jfif" alt="Thunder Profile">
       </figure>
-      <h1>Thunder</h1>
+      <h1 id="artist_id">Thunder</h1>
       <nav class = "optionuud">
         <button class="active" data-tab="basic">Үндсэн</button>
         <button data-tab="info">Еренхий Мэдээлэл</button>
@@ -66,18 +67,18 @@
       </nav>
     </aside>
 
-    <section id="main-pro">
-      <article id="basic" class="active">
+    <section id="Medeelel">
+      <article id="Undsen" class="active">
         <h2>Үндсэн</h2>
         <form>
-          <label for="main-service">Үндсэн үйлчилгээ</label>
-          <select id="main-service">
+          <label for="artist_category">Үндсэн үйлчилгээ</label>
+          <select id="artist_category">
             <option>Дуучин</option>
           </select>
 
-          <label for="extra-service">Нэмэлт үйлчилгээ</label>
-          <select id="extra-service">
-            <option>Байгууй</option>
+          <label for="Nemelt">Нэмэлт үйлчилгээ</label>
+          <select id="Nemelt">
+            <option>Байхгүй</option>
           </select>
           <button class="save-button">Хадгалах</button>
         </form>
@@ -86,7 +87,7 @@
       <article id="info">
         <h2>Бренхий уран бүтээлчийн талаар</h2>
         <p>Танилцуулга</p>
-        <p>Дуучин хамтлаг болон наадан дээр очиж дуулдаг нэхэмжлэх өрчин увийн залруул дугаар алдартай</p>
+        <p id="artist_description">Дуучин хамтлаг болон наадан дээр очиж дуулдаг нэхэмжлэх өрчин увийн залруул дугаар алдартай</p>
         <button class="save-button">өөрчлөх</button>
       </article>
 
@@ -186,20 +187,5 @@
       </ul>
     </section>
   </footer>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.optionuud button');
-    const articles = document.querySelectorAll('#main-pro article');
-    buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        buttons.forEach(b => b.classList.remove('active'));
-        articles.forEach(a => a.classList.remove('active'));
-        const tab = button.getAttribute('data-tab');
-        button.classList.add('active');
-        document.getElementById(tab).classList.add('active');
-      });
-    });
-  });
-  </script>
 </body>
 </html>

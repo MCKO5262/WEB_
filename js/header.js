@@ -1,36 +1,48 @@
-/**
- * Хэрэглэгчийн нэвтрэх төлөвийг шалгаж, толгой хэсгийн UI-г динамикаар өөрчилдөг функц
- */
-function initializeHeader() {
-    // Хэрэглэгчийн нэвтрэх төлөв болон мэдээллийг авах
+document.addEventListener('DOMContentLoaded', async function () {
+    const artist_id = localStorage.getItem('artist_id');
+    let artistData = null;
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/artists/${artist_id}`);
+        if (!response.ok) throw new Error('Failed to load artist data');
+
+        const { data } = await response.json();
+        artistData = data; // Store the artist data
+    } catch (error) {
+        console.error('Error loading artist data:', error);
+    }
+
+    // Check the authentication state
     const { isLoggedIn, userData } = checkAuthState();
-    // Толгой хэсгийн навигацийн жагсаалтыг DOM-оос олох 
-    const headerNav = document.querySelector('header nav ul');
-    // "Нэвтрэх" товчтой жагсаалтын элементийг олох
-    const loginLi = headerNav.querySelector('.login');
     
-    // Хэрэв хэрэглэгч нэвтэрсэн бол
+    // Initialize header based on authentication state
+    initializeHeader(artistData, isLoggedIn, userData);
+});
+
+function initializeHeader(artistData, isLoggedIn, userData) {
+    const headerNav = document.querySelector('header nav ul');
+    
+    // Find the login list item and user section
+    const loginLi = headerNav.querySelector('.login');
+    const loggedSection = headerNav.querySelector('.loged');
+
+    // If user is logged in
     if (isLoggedIn) {
-        // Хэрэв "Нэвтрэх" товч байвал устгах
+        // Remove login button if it exists
         if (loginLi) {
             loginLi.remove();
         }
-        // Хэрэв хэрэглэгчийн dropdown menu байхгүй бол нэмэх
-        if (!headerNav.querySelector('.loged')) {
-            // Хэрэглэгчийн хэсгийн HTML бүтэц
+        
+        // If user dropdown doesn't exist, add it
+        if (!loggedSection) {
             const userSection = `
                 <li class="loged">
                     <div class="tovch">
-                        <img src="${userData.profileImage}" alt="user">
-                        <span class="ner"></span>
-                        <span class="ner">Thunder</span>
+                        <img id="artist_image" src="${artistData.artist_image}" alt="user">
+                        <span id="user_name">${artistData.artist_name}</span>
                         <svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Дөрвөлжин дүрс -->
-                        <!-- Rectangle shape -->
-                        <rect x="10" y="10" width="80" height="80" rx="15" ry="15" fill="#e6e6e6"/>
-                        <!-- Доошоо заасан сум -->
-                        <!-- Downward pointing arrow -->
-                        <path d="M30 40 L50 60 L70 40" stroke="#000" stroke-width="8" fill="none" stroke-linecap="round" />
+                            <rect x="10" y="10" width="80" height="80" rx="15" ry="15" fill="#e6e6e6"/>
+                            <path d="M30 40 L50 60 L70 40" stroke="#000" stroke-width="8" fill="none" stroke-linecap="round" />
                         </svg>
                     </div>
                     <div class="songolt">
@@ -39,21 +51,32 @@ function initializeHeader() {
                     </div>
                 </li>`;
             
-            // Хэрэглэгчийн хэсгийг навигацийн төгсгөлд нэмэх
+            // Add user section to the end of navigation
             headerNav.insertAdjacentHTML('beforeend', userSection);
         }
     } else {
-        // Хэрэглэгч нэвтрээгүй бол dropdown-ыг устгах
-        const dropdown = headerNav.querySelector('.loged');
-        if (dropdown) {
-            dropdown.remove();
+        // If not logged in, remove dropdown if it exists
+        if (loggedSection) {
+            loggedSection.remove();
         }
-        // Хэрэв "Нэвтрэх" товч байхгүй бол нэмэх
+        
+        // If login button doesn't exist, add it
         if (!loginLi) {
-            const loginButton = `<li class="login"><a href="login.html">Нэвтрэх</a></li>`;
+            const loginButton = `<li class="login"><a href="login.html">Login</a></li>`;
             headerNav.insertAdjacentHTML('beforeend', loginButton);
         }
     }
 }
-// DOM бүрэн ачаалагдсаны дараа функцийг ажиллуулах
-document.addEventListener('DOMContentLoaded', initializeHeader);
+
+// Function to check authentication state
+function checkAuthState() {
+    const isLoggedIn = localStorage.getItem('authToken') !== null;
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+    return { isLoggedIn, userData };
+}
+
+function logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userData');
+    window.location.href = './login.html';
+}

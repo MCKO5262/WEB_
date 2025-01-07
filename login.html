@@ -50,12 +50,18 @@
                     })
                 });
                 
-                const data = await response.json(); //Серверээс ирсэн JSON хариуг JavaScript объект болгон хөрвүүлнэ.
+                const artistData = await response.json(); //Серверээс ирсэн JSON хариуг JavaScript объект болгон хөрвүүлнэ.
                 
-                if (response.ok && data) { //Амжилттай нэвтрэх Серверээс ирсэн хариу амжилттай эсэхийг шалгана (response.ok нь HTTP статус код 200-299 бол үнэн болно).
+                if (response.ok && artistData.id) { //Амжилттай нэвтрэх Серверээс ирсэн хариу амжилттай эсэхийг шалгана (response.ok нь HTTP статус код 200-299 бол үнэн болно).
+                localStorage.setItem('artist_id', artistData.id);
+                localStorage.setItem('authToken', artistData.token); 
+                localStorage.setItem('userData', JSON.stringify({
+                username: username,
+                profileImage: artistData.artist_image || './picture/default-profile.jpg'
+                }));     
                     window.location.href = './profile.html';
                 } else {
-                    errorMessage.textContent = data.message || 'Дахиад шалгаад хүсэлт явуулна уу.';
+                    errorMessage.textContent = artistData.message || 'Дахиад шалгаад хүсэлт явуулна уу.';
                 }
             } catch (error) {
                 console.error('нэвтрэх үед:', error);

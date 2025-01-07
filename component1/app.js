@@ -3,8 +3,17 @@ export class OrderApp {
     constructor() {
         // Custom elements бүртгэгдсэн эсэхийг баталгаажуулахын тулд бага зэрэг хүлээнэ
         setTimeout(() => this.initialize(), 0);
+        this.artist_id = this.getArtistIdFromUrl() || this.getStoredArtistId();
     }
-
+    getArtistIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const artistId = urlParams.get('id');
+        console.log('Artist ID from URL:', artistId);
+        return artistId;
+    }
+    getStoredArtistId() {
+        return sessionStorage.getItem('currentArtistId');
+    }
     initialize() {
         // Захиалгын форм болон баталгаажуулалтын хэсгийг DOM-аас хайж олох
         this.form = document.querySelector('order-form');
@@ -18,7 +27,6 @@ export class OrderApp {
             });
             return;
         }
-
         // Арга хэмжээний сонсогчдыг тохируулах
         this.setupEventListeners();
         console.log('OrderApp хийгдлээ:', {
@@ -37,17 +45,20 @@ export class OrderApp {
         const formData = event.detail;
         console.log('Захиалга илгээж байна:', formData);
         
-        if (!formData) {
-            console.error('Формын өгөгдөл олдсонгүй');
+        if (!this.artist_id) {
+            this.showConfirmation(
+                'rejected', 
+                'Artist ID not found. Please try again from the artist\'s page.'
+            );
             return;
         }
-
         // Формын төлөвийг "илгээж байна" болгон өөрчлөх
         this.form?.setAttribute('state', 'submitting');
         
         try {
             // Захиалгын өгөгдлийг JSON форматаар бэлтгэх
             const orderPayload = {
+                artist_id: this.artist_id,
                 phone: formData.phone,
                 fullname: formData.fullName,
                 email: formData.email,

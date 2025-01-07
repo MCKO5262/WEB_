@@ -1,106 +1,201 @@
-import ApiService from './Apiartist.js'; // Уран бүтээлчдийн API үйлчилгээг импортлох.
+import ApiService from './Apiartist.js';
 
-class ArtistDetailManager { // Уран бүтээлчдийн дэлгэрэнгүйг удирдах класс.
-  constructor() { // Классийн конструктор функц.
-    this.artist = null; // Уран бүтээлчийн анхны утга.
-    this.init(); // Инициализаци хийх.
+class ArtistDetailManager {
+  constructor() {
+    this.artist = null;
+    this.init();
   }
 
-  async init() { // Инициализаци хийх функц.
+  getArtistIdFromUrl() {
+    // Log the full URL for debugging
+    const url = window.location.href;
+    console.log('Current URL:', url);
+
+    const params = new URLSearchParams(window.location.search);
+    console.log('URL Parameters:', Array.from(params.entries())); // Log all parameters
+
+    const id = params.get('id');
+    console.log('Artist ID from URL:', id); // Log the parsed artist ID
+    return id;
+  }
+
+  async init() {
     try {
-      const artistId = this.getArtistIdFromUrl(); // URL-ээс уран бүтээлчийн ID-г авах.
-      if (!artistId) throw new Error('No artist ID found in URL'); // ID байхгүй тохиолдолд алдаа үүсгэх.
+      const artistId = parseInt(this.getArtistIdFromUrl(), 10);
 
-      await this.fetchAndDisplayArtist(artistId); // Уран бүтээлчийн мэдээллийг татаж, дэлгэц дээр харуулах.
-      this.setupEventListeners(); // Товчлууруудын үйлдлийг тохируулах.
-    } catch (error) {
-      console.error('Initialization error:', error); // Инициализацийн алдааг бүртгэх.
-    }
-  }
-
-  getArtistIdFromUrl() { // URL-ээс уран бүтээлчийн ID-г авах функц.
-    return new URLSearchParams(window.location.search).get('id'); // URL-ийн параметрээс ID-г авах.
-  }
-
-  async fetchAndDisplayArtist(artistId) { // Уран бүтээлчийн мэдээллийг татах функц.
-    try {
-      const artists = await ApiService.fetchArtists(); // Уран бүтээлчдийн жагсаалтыг API-аас татах.
-      this.artist = artists.find(artist => artist.id === +artistId); // Тухайн ID-д тохирох уран бүтээлчийг олох.
-      if (!this.artist) throw new Error('Artist not found'); // Уран бүтээлч олдохгүй бол алдаа үүсгэх.
-
-      this.updatePageContent(); // Дэлгэцийн контентыг шинэчлэх.
-    } catch (error) {
-      console.error('Error fetching artist:', error); // Мэдээлэл татах алдааг бүртгэх.
-    }
-  }
-
-  updatePageContent() { // Дэлгэцийн контентыг шинэчлэх функц.
-    if (!this.artist) return; // Хэрэв уран бүтээлчийн мэдээлэл байхгүй бол буцах.
-
-    this.setElementContent('profile-image', 'src', this.artist.image, './picture/default.png'); // Зураг тохируулах.
-    this.setElementContent('profile-name', 'textContent', this.artist.name); // Нэр тохируулах.
-    this.setElementContent('star-rating', 'textContent', '★'.repeat(Math.min(this.artist.rating || 3, 5))); // Үнэлгээ тохируулах.
-    this.setElementContent('location', 'textContent', this.artist.location); // Байршил тохируулах.
-    this.setElementContent('price', 'textContent', `${this.formatPrice(this.artist.price)} ₮`); // Үнэ тохируулах.
-    this.setElementContent('description p', 'textContent', this.artist.description); // Тайлбар тохируулах.
-    this.setElementContent('like-button', 'textContent', `Талагдсан (${this.artist.likes || 0})`); // Like товчны агуулгыг тохируулах.
-
-    if (this.artist.video) this.setMedia('video', this.artist.video); // Видео тохируулах.
-    document.title = `${this.artist.name} - Solned`; // Хуудасны гарчиг тохируулах.
-  }
-
-  setElementContent(selector, property, value, fallback = '') { // HTML элементийн контентыг тохируулах функц.
-    const element = document.querySelector(`#${selector}`); // Элементийг сонгох.
-    if (element) { // Хэрэв элемент байвал:
-      element[property] = value || fallback; // Шинж чанарыг тохируулах.
-      if (property === 'src' && element.onerror) { // Хэрэв зураг байвал:
-        element.onerror = () => element.src = fallback; // Зураг алдаатай бол fallback зураг харуулах.
+      // Check if the artistId is valid
+      if (!artistId || isNaN(artistId)) {
+        console.error('No valid artist ID found in URL');
+        alert('Invalid or missing artist ID. Please check the URL.');
+        return;
       }
+
+      sessionStorage.setItem('currentArtistId', artistId);
+      console.log('Stored Artist ID:', sessionStorage.getItem('currentArtistId'));
+
+      await this.fetchAndDisplayArtist(artistId);
+      this.setupMediaControls();
+      this.setupEventListeners();
+    } catch (error) {
+      console.error('Error initializing artist detail page:', error);
     }
   }
 
-  setMedia(type, src) { // Видео эсвэл медиа тохируулах функц.
-    const videoContainer = document.querySelector('#video-container'); // Видео хэсгийг сонгох.
-    if (!videoContainer) return; // Хэрэв байхгүй бол буцах.
+  async fetchAndDisplayArtist(artistId) {
+    try {
+      const artists = await ApiService.fetchArtists();
+      this.artist = artists.find(artist => artist.id === artistId);
 
-    const media = type === 'video' ? `<video controls><source src="${src}" type="video/mp4"></video>` : // Видео тохируулах.
-                  type === 'audio' ? `<audio controls><source src="${src}" type="audio/mpeg"></audio>` : // Аудио тохируулах.
-                  `<img src="${src}" alt="${this.artist.name || 'Artist'}"/>`; // Зураг тохируулах.
-    videoContainer.innerHTML = media; // Контейнерт медиа нэмэх.
+      if (!this.artist) {
+        console.error('Artist not found');
+        alert('Artist not found. Please check the ID in the URL.');
+        return;
+      }
+
+      this.updatePageContent();
+    } catch (error) {
+      console.error('Error fetching artist data:', error);
+    }
   }
 
-  setupEventListeners() { // Үйлдлүүдийн сонсогч тохируулах функц.
-    const likeButton = document.getElementById('like-button'); // Like товчийг сонгох.
-    if (likeButton) { // Хэрэв байвал:
-      likeButton.addEventListener('click', e => { // Дарсан үйлдлийг сонсох.
-        e.preventDefault(); // Default үйлдлийг зогсоох.
-        if (this.artist && !likeButton.disabled) { // Уран бүтээлчийн мэдээлэл байгаа бол:
-          this.artist.likes = (this.artist.likes || 0) + 1; // Like нэмэгдүүлэх.
-          console.log('Like clicked for artist:', this.artist.id); // Like дарсан тухай бүртгэх.
-          likeButton.textContent = `Талагдсан (${this.artist.likes})`; // Like-ийн тоог шинэчлэх.
+  updatePageContent() {
+    if (!this.artist) return;
 
-          likeButton.disabled = true; // Товчийг идэвхгүй болгох.
+    // Update profile image
+    const profileImage = document.getElementById('profile-image');
+    if (profileImage) {
+      profileImage.src = this.artist.image || './picture/default.png';
+      profileImage.onerror = () => {
+        profileImage.src = './picture/default.png';
+      };
+    }
+
+    // Update profile name
+    const profileName = document.getElementById('profile-name');
+    if (profileName) {
+      profileName.textContent = this.artist.name;
+    }
+
+    // Update star rating
+    const starRating = document.getElementById('star-rating');
+    if (starRating) {
+      starRating.textContent = '★'.repeat(Math.min(Math.max(this.artist.rating || 3, 0), 5));
+    }
+
+    // Update location
+    const location = document.getElementById('location');
+    if (location) {
+      location.textContent = this.artist.location;
+    }
+
+    // Update price
+    const price = document.getElementById('price');
+    if (price) {
+      price.textContent = `${this.formatPrice(this.artist.price)} ₮`;
+    }
+
+    // Update description
+    const description = document.querySelector('#description p');
+    if (description) {
+      description.textContent = this.artist.description;
+    }
+
+    // Update like button
+    const likeButton = document.getElementById('like-button');
+    if (likeButton) {
+      likeButton.textContent = `Талагдсан (${this.artist.likes || 0})`;
+    }
+
+    // Update video source if available
+    const video = document.querySelector('video source');
+    if (video && this.artist.video) {
+      video.src = this.artist.video;
+      video.parentElement.load(); // Reload the video element
+    }
+
+    // Update document title
+    document.title = `${this.artist.name} - Solned`;
+  }
+
+  setupMediaControls() {
+    const mediaButtons = document.querySelectorAll('.media-button');
+    const videoContainer = document.querySelector('#video-container');
+
+    mediaButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        mediaButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        switch (button.id) {
+          case 'media-button-video':
+            videoContainer.innerHTML = `
+              <video controls>
+                <source src="${this.artist?.video || '#'}" type="video/mp4">
+                <p>Your browser doesn't support HTML5 video.</p>
+              </video>`;
+            break;
+          case 'media-button-images':
+            videoContainer.innerHTML = `
+              <div class="image-gallery">
+                <img src="${this.artist?.image || './picture/default.png'}" alt="${this.artist?.name || 'Artist'}" />
+              </div>`;
+            break;
+          case 'media-button-audio':
+            videoContainer.innerHTML = `
+              <audio controls>
+                <source src="${this.artist?.audio || '#'}" type="audio/mpeg">
+                <p>Your browser doesn't support HTML5 audio.</p>
+              </audio>`;
+            break;
+        }
+      });
+    });
+  }
+
+  setupEventListeners() {
+    // Setup like button functionality
+    const likeButton = document.getElementById('like-button');
+    if (likeButton) {
+      likeButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (!this.artist) return;
+        try {
+          const response = await ApiService.updateArtistLikes(this.artist.id);
+          this.artist.likes = response.likes; // Assuming the response contains updated likes count
+          likeButton.textContent = `Талагдсан (${this.artist.likes})`;
+        } catch (error) {
+          console.error('Error liking artist:', error);
         }
       });
     }
 
-    this.setupButton('order-button', id => `get-order.html?id=${id}`); // Захиалга товч тохируулах.
-    this.setupButton('schedule-button', () => { // Хуваарь товч тохируулах.
-      console.log('Schedule clicked for artist:', this.artist?.id); // Хуваарь товч дарсан тухай бүртгэх.
-    });
+    // Setup order button functionality
+    const orderButton = document.getElementById('order-button');
+    if (orderButton) {
+      orderButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!this.artist) return;
+        window.location.href = `get-order.html?id=${this.artist.id}`;
+      });
+    }
+
+    // Setup schedule button functionality
+    const scheduleButton = document.getElementById('schedule-button');
+    if (scheduleButton) {
+      scheduleButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Schedule clicked for artist:', this.artist?.id);
+      });
+    }
   }
 
-  setupButton(buttonId, callback) { // Товчлуур тохируулах функц.
-    document.getElementById(buttonId)?.addEventListener('click', e => { // Товч дарсан үйлдлийг сонсох.
-      if (this.artist) window.location.href = callback(this.artist.id); // Callback функц дуудаж, URL-руу шилжих.
-    });
-  }
-
-  formatPrice(price) { // Үнэ форматлах функц.
-    return new Intl.NumberFormat('mn-MN').format(Math.floor(price)); // Үнэ Монгол хэлбэрээр форматлах.
+  formatPrice(price) {
+    return new Intl.NumberFormat('mn-MN').format(Math.floor(price));
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => new ArtistDetailManager()); // Хуудас ачаалсаны дараа `ArtistDetailManager` үүсгэх.
+document.addEventListener('DOMContentLoaded', () => {
+  new ArtistDetailManager();
+});
 
-export default ArtistDetailManager; // Классыг экспортлох.
+export default ArtistDetailManager;

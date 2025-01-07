@@ -1,14 +1,3 @@
-function checkAuthState() {
-    const isLoggedIn = localStorage.getItem('authToken') !== null;
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    return { isLoggedIn, userData };
-}
-
-function logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userData');
-    window.location.href = './login.html';
-}
 function initializeLoginForm() {
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
@@ -20,7 +9,7 @@ function initializeLoginForm() {
             const loginButton = document.getElementById('login-button');
             const errorMessage = document.getElementById('error-message');
             loginButton.disabled = true;
-            loginButton.textContent = 'Уншиж байна...';
+            loginButton.textContent = 'Уншиж байна...'; // "Logging in..."
             errorMessage.textContent = '';
 
             try {
@@ -30,27 +19,28 @@ function initializeLoginForm() {
                     body: JSON.stringify({ u: username, p: password })
                 });
                 
-                const data = await response.json();
+                const artistData = await response.json();
                 
                 if (response.ok && data) {
                     // Store auth data
                     localStorage.setItem('authToken', data.token);
                     localStorage.setItem('userData', JSON.stringify({
                         username: username,
-                        profileImage: './picture/thunder.jfif' // Update this with actual user image
+                        profileImage: data.profileImage || './picture/default-profile.jpg' // Use actual profile image from response
                     }));
-                    window.location.href = './profile.html';
+                    window.location.href = './profile.html'; // Redirect after successful login
                 } else {
-                    errorMessage.textContent = data.message || 'Дахиад шалгаад хүсэлт явуулна уу.';
+                    errorMessage.textContent = data.message || 'Дахиад шалгаад хүсэлт явуулна уу.'; // "Please check and try again."
                 }
             } catch (error) {
-                console.error('нэвтрэх үед:', error);
-                errorMessage.textContent = 'Сүлжээний алдаа';
+                console.error('Нэвтрэх үед алдаа гарлаа:', error); // "Error during login"
+                errorMessage.textContent = 'Сүлжээний алдаа'; // "Network error"
             } finally {
                 loginButton.disabled = false;
-                loginButton.textContent = 'Нэвтрэх';
+                loginButton.textContent = 'Нэвтрэх'; // "Login"
             }
         });
     }
 }
+
 document.addEventListener('DOMContentLoaded', initializeLoginForm);

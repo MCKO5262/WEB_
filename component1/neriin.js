@@ -5,46 +5,52 @@ export class ArtistProfile extends HTMLElement {
         this._state = {
             artistData: {
                 name: '',
-                image: ''
+                image: '',
+                likes: ''
             }
         };
     }
 
-    static get observedAttributes() {
-        return ['artist-name', 'image'];
-    }
+    async connectedCallback() {
+        // Get artist ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const artistId = parseInt(urlParams.get('id'), 10);
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        switch (name) {
-            case 'artist-name':
-                this._state.artistData.name = newValue;
-                break;
-            case 'image':
-                this._state.artistData.image = newValue;
-                break;
-        }
-        this.updateUI();
-    }
-
-    updateUI() {
-        if (!this.shadowRoot) return;
-
-        const artistImage = this.shadowRoot.querySelector('.artist-image');
-        const artistName = this.shadowRoot.querySelector('.artist-name');
-
-        if (artistImage) {
-            artistImage.src = this._state.artistData.image || '';
-            artistImage.alt = `${this._state.artistData.name || 'Artist'}'s Image`;
+        if (artistId) {
+            await this.fetchArtistData(artistId);
         }
 
-        if (artistName) {
-            artistName.textContent = this._state.artistData.name || '';
-        }
-    }
-
-    connectedCallback() {
         this.render();
         this.setupEventListeners();
+    }
+
+    async fetchArtistData(artistId) {
+        try {
+            const response = await fetch('http://localhost:3000/api/artists', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+
+                // Find the artist with the matching ID
+                const artist = data.data.find(artist => artist.id === artistId);
+                if (artist) {
+                    this._state.artistData = {
+                        name: artist.name || '',
+                        image: artist.image || '',
+                        likes: artist.likes
+                    };
+                } else {
+                    console.warn('Artist not found');
+                }
+            } else {
+                console.error('Failed to fetch artist data:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching artist data:', error);
+        }
     }
 
     setupEventListeners() {
@@ -85,7 +91,7 @@ export class ArtistProfile extends HTMLElement {
                 "zrg unelgee"
                 "zrg huvaari";
             }
-
+        
             .Neriin_huudas img {
                 width: 10rem;
                 height: 10rem;
@@ -94,8 +100,11 @@ export class ArtistProfile extends HTMLElement {
                 object-fit: cover;
                 grid-area: zrg;
             }
-
+            h3 {
+                text-align : center;
+            }
             .Neriin_huudas h2 {
+                text-align : center;
                 font-size: 2rem;
                 margin: 0.5rem 0;
                 color: white;
@@ -152,11 +161,11 @@ export class ArtistProfile extends HTMLElement {
                      src="${this._state.artistData.image || ''}" 
                      alt="${this._state.artistData.name || 'Artist'}'s Image">
                 <h2 class="artist-name">${this._state.artistData.name || ''}</h2>
-                <div class="stars">★★★★★</div>
+                <h3> 💖${this._state.artistData.likes}</h3>
+
                 <button class="Huvari_harah">Хуваарь харах</button>
             </section>
         `;
     }
 }
 
-customElements.define('artist-profile', ArtistProfile);
