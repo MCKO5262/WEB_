@@ -76,12 +76,6 @@ class ArtistDetailManager {
       profileName.textContent = this.artist.name;
     }
 
-    // Update star rating
-    const starRating = document.getElementById('star-rating');
-    if (starRating) {
-      starRating.textContent = '★'.repeat(Math.min(Math.max(this.artist.rating || 3, 0), 5));
-    }
-
     // Update location
     const location = document.getElementById('location');
     if (location) {
@@ -91,7 +85,7 @@ class ArtistDetailManager {
     // Update price
     const price = document.getElementById('price');
     if (price) {
-      price.textContent = `${this.formatPrice(this.artist.price)} ₮`;
+      price.textContent = `💵 ${this.formatPrice(this.artist.price)} ₮`;
     }
 
     // Update description
@@ -103,7 +97,7 @@ class ArtistDetailManager {
     // Update like button
     const likeButton = document.getElementById('like-button');
     if (likeButton) {
-      likeButton.textContent = `Талагдсан (${this.artist.likes || 0})`;
+      likeButton.textContent = ` 💖 Талагдсан (${this.artist.likes || 0})`;
     }
 
     // Update video source if available

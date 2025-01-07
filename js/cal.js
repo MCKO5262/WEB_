@@ -4,22 +4,22 @@ const getLoggedInArtistId = () => {
   console.log('Artist ID:', artistId);  
     return artistId;
 }
-
+ 
 // Fetch orders for the specific artist
 async function fetchOrders() {
   try {
       const artistId = getLoggedInArtistId();
-
+ 
       // Ensure we have a valid artist ID
       if (!artistId) {
           console.error('Artist ID not found in localStorage.');
           return [];
       }
-
+ 
       // Fetch orders directly using the artist ID in the URL
       const response = await fetch(`http://localhost:3000/api/getorderData/${artistId}`);
       const result = await response.json();
-
+ 
       if (response.ok && result.data) {
         console.log('Fetched orders:', result.data.orders); // Захиалгуудыг зөв шалгах
         return result.data.orders || []; // зөвхөн orders массивыг буцаах
@@ -32,8 +32,8 @@ async function fetchOrders() {
       return [];
   }
 }
-
-  
+ 
+ 
   // Calendar functionality
   class Calendar {
     constructor() {
@@ -41,40 +41,57 @@ async function fetchOrders() {
       this.orders = [];
       this.weekStart = this.getWeekStart(this.currentDate);
       this.weekEnd = this.getWeekEnd(this.currentDate);
-      
+     
       // DOM elements
       this.orderList = document.getElementById('order-list');
       this.prevWeekBtn = document.getElementById('prev-week');
       this.nextWeekBtn = document.getElementById('next-week');
       this.currentWeekDisplay = document.getElementById('current-week');
-      
+      this.modal = document.getElementById('bookingModal');
+     
       // Initialize
       this.initialize();
     }
-  
+ 
     async initialize() {
       this.setupEventListeners();
       await this.loadOrders();
       this.updateWeekDisplay();
       this.updateCalendarEvents();
+      this.setupModal();
     }
-  
+   
+    setupModal() {
+      if (!this.modal) {
+        this.modal = document.createElement('div');
+        this.modal.id = 'bookingModal';
+        this.modal.className = 'modal';
+        document.body.appendChild(this.modal);
+      }
+    }
+ 
     setupEventListeners() {
       this.prevWeekBtn.addEventListener('click', () => {
         this.navigateWeek(-1);
       });
-  
+ 
       this.nextWeekBtn.addEventListener('click', () => {
         this.navigateWeek(1);
       });
+ 
+      window.addEventListener('click', (event) => {
+        if (event.target === this.modal) {
+          this.hideModal();
+        }
+      });
     }
-  
+ 
     async loadOrders() {
       this.orders = await fetchOrders();
       console.log('Orders loaded:', this.orders); // Захиалгуудыг зөв форматтай эсэхийг шалгах
       this.updateOrderList();
     }
-  
+ 
     getWeekStart(date) {
       const start = new Date(date);
       const day = start.getDay();
@@ -83,24 +100,24 @@ async function fetchOrders() {
       start.setHours(0, 0, 0, 0);
       return start;
     }
-  
+ 
     getWeekEnd(date) {
       const end = new Date(this.getWeekStart(date));
       end.setDate(end.getDate() + 6);
       end.setHours(23, 59, 59, 999);
       return end;
     }
-  
+ 
     formatDate(date) {
       return `${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     }
-  
+ 
     updateWeekDisplay() {
       const weekStart = this.formatDate(this.weekStart);
       const weekEnd = this.formatDate(this.weekEnd);
       this.currentWeekDisplay.textContent = `${weekStart} - ${weekEnd}`;
     }
-  
+ 
     navigateWeek(direction) {
       this.currentDate.setDate(this.currentDate.getDate() + (direction * 7));
       this.weekStart = this.getWeekStart(this.currentDate);
@@ -108,30 +125,33 @@ async function fetchOrders() {
       this.updateWeekDisplay();
       this.updateCalendarEvents();
     }
-  
+ 
     isDateInCurrentWeek(dateStr) {
       const date = new Date(dateStr);
       return date >= this.weekStart && date <= this.weekEnd;
     }
-  
+ 
     updateOrderList() {
       this.orderList.innerHTML = '';
       const today = new Date();
-  
+ 
       const upcomingOrders = this.orders
-        .filter(order => new Date(order.event_date) >= today)
-        .sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
-  
+      .filter(order => {
+        const orderDate = new Date(order.event_date);
+        return orderDate >= today && order.order_status !== 'cancelled';
+      })
+      .sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
+ 
       upcomingOrders.forEach(order => {
         const li = this.createOrderListItem(order);
         this.orderList.appendChild(li);
       });
     }
-  
+ 
     createOrderListItem(order) {
       const li = document.createElement('li');
       const orderDate = new Date(order.event_date);
-  
+ 
       const time = document.createElement('p');
       time.className = 'time';
       time.textContent = orderDate.toLocaleString('mn-MN', {
@@ -141,42 +161,42 @@ async function fetchOrders() {
         hour: '2-digit',
         minute: '2-digit'
       });
-  
+ 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.checked = order.order_status === "confirmed";
+      checkbox.checked = order.order_status === "checked";
       checkbox.addEventListener('change', () => {
-        this.updateOrderStatus(order.id, checkbox.checked ? "confirmed" : "pending");
+        this.updateOrderStatus(order.id, checkbox.checked ? "checked" : "pending");
       });
-  
+ 
       const label = document.createElement('label');
       label.textContent = order.event_name_and_features;
-  
+ 
       const detailsButton = document.createElement('button');
       detailsButton.textContent = 'Дэлгэрэнгүй';
       detailsButton.className = 'more-btn';
       detailsButton.addEventListener('click', () => {
         this.showOrderDetails(order);
       });
-  
+ 
       li.appendChild(checkbox);
       li.appendChild(time);
       li.appendChild(label);
       li.appendChild(detailsButton);
-  
+ 
       return li;
     }
-  
+ 
     async updateOrderStatus(orderId, newStatus) {
       try {
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+        const response = await fetch(`http://localhost:3000/api/cal/${orderId}/status`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ newStatus })
         });
-  
+ 
         if (response.ok) {
           await this.loadOrders();
           this.updateCalendarEvents();
@@ -187,10 +207,10 @@ async function fetchOrders() {
         console.error('Error updating order status:', error);
       }
     }
-  
+ 
     updateCalendarEvents() {
       const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-      
+     
       // Clear existing events
       weekdays.forEach(day => {
         const dayElement = document.getElementById(`${day}_a`);
@@ -198,7 +218,7 @@ async function fetchOrders() {
           dayElement.innerHTML = '';
         }
       });
-  
+ 
       // Add events to calendar
       this.orders.forEach(order => {
         if (this.isDateInCurrentWeek(order.event_date)) {
@@ -206,7 +226,7 @@ async function fetchOrders() {
           const dayIndex = orderDate.getDay();
           const adjustedIndex = dayIndex === 0 ? 6 : dayIndex - 1;
           const dayId = `${weekdays[adjustedIndex]}_a`;
-  
+ 
           const dayElement = document.getElementById(dayId);
           if (dayElement) {
             const eventDiv = this.createEventElement(order);
@@ -215,29 +235,29 @@ async function fetchOrders() {
         }
       });
     }
-  
+ 
     createEventElement(order) {
       const eventDiv = document.createElement('div');
       eventDiv.className = `event ${order.order_status === 'cancelled' ? 'cancelled' : ''}`;
-      
+     
       const orderDate = new Date(order.event_date);
       const timeStr = orderDate.toLocaleTimeString('mn-MN', {
         hour: '2-digit',
         minute: '2-digit'
       });
-      
+     
       eventDiv.innerHTML = `
         <span class="time">${timeStr}</span>
         <span class="title">${order.event_name_and_features}</span>
       `;
-  
+ 
       eventDiv.addEventListener('click', () => {
         this.showOrderDetails(order);
       });
-  
+ 
       return eventDiv;
     }
-  
+ 
     showOrderDetails(order) {
       // Create modal content
       const modalHTML = `
@@ -257,12 +277,12 @@ async function fetchOrders() {
           </div>
         </div>
       `;
-  
+ 
       // Show modal
       const modal = document.getElementById('bookingModal');
       modal.innerHTML = modalHTML;
       modal.style.display = 'block';
-  
+ 
       // Add close handlers
       const closeBtn = modal.querySelector('.close');
       closeBtn.onclick = () => modal.style.display = 'none';
@@ -273,7 +293,7 @@ async function fetchOrders() {
       };
     }
   }
-  
+ 
   // Initialize calendar when DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
     new Calendar();

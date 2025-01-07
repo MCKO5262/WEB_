@@ -217,8 +217,7 @@ h3 {
   background-color: var(--fade-bg-hover);
 }
 
-#comment-author-1 {
-  font-weight: 600;
+#comment-author {
   color: var(--txtc);
   background-color: var(--primary-color);
   padding: 0.3rem 4rem;
@@ -227,7 +226,7 @@ h3 {
   width: fit-content;
 }
 
-#comment-content-1 {
+#comment-content {
   color: var(--txtc);
   line-height: 1.5;
   font-size: 1.2rem;
@@ -247,7 +246,7 @@ h3 {
     padding: 12px;
   }
   
-  #comment-content-1{
+  #comment-content{
     font-size: 0.875rem;
     padding: 10px;
   }
@@ -290,7 +289,7 @@ h3 {
     grid-row: 1;
   }
 }
-#comment-date-1 {
+#comment-date {
   color: var(--neutral-color);
   font-size: 1rem;
   background-color: var(--comment-bg);
@@ -299,9 +298,8 @@ h3 {
   width: fit-content;
   margin-left: 1rem;
 }
-#comment-header-1 {
+#comment-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 1rem;
 }
