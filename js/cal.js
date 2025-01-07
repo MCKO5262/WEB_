@@ -1,32 +1,38 @@
-// Get the logged in artist's ID from localStorage or session
+// Get the logged-in artist's ID from localStorage or session
 const getLoggedInArtistId = () => {
-    const artistData = JSON.parse(localStorage.getItem('artistData') || '{}');
-    return artistData.id || null;
-  };
-  // Fetch orders for the specific artist
-  async function fetchOrders() {
-    try {
-      const response = await fetch('http://localhost:3000/api/orders');
-      const result = await response.json();
-  
-      if (response.ok) {
-        const artistId = getLoggedInArtistId();
-        // Filter orders for the logged-in artist if an artist is logged in
-        const filteredOrders = artistId 
-          ? result.data.filter(order => order.artist_id === artistId)
-          : result.data;
-          
-        console.log('Filtered orders:', filteredOrders);
-        return filteredOrders;
-      } else {
-        console.error('Error fetching orders:', result.message);
-        return [];
+  const artistId = localStorage.getItem('artist_id');
+  console.log('Artist ID:', artistId);  
+    return artistId;
+}
+
+// Fetch orders for the specific artist
+async function fetchOrders() {
+  try {
+      const artistId = getLoggedInArtistId();
+
+      // Ensure we have a valid artist ID
+      if (!artistId) {
+          console.error('Artist ID not found in localStorage.');
+          return [];
       }
-    } catch (error) {
+
+      // Fetch orders directly using the artist ID in the URL
+      const response = await fetch(`http://localhost:3000/api/getorderData/${artistId}`);
+      const result = await response.json();
+
+      if (response.ok && result.data) {
+        console.log('Fetched orders:', result.data.orders); // Захиалгуудыг зөв шалгах
+        return result.data.orders || []; // зөвхөн orders массивыг буцаах
+    } else {
+          console.error('Error fetching orders:', result.message);
+          return [];
+      }
+  } catch (error) {
       console.error('Network error:', error);
       return [];
-    }
   }
+}
+
   
   // Calendar functionality
   class Calendar {
@@ -65,6 +71,7 @@ const getLoggedInArtistId = () => {
   
     async loadOrders() {
       this.orders = await fetchOrders();
+      console.log('Orders loaded:', this.orders); // Захиалгуудыг зөв форматтай эсэхийг шалгах
       this.updateOrderList();
     }
   
@@ -246,6 +253,7 @@ const getLoggedInArtistId = () => {
             <p><strong>Төлөв:</strong> ${order.order_status}</p>
             <p><strong>Үргэлжлэх хугацаа:</strong> ${order.event_duration}</p>
             <p><strong>Нийт дүн:</strong> ${order.total_amount?.toLocaleString()} ₮</p>
+            <p><strong>Холбогдох дугаар:</strong> ${order.event_phone}</p>
           </div>
         </div>
       `;

@@ -124,7 +124,6 @@
     </footer>
     <script>
       let currentOrderId = null;
-
       document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
         const orderCode = urlParams.get("orderNumber");
@@ -171,7 +170,7 @@
 
         const html = `
                 <div class="order-card">
-                  <artist-profile artist-id="${order.event.artistId}"></artist-profile>
+                  <artist-profile artist-id="${order.artistId}"></artist-profile>
                     <div class="order-header">
                         <h2>Захиалгын дэлгэрэнгүй</h2>
                         <span class="status-badge status-${order.status}">
@@ -256,13 +255,13 @@
           closeModal();
         }
       }
-
       window.onclick = function (event) {
         const modal = document.getElementById("cancelModal");
         if (event.target === modal) {
           closeModal();
         }
       };
+      
     </script>
   </body>
 </html>

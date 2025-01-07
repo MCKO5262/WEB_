@@ -12,9 +12,13 @@ export class ArtistProfile extends HTMLElement {
     }
 
     async connectedCallback() {
-        // Get artist ID from URL
+        // Get artist ID from both URL and attribute
         const urlParams = new URLSearchParams(window.location.search);
-        const artistId = parseInt(urlParams.get('id'), 10);
+        const urlArtistId = parseInt(urlParams.get('id'), 10);
+        const attributeArtistId = parseInt(this.getAttribute('artist-id'), 10);
+        
+        // Use attribute ID if available, otherwise use URL ID
+        const artistId = attributeArtistId || urlArtistId;
 
         if (artistId) {
             await this.fetchArtistData(artistId);
@@ -169,3 +173,4 @@ export class ArtistProfile extends HTMLElement {
     }
 }
 
+customElements.define('artist-profile', ArtistProfile);
