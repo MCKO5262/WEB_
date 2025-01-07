@@ -144,9 +144,9 @@ async function fetchOrders() {
   
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.checked = order.order_status === "checked";
+      checkbox.checked = order.order_status === "confirmed";
       checkbox.addEventListener('change', () => {
-        this.updateOrderStatus(order.id, checkbox.checked ? "checked" : "pending");
+        this.updateOrderStatus(order.id, checkbox.checked ? "confirmed" : "pending");
       });
   
       const label = document.createElement('label');
