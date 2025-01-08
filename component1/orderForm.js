@@ -15,9 +15,9 @@ export class OrderForm extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "theme") {
-      this.updateTheme(newValue); // Theme шинэчлэгдсэн үед
+      this.updateTheme(newValue); 
     } else if (name === "state") {
-      this.updateState(newValue); // state шинэчлэгдсэн үед
+      this.updateState(newValue); 
     }
   }
 

@@ -1,13 +1,14 @@
 export class OrderConfirmation extends HTMLElement {
     constructor() {
         super(); 
+        // Компонентыг үүсгэх үед гүйцэтгэгдэнэ
         this.artist_id = this.getArtistIdFromUrl() || this.getStoredArtistId();
         this.attachShadow({ mode: 'open' }); // Shadow DOM-г нээж, тусгаарлагдсан DOM бүтээнэ
         this._state = { 
-            status: 'pending',
-            message: '', 
-            orderNumber: '', 
-            isVisible: false 
+            status: 'pending', // Одоогийн төлөв: баталгаажаагүй
+            message: '', // Харуулах мессеж
+            orderNumber: '', // Захиалгын дугаар
+            isVisible: false // Попап харагдаж байгаа эсэх
         };
         console.log('OrderConfirmation component constructed'); // Консол дээр мессеж бичнэ
     }
@@ -24,7 +25,7 @@ export class OrderConfirmation extends HTMLElement {
     connectedCallback() {
         // Компонент DOM-д холбогдсон үед дуудагдана
         console.log('OrderConfirmation connected to DOM');
-        this.render(); 
+        this.render(); // Анхдагч HTML бүтэц үүсгэнэ
         this.setupEventListeners(); // Үйлдлийн сонсогчид нэмнэ
     }
 
@@ -47,11 +48,9 @@ export class OrderConfirmation extends HTMLElement {
     updateUI() {
         // UI-г шинэчлэх
         if (!this.shadowRoot) {
-            console.error('Shadow root not found'); // Shadow DOM олдохгүй бол алдаа бичих
+            console.error('Shadow root not found'); 
             return;
         }
-
-        // UI элементүүдийг Shadow DOM-оос олох
         const messageEl = this.shadowRoot.getElementById('statusMessage');
         const orderNumberEl = this.shadowRoot.getElementById('orderNumberDisplay');
         const statusIcon = this.shadowRoot.querySelector('.status-icon');
@@ -62,17 +61,22 @@ export class OrderConfirmation extends HTMLElement {
             return;
         }
 
+        console.log('Updating UI with state:', this._state); // Одоогийн төлвийг лог хийх
+
+        // Мессежийн текстийг шинэчлэх
         messageEl.textContent = this._state.message;
 
         if (this._state.status === 'confirmed' && this._state.orderNumber) {
             // Амжилттай баталгаажуулалт
             orderNumberEl.textContent = `Захиалгын дугаар: ${this._state.orderNumber}`;
-            statusIcon.className = 'status-icon confirmed';
+            statusIcon.className = 'status-icon confirmed'; // Зурагт тэмдгийг баталгаажсан болгож өөрчлөх
         } else if (this._state.status === 'rejected') {
-            orderNumberEl.textContent = '';
-            statusIcon.className = 'status-icon rejected'; 
+            // Алдаатай баталгаажуулалт
+            orderNumberEl.textContent = ''; // Захиалгын дугаарыг хоослох
+            statusIcon.className = 'status-icon rejected'; // Зурагт тэмдгийг алдааны болгож өөрчлөх
         }
 
+        // Попапын харагдах байдлыг шинэчлэх
         popup.style.display = this._state.isVisible ? 'flex' : 'none';
     }
 
@@ -84,7 +88,8 @@ export class OrderConfirmation extends HTMLElement {
         if (closeBtn) {
             // Хаах товчинд сонсогч нэмэх
             closeBtn.addEventListener('click', () => {
-                this.hide(); 
+                console.log('Close button clicked'); // Лог бичих
+                this.hide(); // Попап нуух
             });
         }
 
@@ -92,6 +97,7 @@ export class OrderConfirmation extends HTMLElement {
             // Попапын гадна дарах үед нуух
             popupContainer.addEventListener('click', (e) => {
                 if (e.target === popupContainer) {
+                    console.log('Background clicked'); // Лог бичих
                     this.hide(); // Попап нуух
                 }
             });
