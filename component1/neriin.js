@@ -17,7 +17,6 @@ export class ArtistProfile extends HTMLElement {
         const urlArtistId = parseInt(urlParams.get('id'), 10);
         const attributeArtistId = parseInt(this.getAttribute('artist-id'), 10);
         
-        // Use attribute ID if available, otherwise use URL ID
         const artistId = attributeArtistId || urlArtistId;
 
         if (artistId) {
@@ -167,7 +166,6 @@ export class ArtistProfile extends HTMLElement {
                 <h2 class="artist-name">${this._state.artistData.name || ''}</h2>
                 <h3> 💖${this._state.artistData.likes}</h3>
 
-                <button class="Huvari_harah">Хуваарь харах</button>
             </section>
         `;
     }

@@ -1,9 +1,7 @@
 // app.js
 export class OrderApp {
     constructor() {
-        // Custom elements бүртгэгдсэн эсэхийг баталгаажуулахын тулд бага зэрэг хүлээнэ
-        setTimeout(() => this.initialize(), 0);
-        this.artist_id = this.getArtistIdFromUrl() || this.getStoredArtistId();
+        this.artist_id = this.getArtistIdFromUrl();
     }
     getArtistIdFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -11,15 +9,10 @@ export class OrderApp {
         console.log('Artist ID from URL:', artistId);
         return artistId;
     }
-    getStoredArtistId() {
-        return sessionStorage.getItem('currentArtistId');
-    }
     initialize() {
         // Захиалгын форм болон баталгаажуулалтын хэсгийг DOM-аас хайж олох
         this.form = document.querySelector('order-form');
         this.confirmation = document.querySelector('order-confirmation');
-        
-        // Хэрэв шаардлагатай элементүүд олдоогүй бол алдаа харуулах
         if (!this.form || !this.confirmation) {
             console.error('Шаардлагатай компонентууд олдсонгүй:', {
                 form: !!this.form,
@@ -101,10 +94,7 @@ export class OrderApp {
             if (this.form) {
                 const formElement = this.form.shadowRoot?.querySelector('form');
                 formElement?.reset();
-                /*if (this.form):this.form (гадна талаас order-form элемент) байгаа эсэхийг шалгана. Хэрэв байхгүй бол доорх үйлдлийг гүйцэтгэхгүй.this.form.shadowRoot?.querySelector('form'):order-form гэдэг custom элемент нь Shadow DOM ашигладаг байж магадгүй.shadowRoot-ыг ашиглан тухайн элемент доторх агуулга руу хандана.querySelector('form')-ийг ашиглан Shadow DOM доторх <form> элементийг олно.
-                formElement?.reset():formElement элемент нь HTML формыг илэрхийлэх элемент байх бөгөөд энэ элементийн
-                reset() функц нь HTML формын бүх оруулга (input), сонголт (select), шалгуур (checkbox) гэх мэт талбаруудыг анхдагч утгаар нь буцаана.
-                Жишээ нь, хэрэв хэрэглэгч формыг бөглөөд "Илгээх" товч дарсан бол энэ функц нь формыг дахин цэвэрлэж, хоослох болно.*/
+
             }
             
         } catch (error) {

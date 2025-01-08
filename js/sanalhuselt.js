@@ -132,16 +132,12 @@ class ArtistDetailManager {
   setupEventListeners() {
     const likeButton = document.getElementById('like-button');
     if (likeButton) {
-      likeButton.addEventListener('click', async (e) => {
+      likeButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (!this.artist) return;
-        try {
-          const response = await ApiService.updateArtistLikes(this.artist.id);
-          this.artist.likes = response.likes; 
-          likeButton.textContent = `Талагдсан (${this.artist.likes})`;
-        } catch (error) {
-          console.error('Error liking artist:', error);
-        }
+        
+        this.artist.likes++;
+        likeButton.textContent = `💖 Талагдсан (${this.artist.likes})`;
       });
     }
 
@@ -151,15 +147,6 @@ class ArtistDetailManager {
         e.preventDefault();
         if (!this.artist) return;
         window.location.href = `get-order.html?id=${this.artist.id}`;
-      });
-    }
-
-
-    const scheduleButton = document.getElementById('schedule-button');
-    if (scheduleButton) {
-      scheduleButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log('Schedule clicked for artist:', this.artist?.id);
       });
     }
   }
