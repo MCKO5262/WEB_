@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const artist_id = localStorage.getItem('artist_id');
     if (!artist_id) {
-        requestAnimationFrame(() => {
-            window.location.replace('login.html');
-        });
         return;
     }
 

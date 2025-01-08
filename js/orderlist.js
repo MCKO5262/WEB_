@@ -96,7 +96,6 @@ function displayOrderDetails(order) {
     container.innerHTML = html;
 }
 
-// Expose function to global scope
 window.showCancelModal = function () {
     document.getElementById("cancelModal").style.display = "block";
 };
