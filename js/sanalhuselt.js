@@ -7,23 +7,20 @@ class ArtistDetailManager {
   }
 
   getArtistIdFromUrl() {
-    // Log the full URL for debugging
     const url = window.location.href;
     console.log('Current URL:', url);
 
     const params = new URLSearchParams(window.location.search);
-    console.log('URL Parameters:', Array.from(params.entries())); // Log all parameters
+    console.log('URL Parameters:', Array.from(params.entries())); 
 
     const id = params.get('id');
-    console.log('Artist ID from URL:', id); // Log the parsed artist ID
+    console.log('Artist ID from URL:', id); 
     return id;
   }
 
   async init() {
     try {
       const artistId = parseInt(this.getArtistIdFromUrl(), 10);
-
-      // Check if the artistId is valid
       if (!artistId || isNaN(artistId)) {
         console.error('No valid artist ID found in URL');
         alert('Invalid or missing artist ID. Please check the URL.');
@@ -61,7 +58,6 @@ class ArtistDetailManager {
   updatePageContent() {
     if (!this.artist) return;
 
-    // Update profile image
     const profileImage = document.getElementById('profile-image');
     if (profileImage) {
       profileImage.src = this.artist.image || './picture/default.png';
@@ -70,44 +66,37 @@ class ArtistDetailManager {
       };
     }
 
-    // Update profile name
     const profileName = document.getElementById('profile-name');
     if (profileName) {
       profileName.textContent = this.artist.name;
     }
 
-    // Update location
     const location = document.getElementById('location');
     if (location) {
       location.textContent = this.artist.location;
     }
 
-    // Update price
     const price = document.getElementById('price');
     if (price) {
       price.textContent = `💵 ${this.formatPrice(this.artist.price)} ₮`;
     }
 
-    // Update description
     const description = document.querySelector('#description p');
     if (description) {
       description.textContent = this.artist.description;
     }
 
-    // Update like button
     const likeButton = document.getElementById('like-button');
     if (likeButton) {
       likeButton.textContent = ` 💖 Талагдсан (${this.artist.likes || 0})`;
     }
 
-    // Update video source if available
     const video = document.querySelector('video source');
     if (video && this.artist.video) {
       video.src = this.artist.video;
-      video.parentElement.load(); // Reload the video element
+      video.parentElement.load(); 
     }
 
-    // Update document title
     document.title = `${this.artist.name} - Solned`;
   }
 
@@ -147,7 +136,6 @@ class ArtistDetailManager {
   }
 
   setupEventListeners() {
-    // Setup like button functionality
     const likeButton = document.getElementById('like-button');
     if (likeButton) {
       likeButton.addEventListener('click', async (e) => {
@@ -155,7 +143,7 @@ class ArtistDetailManager {
         if (!this.artist) return;
         try {
           const response = await ApiService.updateArtistLikes(this.artist.id);
-          this.artist.likes = response.likes; // Assuming the response contains updated likes count
+          this.artist.likes = response.likes; 
           likeButton.textContent = `Талагдсан (${this.artist.likes})`;
         } catch (error) {
           console.error('Error liking artist:', error);
@@ -163,7 +151,6 @@ class ArtistDetailManager {
       });
     }
 
-    // Setup order button functionality
     const orderButton = document.getElementById('order-button');
     if (orderButton) {
       orderButton.addEventListener('click', (e) => {
@@ -173,7 +160,7 @@ class ArtistDetailManager {
       });
     }
 
-    // Setup schedule button functionality
+
     const scheduleButton = document.getElementById('schedule-button');
     if (scheduleButton) {
       scheduleButton.addEventListener('click', (e) => {

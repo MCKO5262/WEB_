@@ -129,7 +129,25 @@ figure.media-item {
   border-radius: 0.5rem;
   margin: 0;
 }
+#artist_category {
+  background-color: var(--third-color);
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 5px 0;
+  min-width: 100px;
+  text-align: left;
+}
 
+.info-row {
+  margin: 15px 0;
+}
+
+.info-row label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
 figure.video-item {
   aspect-ratio: 16/9;
   position: relative;
