@@ -6,11 +6,9 @@ export class OrderApp {
     getArtistIdFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
         const artistId = urlParams.get('id');
-        console.log('Artist ID from URL:', artistId);
         return artistId;
     }
     initialize() {
-        // Захиалгын форм болон баталгаажуулалтын хэсгийг DOM-аас хайж олох
         this.form = document.querySelector('order-form');
         this.confirmation = document.querySelector('order-confirmation');
         if (!this.form || !this.confirmation) {
@@ -20,7 +18,6 @@ export class OrderApp {
             });
             return;
         }
-        // Арга хэмжээний сонсогчдыг тохируулах
         this.setupEventListeners();
         console.log('OrderApp хийгдлээ:', {
             form: this.form,
@@ -29,12 +26,9 @@ export class OrderApp {
     }
 
     setupEventListeners() {
-        // Захиалга илгээх үйлдлийн сонсогчийг бүртгэх
         this.form.addEventListener('order-submit', this.handleOrderSubmit.bind(this));
     }
-
     async handleOrderSubmit(event) {
-        // Захиалгын өгөгдлийг эвентийн `detail`-ээс хүлээн авах
         const formData = event.detail;
         console.log('Захиалга илгээж байна:', formData);
         
@@ -45,11 +39,9 @@ export class OrderApp {
             );
             return;
         }
-        // Формын төлөвийг "илгээж байна" болгон өөрчлөх
         this.form?.setAttribute('state', 'submitting');
         
         try {
-            // Захиалгын өгөгдлийг JSON форматаар бэлтгэх
             const orderPayload = {
                 artist_id: this.artist_id,
                 phone: formData.phone,
@@ -67,14 +59,12 @@ export class OrderApp {
                 special_requests: formData.specialRequests
             };
 
-            // Сервер рүү HTTP POST хүсэлт илгээх
             const response = await fetch('http://localhost:3000/api/events', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderPayload) // JSON форматтай өгөгдөл илгээх
+                body: JSON.stringify(orderPayload) // JSON ugugdul oruulah
             });
 
-            // Серверээс ирсэн хариуг унших
             const result = await response.json();
             console.log('Серверийн хариу:', result);
 
@@ -82,7 +72,6 @@ export class OrderApp {
                 throw new Error(result.details || 'Захиалгыг илгээхэд алдаа гарлаа');
             }
 
-            // Амжилттай бол баталгаажуулалтын попап харуулах
             console.log('Баталгаажуулалтын попап харуулж байна');
             this.showConfirmation(
                 'confirmed', 
@@ -90,7 +79,6 @@ export class OrderApp {
                 result.data.order_code
             );
             
-            // Формыг цэвэрлэх
             if (this.form) {
                 const formElement = this.form.shadowRoot?.querySelector('form');
                 formElement?.reset();
@@ -98,20 +86,18 @@ export class OrderApp {
             }
             
         } catch (error) {
-            // Алдаа гарвал хэрэглэгчид мэдэгдэх
             console.error('Захиалгыг илгээхэд алдаа гарлаа:', error);
             this.showConfirmation(
                 'rejected', 
                 'Захиалга амжилтгүй боллоо. Дахин оролдоно уу.'
             );
         } finally {
-            // Формын төлөвийг анхны байдалд оруулах
             this.form?.setAttribute('state', '');
         }
     }
 
     showConfirmation(status, message, orderCode = '') {
-        // Баталгаажуулалтын хэсгийг харуулах эсвэл алдааны мессеж гаргах
+
         console.log('Баталгаажуулалтыг харуулж байна:', { status, message, orderCode });
         if (this.confirmation) {
             this.confirmation.show(status, message, orderCode);
@@ -122,7 +108,6 @@ export class OrderApp {
     }
 
     validateFormData(formData) {
-        // Шаардлагатай талбаруудыг шалгах
         const requiredFields = [
             'phone',
             'fullName',
@@ -142,14 +127,12 @@ export class OrderApp {
             return false;
         }
 
-        // И-мэйл хаягийн форматыг шалгах
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
             console.error('И-мэйл хаяг буруу байна');
             return false;
         }
 
-        // Утасны дугаарын форматыг шалгах (8 оронтой байх шаардлагатай)
         const phoneRegex = /^[0-9]{8}$/;
         if (!phoneRegex.test(formData.phone)) {
             console.error('Утасны дугаарын формат буруу байна');

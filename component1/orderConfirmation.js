@@ -1,14 +1,13 @@
 export class OrderConfirmation extends HTMLElement {
     constructor() {
         super(); 
-        // Компонентыг үүсгэх үед гүйцэтгэгдэнэ
         this.artist_id = this.getArtistIdFromUrl() || this.getStoredArtistId();
         this.attachShadow({ mode: 'open' }); // Shadow DOM-г нээж, тусгаарлагдсан DOM бүтээнэ
         this._state = { 
-            status: 'pending', // Одоогийн төлөв: баталгаажаагүй
-            message: '', // Харуулах мессеж
-            orderNumber: '', // Захиалгын дугаар
-            isVisible: false // Попап харагдаж байгаа эсэх
+            status: 'pending',
+            message: '', 
+            orderNumber: '', 
+            isVisible: false 
         };
         console.log('OrderConfirmation component constructed'); // Консол дээр мессеж бичнэ
     }
@@ -25,7 +24,7 @@ export class OrderConfirmation extends HTMLElement {
     connectedCallback() {
         // Компонент DOM-д холбогдсон үед дуудагдана
         console.log('OrderConfirmation connected to DOM');
-        this.render(); // Анхдагч HTML бүтэц үүсгэнэ
+        this.render(); 
         this.setupEventListeners(); // Үйлдлийн сонсогчид нэмнэ
     }
 
@@ -63,22 +62,17 @@ export class OrderConfirmation extends HTMLElement {
             return;
         }
 
-        console.log('Updating UI with state:', this._state); // Одоогийн төлвийг лог хийх
-
-        // Мессежийн текстийг шинэчлэх
         messageEl.textContent = this._state.message;
 
         if (this._state.status === 'confirmed' && this._state.orderNumber) {
             // Амжилттай баталгаажуулалт
             orderNumberEl.textContent = `Захиалгын дугаар: ${this._state.orderNumber}`;
-            statusIcon.className = 'status-icon confirmed'; // Зурагт тэмдгийг баталгаажсан болгож өөрчлөх
+            statusIcon.className = 'status-icon confirmed';
         } else if (this._state.status === 'rejected') {
-            // Алдаатай баталгаажуулалт
-            orderNumberEl.textContent = ''; // Захиалгын дугаарыг хоослох
-            statusIcon.className = 'status-icon rejected'; // Зурагт тэмдгийг алдааны болгож өөрчлөх
+            orderNumberEl.textContent = '';
+            statusIcon.className = 'status-icon rejected'; 
         }
 
-        // Попапын харагдах байдлыг шинэчлэх
         popup.style.display = this._state.isVisible ? 'flex' : 'none';
     }
 
@@ -90,8 +84,7 @@ export class OrderConfirmation extends HTMLElement {
         if (closeBtn) {
             // Хаах товчинд сонсогч нэмэх
             closeBtn.addEventListener('click', () => {
-                console.log('Close button clicked'); // Лог бичих
-                this.hide(); // Попап нуух
+                this.hide(); 
             });
         }
 
@@ -99,7 +92,6 @@ export class OrderConfirmation extends HTMLElement {
             // Попапын гадна дарах үед нуух
             popupContainer.addEventListener('click', (e) => {
                 if (e.target === popupContainer) {
-                    console.log('Background clicked'); // Лог бичих
                     this.hide(); // Попап нуух
                 }
             });
