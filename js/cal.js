@@ -298,8 +298,8 @@ class Calendar {
           <p><strong>Байршил:</strong> ${order.event_location}</p>
           <p><strong>Огноо:</strong> ${new Date(order.event_date).toLocaleString('mn-MN')}</p>
           <p><strong>Төлөв:</strong> ${order.order_status}</p>
-          <p><strong>Үргэлжлэх хугацаа:</strong> ${order.event_duration}</p>
-          <p><strong>Нийт дүн:</strong> ${order.total_amount?.toLocaleString()} ₮</p>
+          <p><strong>Үргэлжлэх хугацаа:</strong> ${order.event_artist_availability}</p>
+          <p><strong>Нийт дүн:</strong> ${order.order_total_amount} ₮</p>
           <p><strong>Холбогдох дугаар:</strong> ${order.event_phone}</p>
         </div>
         <div class="modal-footer">
@@ -329,4 +329,78 @@ class Calendar {
 // Initialize calendar when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new Calendar();
+});
+
+// Mobile view functionality
+function initMobileView() {
+  // Get all day elements and their corresponding event containers
+  const days = document.querySelectorAll('.day');
+  const eventContainers = document.querySelectorAll('.ajil');
+  let selectedDay = null;
+
+  // Function to handle day click
+  function handleDayClick(dayElement, index) {
+      // Only handle clicks in mobile view
+      if (window.innerWidth > 430) return;
+
+      // Reset previous selection
+      if (selectedDay) {
+          selectedDay.style.backgroundColor = '';
+          selectedDay.style.color = '';
+      }
+
+      // Hide all event containers
+      eventContainers.forEach(container => {
+          container.style.display = 'none';
+      });
+
+      // Highlight selected day
+      dayElement.style.backgroundColor = '#6B46C1';
+      dayElement.style.color = 'white';
+      selectedDay = dayElement;
+
+      // Show events for selected day
+      eventContainers[index].style.display = 'block';
+  }
+
+  // Add click event listeners to each day
+  days.forEach((day, index) => {
+      day.addEventListener('click', () => handleDayClick(day, index));
+  });
+
+  // Select current day on load if in mobile view
+  if (window.innerWidth <= 430) {
+      const today = new Date().getDay();
+      const dayIndex = today === 0 ? 6 : today - 1; // Adjust for Sunday
+      if (days[dayIndex]) {
+          handleDayClick(days[dayIndex], dayIndex);
+      }
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+      if (window.innerWidth > 430) {
+          // Reset to desktop view
+          if (selectedDay) {
+              selectedDay.style.backgroundColor = '';
+              selectedDay.style.color = '';
+              selectedDay = null;
+          }
+          eventContainers.forEach(container => {
+              container.style.display = '';
+          });
+      } else {
+          // Return to mobile view
+          const today = new Date().getDay();
+          const dayIndex = today === 0 ? 6 : today - 1;
+          if (days[dayIndex]) {
+              handleDayClick(days[dayIndex], dayIndex);
+          }
+      }
+  });
+}
+
+// Initialize mobile view when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  initMobileView();
 });

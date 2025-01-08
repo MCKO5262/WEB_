@@ -95,5 +95,30 @@ function showError(containerId, message) {
     `;
   }
 }
+// Scroll animation хийх JavaScript код
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    // Элемент харагдахгүй болох үед show классыг хасна
+    if (!entry.isIntersecting) {
+      entry.target.classList.remove('show');
+    } else {
+      // Элемент харагдах үед show классыг нэмнэ
+      entry.target.classList.add('show');
+    }
+  });
+}, {
+  // Root margin нь element-ийг хэзээ ажиглаж эхлэхийг тохируулна
+  rootMargin: '-50px',
+  // Threshold нь element хэдэн хувь харагдах үед ажиллахыг заана
+  threshold: 0.15
+});
+
+// ID-аар элемент бүрийг observe хийх
+['hamtlag', 'hugjim', 'duuchin'].forEach(id => {
+  const element = document.getElementById(id);
+  if (element) {
+    observer.observe(element);
+  }
+});
 
 document.addEventListener('DOMContentLoaded', initializeArtists);
