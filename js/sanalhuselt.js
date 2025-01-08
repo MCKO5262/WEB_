@@ -9,10 +9,7 @@ class ArtistDetailManager {
   getArtistIdFromUrl() {
     const url = window.location.href;
     console.log('Current URL:', url);
-
     const params = new URLSearchParams(window.location.search);
-    console.log('URL Parameters:', Array.from(params.entries())); 
-
     const id = params.get('id');
     console.log('Artist ID from URL:', id); 
     return id;
@@ -21,14 +18,12 @@ class ArtistDetailManager {
   async init() {
     try {
       const artistId = parseInt(this.getArtistIdFromUrl(), 10);
-      if (!artistId || isNaN(artistId)) {
-        console.error('No valid artist ID found in URL');
-        alert('Invalid or missing artist ID. Please check the URL.');
+      if (!artistId) {
+        console.error('baihgue artist id');
         return;
       }
 
       sessionStorage.setItem('currentArtistId', artistId);
-      console.log('Stored Artist ID:', sessionStorage.getItem('currentArtistId'));
 
       await this.fetchAndDisplayArtist(artistId);
       this.setupMediaControls();
@@ -44,14 +39,13 @@ class ArtistDetailManager {
       this.artist = artists.find(artist => artist.id === artistId);
 
       if (!this.artist) {
-        console.error('Artist not found');
-        alert('Artist not found. Please check the ID in the URL.');
+        console.error('Artist baihgue');
         return;
       }
 
       this.updatePageContent();
     } catch (error) {
-      console.error('Error fetching artist data:', error);
+      console.error('fetch hiisengue :', error);
     }
   }
 
