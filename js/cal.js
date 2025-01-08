@@ -326,7 +326,6 @@ class Calendar {
     };
   }
 }
- 
 // Initialize calendar when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new Calendar();

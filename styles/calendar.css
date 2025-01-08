@@ -6,12 +6,14 @@
   --calendar-event-font-size: 0.875rem; /* 14px to rem */
   --calendar-event-font-size-mobile: 0.875rem;
 }
+
 main {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   gap: 1rem;
   padding-top: 0.625rem; /* 10px */
   padding-bottom: 0.625rem; /* 10px */
+  height: 80%;
 }
  
 aside {
@@ -135,6 +137,8 @@ aside input[type="checkbox"]:checked + .time {
   border-radius: var(--border-radius);
   padding: var(--padding);
   color: var(--text-color);
+  position: relative;
+  overflow: hidden;
 }
  
 .calendar-header {
@@ -143,7 +147,13 @@ aside input[type="checkbox"]:checked + .time {
   align-items: center;
   margin-bottom: 1rem;
 }
- 
+.weekdays-ajil {
+  position: relative;
+  background-image: url('data:image/svg+xml,...'); /* Insert the SVG here */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  min-height: 600px;
+}
 .weekdays, .weekdays-ajil {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -170,7 +180,20 @@ aside input[type="checkbox"]:checked + .time {
   border-radius: 0.25rem; /* 4px */
   font-size: 0.875rem; /* 14px */
 }
- 
+ /* Time slots styles */
+.time-slots {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
 .modal {
   display: none;
   position: fixed;
@@ -324,19 +347,52 @@ aside input[type="checkbox"]:checked + .time {
   }
  
   .event {
-    margin: 0.5rem 0;
-    padding: 0.75rem;
-    font-size: 0.9rem;
     background-color: var(--calendar-back);
-    border-radius: var(--border-radius);
+    padding: 8px;
+    margin: 4px;
+    border-radius: 4px;
+    font-size: var(--event-font-size);
+    position: relative;
+    z-index: 2;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
  
   .event:hover {
-    transform: translateX(4px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
- 
+  .event::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transform: translateY(-50%);
+  }
+  /* Time indicator line */
+.time-indicator {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-color);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.time-indicator::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+}
   /* Aside styles */
   aside li {
     grid-template-columns: 1fr;
