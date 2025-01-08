@@ -5,3 +5,6 @@ artist-profile {
     margin-top: 2rem;
     justify-self: center;
 }
+a {
+    text-decoration: none;
+}

@@ -2,6 +2,7 @@ export class OrderConfirmation extends HTMLElement {
     constructor() {
         super(); 
         // Компонентыг үүсгэх үед гүйцэтгэгдэнэ
+        this.artist_id = this.getArtistIdFromUrl() || this.getStoredArtistId();
         this.attachShadow({ mode: 'open' }); // Shadow DOM-г нээж, тусгаарлагдсан DOM бүтээнэ
         this._state = { 
             status: 'pending', // Одоогийн төлөв: баталгаажаагүй
@@ -10,6 +11,15 @@ export class OrderConfirmation extends HTMLElement {
             isVisible: false // Попап харагдаж байгаа эсэх
         };
         console.log('OrderConfirmation component constructed'); // Консол дээр мессеж бичнэ
+    }
+    getArtistIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const artistId = urlParams.get('id');
+        console.log('Artist ID from URL:', artistId);
+        return artistId;
+    }
+    getStoredArtistId() {
+        return sessionStorage.getItem('currentArtistId');
     }
 
     connectedCallback() {
@@ -124,6 +134,7 @@ export class OrderConfirmation extends HTMLElement {
             position: relative;
             animation: popup-enter 0.3s var(--transition-timing);
             border: 1px solid var(--third-color);
+            text-decoration: none;
             }
 
             .status-icon {
@@ -162,7 +173,8 @@ export class OrderConfirmation extends HTMLElement {
             font-family: var(--font-family);
             }
 
-            #closeBtn {
+            .closeBtn {
+            text-decoration: none;
             margin-top: 1.5rem;
             padding: 0.75rem 2rem;
             border: none;
@@ -175,13 +187,16 @@ export class OrderConfirmation extends HTMLElement {
             transition: all var(--transition-speed) var(--transition-timing);
             box-shadow: var(--box-shadow);
             }
-
-            #closeBtn:hover {
+            .closeBtn a {
+                text-decoration: none;
+                color: var(--txtc)
+            }
+            .closeBtn:hover {
             background: var(--hover-dark-neutral);
             transform: translateY(-2px);
             }
 
-            #closeBtn:active {
+            .closeBtn:active {
             transform: translateY(0);
             }
 
@@ -248,7 +263,7 @@ export class OrderConfirmation extends HTMLElement {
                         <p id="statusMessage"></p>
                         <p id="orderNumberDisplay"></p>
                     </div>
-                    <button id="closeBtn"><a href="get-order.html">Хаах</a></button>
+                    <button class="closeBtn"><a href="Sanalhuselt.html?id=${this.artist_id}">Хаах</a></button>
                 </div>
             </div>
         `;

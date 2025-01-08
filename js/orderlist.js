@@ -96,15 +96,16 @@ function displayOrderDetails(order) {
     container.innerHTML = html;
 }
 
-function showCancelModal() {
+// Expose function to global scope
+window.showCancelModal = function () {
     document.getElementById("cancelModal").style.display = "block";
-}
+};
 
-function closeModal() {
+window.closeModal = function () {
     document.getElementById("cancelModal").style.display = "none";
-}
+};
 
-async function confirmCancel() {
+window.confirmCancel = async function () {
     try {
         const orderCode = new URLSearchParams(window.location.search).get(
             "orderNumber"
@@ -130,11 +131,6 @@ async function confirmCancel() {
     } finally {
         closeModal();
     }
-}
-window.onclick = function (event) {
-    const modal = document.getElementById("cancelModal");
-    if (event.target === modal) {
-        closeModal();
-    }
 };
-
+document.querySelector(".cancel-btn").addEventListener("click", showCancelModal);
+document.querySelector(".confirm-btn").addEventListener("click", confirmCancel);
