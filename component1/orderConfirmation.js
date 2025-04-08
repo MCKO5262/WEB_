@@ -1,16 +1,15 @@
 export class OrderConfirmation extends HTMLElement {
     constructor() {
         super(); 
-        // Компонентыг үүсгэх үед гүйцэтгэгдэнэ
         this.artist_id = this.getArtistIdFromUrl() || this.getStoredArtistId();
-        this.attachShadow({ mode: 'open' }); // Shadow DOM-г нээж, тусгаарлагдсан DOM бүтээнэ
+        this.attachShadow({ mode: 'open' });
         this._state = { 
-            status: 'pending', // Одоогийн төлөв: баталгаажаагүй
-            message: '', // Харуулах мессеж
-            orderNumber: '', // Захиалгын дугаар
-            isVisible: false // Попап харагдаж байгаа эсэх
+            status: 'pending', 
+            message: '', 
+            orderNumber: '', 
+            isVisible: false
         };
-        console.log('OrderConfirmation component constructed'); // Консол дээр мессеж бичнэ
+        console.log('OrderConfirmation component constructed');
     }
     getArtistIdFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -23,30 +22,26 @@ export class OrderConfirmation extends HTMLElement {
     }
 
     connectedCallback() {
-        // Компонент DOM-д холбогдсон үед дуудагдана
         console.log('OrderConfirmation connected to DOM');
-        this.render(); // Анхдагч HTML бүтэц үүсгэнэ
-        this.setupEventListeners(); // Үйлдлийн сонсогчид нэмнэ
+        this.render();
+        this.setupEventListeners(); 
     }
 
     show(status, message, orderNumber = '') {
-        // Баталгаажуулалтын мессеж харуулах
         console.log('Show confirmation called:', { status, message, orderNumber });
-        this._state = { status, message, orderNumber, isVisible: true }; // Төлөв шинэчлэх
-        this.setAttribute('status', 'showing'); // HTML атрибут шинэчлэх
-        this.updateUI(); // UI-г шинэчилж харуулах
+        this._state = { status, message, orderNumber, isVisible: true }; 
+        this.setAttribute('status', 'showing'); 
+        this.updateUI(); 
     }
 
     hide() {
-        // Баталгаажуулалтын мессеж нуух
         console.log('Hiding confirmation');
-        this._state = { ...this._state, isVisible: false }; // Харагдах байдлыг false болгоно
-        this.removeAttribute('status'); // 'status' атрибутыг устгана
-        this.dispatchEvent(new CustomEvent('confirmation-closed')); // Компонент хаагдсаныг мэдээлэх эвент үүсгэнэ
+        this._state = { ...this._state, isVisible: false };
+        this.removeAttribute('status');
+        this.dispatchEvent(new CustomEvent('confirmation-closed'));
     }
 
     updateUI() {
-        // UI-г шинэчлэх
         if (!this.shadowRoot) {
             console.error('Shadow root not found'); 
             return;
@@ -57,49 +52,34 @@ export class OrderConfirmation extends HTMLElement {
         const popup = this.shadowRoot.querySelector('.popup-container');
 
         if (!messageEl || !orderNumberEl || !statusIcon || !popup) {
-            console.error('Required elements not found'); // Шаардлагатай элементүүд олдохгүй бол алдаа бичих
+            console.error('element dutuu bn');
             return;
         }
 
-        console.log('Updating UI with state:', this._state); // Одоогийн төлвийг лог хийх
-
-        // Мессежийн текстийг шинэчлэх
+        console.log('Updating UI with state:', this._state); 
         messageEl.textContent = this._state.message;
 
         if (this._state.status === 'confirmed' && this._state.orderNumber) {
-            // Амжилттай баталгаажуулалт
             orderNumberEl.textContent = `Захиалгын дугаар: ${this._state.orderNumber}`;
-            statusIcon.className = 'status-icon confirmed'; // Зурагт тэмдгийг баталгаажсан болгож өөрчлөх
+            statusIcon.className = 'status-icon confirmed';
         } else if (this._state.status === 'rejected') {
-            // Алдаатай баталгаажуулалт
-            orderNumberEl.textContent = ''; // Захиалгын дугаарыг хоослох
+            orderNumberEl.textContent = '';
             statusIcon.className = 'status-icon rejected'; // Зурагт тэмдгийг алдааны болгож өөрчлөх
         }
 
-        // Попапын харагдах байдлыг шинэчлэх
+
         popup.style.display = this._state.isVisible ? 'flex' : 'none';
     }
 
     setupEventListeners() {
         // Үйлдлийн сонсогчид бүртгэх
         const closeBtn = this.shadowRoot.querySelector('#closeBtn'); // Хаах товчийг олох
-        const popupContainer = this.shadowRoot.querySelector('.popup-container'); // Попап контейнерыг олох
 
         if (closeBtn) {
             // Хаах товчинд сонсогч нэмэх
             closeBtn.addEventListener('click', () => {
                 console.log('Close button clicked'); // Лог бичих
                 this.hide(); // Попап нуух
-            });
-        }
-
-        if (popupContainer) {
-            // Попапын гадна дарах үед нуух
-            popupContainer.addEventListener('click', (e) => {
-                if (e.target === popupContainer) {
-                    console.log('Background clicked'); // Лог бичих
-                    this.hide(); // Попап нуух
-                }
             });
         }
     }

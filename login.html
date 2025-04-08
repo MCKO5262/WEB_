@@ -52,7 +52,7 @@
                 
                 const artistData = await response.json(); //Серверээс ирсэн JSON хариуг JavaScript объект болгон хөрвүүлнэ.
                 
-                if (response.ok && artistData.id) { //Амжилттай нэвтрэх Серверээс ирсэн хариу амжилттай эсэхийг шалгана (response.ok нь HTTP статус код 200-299 бол үнэн болно).
+                if (response.ok && artistData.id) { 
                 localStorage.setItem('artist_id', artistData.id);
                 localStorage.setItem('authToken', artistData.token); 
                 localStorage.setItem('userData', JSON.stringify({

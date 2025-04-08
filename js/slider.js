@@ -5,7 +5,7 @@ let current = 0; // Одоогийн слайдын индекс
 let auto = null; // Автомат слайд солигдолтын интервал
 let isTransitioning = false; 
 function showSlide(index) {
-  if (isTransitioning) return; // Шилжилт дунд бол зогсооно
+  if (isTransitioning) return; 
   isTransitioning = true;
 
   // Бүх слайдаас 'active' классыг устгана
@@ -13,7 +13,6 @@ function showSlide(index) {
     slide.classList.remove("active");
   });
 
-  // Шинэ слайдад 'active' классыг нэмнэ
   slides[index].classList.add("active");
   slides.forEach((slide) => {
     const counter = slide.querySelector(".slide-counter");

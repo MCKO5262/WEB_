@@ -12,7 +12,6 @@ export class ArtistProfile extends HTMLElement {
     }
 
     async connectedCallback() {
-        // Get artist ID from both URL and attribute
         const urlParams = new URLSearchParams(window.location.search);
         const urlArtistId = parseInt(urlParams.get('id'), 10);
         const attributeArtistId = parseInt(this.getAttribute('artist-id'), 10);
@@ -37,7 +36,6 @@ export class ArtistProfile extends HTMLElement {
             if (response.ok) {
                 const data = await response.json();
 
-                // Find the artist with the matching ID
                 const artist = data.data.find(artist => artist.id === artistId);
                 if (artist) {
                     this._state.artistData = {
@@ -67,6 +65,24 @@ export class ArtistProfile extends HTMLElement {
             });
         }
     }
+    disconnectedCallback() {
+        console.log('');
+    }
+
+    static get observedAttributes() {
+        return ['artist-id']; 
+    }
+
+    attributeChangedCallback(name, oldVal, newVal) {
+        if (name === 'artist-id' && oldVal !== newVal) {
+            console.log(`Artist ID changed from ${oldVal} to ${newVal}`);
+            this.fetchArtistData(newVal);
+        }
+    }
+
+    adoptedCallback() {
+    }
+
 
     render() {
         this.shadowRoot.innerHTML = `
@@ -172,3 +188,7 @@ export class ArtistProfile extends HTMLElement {
 }
 
 customElements.define('artist-profile', ArtistProfile);
+
+
+
+

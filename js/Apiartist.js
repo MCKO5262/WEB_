@@ -1,6 +1,6 @@
 class ApiService {
     constructor() {
-      this.apiUrl = 'https://api.jsonbin.io/v3/qs/677e694fe41b4d34e471e0a1';
+      this.apiUrl = 'https://api.jsonbin.io/v3/qs/67d8e0a98561e97a50ee3f62';
     }
   
     async fetchArtists() {

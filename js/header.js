@@ -26,9 +26,7 @@ function initializeHeader(artistData, isLoggedIn, userData) {
     const loginLi = headerNav.querySelector('.login');
     const loggedSection = headerNav.querySelector('.loged');
 
-    // If user is logged in
     if (isLoggedIn) {
-        // Remove login button if it exists
         if (loginLi) {
             loginLi.remove();
         }
@@ -55,12 +53,10 @@ function initializeHeader(artistData, isLoggedIn, userData) {
             headerNav.insertAdjacentHTML('beforeend', userSection);
         }
     } else {
-        // If not logged in, remove dropdown if it exists
         if (loggedSection) {
             loggedSection.remove();
         }
         
-        // If login button doesn't exist, add it
         if (!loginLi) {
             const loginButton = `<li class="login"><a href="login.html">Login</a></li>`;
             headerNav.insertAdjacentHTML('beforeend', loginButton);
